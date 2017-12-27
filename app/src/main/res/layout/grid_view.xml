@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="3dp"
+        android:layout_margin="4dp"
+        android:id="@+id/card"
+        cardview:cardElevation="@dimen/cardview_default_elevation">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/topLayout">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="8dp"
+                android:id="@+id/profile"
+                android:background="@drawable/ic_perm_identity_black_24dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/nama"
+                android:layout_toRightOf="@id/profile"
+                android:text="Nama"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="15dp"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:id="@+id/img_thumbnail"
+                android:layout_marginLeft="5dp"
+                android:layout_below="@+id/profile"
+                android:scaleType="fitXY"/>
+
+            <ImageView
+                android:id="@+id/img_behind_status"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@+id/img_thumbnail"
+                android:scaleType="fitXY"
+                android:alpha="0.6"
+                android:background="@color/cardview_shadow_end_color"/>
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_alignBottom="@id/img_thumbnail"
+                android:layout_centerHorizontal="true"
+                android:gravity="bottom"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="5dp"
+                android:text="Status"
+                android:textSize="12dp"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

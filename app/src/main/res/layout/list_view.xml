@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="16dp">
+
+        <ImageView
+            android:id="@+id/thumbnail"
+            android:layout_height="70dp"
+            android:layout_width="70dp"
+            android:background="@drawable/ic_perm_identity_black_24dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/judul"
+            android:text="Judul"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/deskripsi"
+            android:text="Deskripsi"
+            android:layout_below="@+id/judul"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:id="@+id/tanggal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/deskripsi"
+            android:layout_alignBottom="@+id/deskripsi"
+            android:layout_marginLeft="29dp"
+            android:layout_marginStart="29dp"
+            android:layout_toEndOf="@+id/deskripsi"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:text="Tanggal" />
+
+</RelativeLayout>
