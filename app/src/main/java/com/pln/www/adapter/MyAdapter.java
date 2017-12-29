@@ -41,9 +41,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 }
             });
             textView = (TextView) v.findViewById(R.id.judul);
-            textView2 = (TextView) v.findViewById(R.id.deskripsi);
+            textView2 = (TextView) v.findViewById(R.id.konsultan);
             textView3 = (TextView) v.findViewById(R.id.tanggal);
-            icon = (ImageView) v.findViewById(R.id.thumbnail);
+            icon = (ImageView) v.findViewById(R.id.status);
         }
 
         public TextView getTextView() {

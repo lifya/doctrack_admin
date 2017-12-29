@@ -12,14 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.pln.www.R;
-import com.pln.www.TambahDokumentActivity;
+//import com.pln.www.TambahDokumentActivity;
 import com.pln.www.adapter.MyAdapter;
 
 /**
  * Created by ACHI on 27/08/2017.
  */
 
-public class ChatFragment extends Fragment {
+public class DokumenFragment extends Fragment {
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
@@ -55,7 +55,7 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_chat, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_dokumen, container, false);
         rootView.setTag(TAG);
 
         // BEGIN_INCLUDE(initializeRecyclerView)
@@ -80,14 +80,14 @@ public class ChatFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
 
-        FloatingActionButton fabs = (FloatingActionButton)rootView.findViewById(R.id.fabs);
-        fabs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), TambahDokumentActivity.class);
-                startActivity(intent);
-            }
-        });
+//        FloatingActionButton fabs = (FloatingActionButton)rootView.findViewById(R.id.fabs);
+//        fabs.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(), TambahDokumentActivity.class);
+//                startActivity(intent);
+//            }
+//        });
         return rootView;
     }
 

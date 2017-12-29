@@ -9,7 +9,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
 
-import com.pln.www.fragment.ChatFragment;
+import com.pln.www.fragment.DokumenFragment;
 
 
 /**
@@ -34,10 +34,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                ChatFragment fragment0=new ChatFragment();
+                DokumenFragment fragment0=new DokumenFragment();
                 return fragment0;
             case 1:
-                ChatFragment fragment1=new ChatFragment();
+                DokumenFragment fragment1=new DokumenFragment();
                 return fragment1;
         }
         return null;

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\design-25.3.1.aar\d0d94a5d0f21989d33d3c5d24f18dc42\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\support-v4-25.3.1.aar\f9f15c81b533a3e6cfd54c168dd13334\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\18.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-25.3.1.aar\c11079fea644ac41662400b5e4db8a79\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\cardview-v7-25.3.1.aar\34776032faba2b642607b420629cb8ba\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="914f5d3e3ace66080e59613708f06d129a222e25">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\AppData\Local\Android\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\26.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\firebase-auth-11.0.4.aar\ee296157dc2e30d979b42bc3d26ca90a\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b5b6af36bacf1d812cd3dc45f9dcab9ea471ed91">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.0.4.aar\622779fc739f9391414bbc983b39c2c3\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="ed87ccdcb70c17d71ba4e6e4ac16afa62d3c49fb">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\14.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-25.3.1.aar\d3b6166cced68469fb87e8e822365c80\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.0.4.aar\59529b1b3ba35ac59265c5465386518e\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e1625e48a836779b5fa141d22e5d05563aaccc9a">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\13.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\transition-25.3.1.aar\28e591ee0bea088d2d2de1587e898b55\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\support-fragment-25.3.1.aar\a49ad20c268acc7440172eda5470718c\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\20.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.3.1\support-annotations-25.3.1.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\25.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\support-core-ui-25.3.1.aar\2fb70ae158a183766f954d6737fdf547\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\21.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\support-compat-25.3.1.aar\017f0d4ab57dd3fbb2f38869a731bb29\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\24.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\play-services-tasks-11.0.4.aar\ec14156436cf8de49d11c44182e78686\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="2430e711762a749feb00b3d64858ca4768251b9d">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\16.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\appcompat-v7-25.3.1.aar\8d8a6ab141edf18372b9cf9c9da54c1d\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\play-services-base-11.0.4.aar\61d5c565b0514ec9a9cc64b26cc98a95\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="70ffe00aaf049893f59d1dad57bd82992faa38ef">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\12.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\modules-2\files-2.1\com.github.nkzawa\engine.io-client\0.4.1\9fa2901033b1e43a254a35bc82be281dfa7bc48f\engine.io-client-0.4.1.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="9fa2901033b1e43a254a35bc82be281dfa7bc48f">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\27.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.0.4.aar\b7d4558c8bff9f834cacef95e9c00c76\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e5b429c146094a612134910688d169ec08deeefb">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\11.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\modules-2\files-2.1\com.github.nkzawa\socket.io-client\0.4.1\30639ee3c8816d04b0562ddf5291ecf65d0a8951\socket.io-client-0.4.1.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="30639ee3c8816d04b0562ddf5291ecf65d0a8951">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\19.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\support-media-compat-25.3.1.aar\3c603b9eddf3903b09ddcab2840cdd77\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\22.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\d89c9ff0a4252109fb753e577d38bab8\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-25.3.1.aar\7202881c6efe7fe5e4cffd9273fc21dc\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="95519720620b553f63afc789beba9ad582807f7c">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\firebase-common-11.0.4.aar\9e9865342e298fafb82056b2009550ff\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="43e9789bd3240271265ab30ce1be9f224843f5a8">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\15.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\play-services-basement-11.0.4.aar\95b483082b2134dfb664d48726cdcd3f\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="364364bf77b4a71afc5930fc3ae57b3f0eea637c">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\17.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\transforms-1\files-1.1\support-core-utils-25.3.1.aar\167c6c11e77f7cf8c8c47b37615f7e08\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\23.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\ACHI\.gradle\caches\modules-2\files-2.1\org.java-websocket\Java-WebSocket\1.3.0\db2658f013fb163de4a99274c2eb9e17efe535d2\Java-WebSocket-1.3.0.jar"
+        jumboMode="false"
+        min-sdk-version="15"
+        optimize="true"
+        revision="26.0.2"
+        sha1="db2658f013fb163de4a99274c2eb9e17efe535d2">
+        <dex dex="C:\Users\ACHI\AndroidStudioProjects\doctrack_admin\app\build\intermediates\transforms\preDex\release\28.jar" />
+    </item>
+
+</items>
