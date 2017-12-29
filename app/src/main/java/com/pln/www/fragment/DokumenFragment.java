@@ -35,13 +35,14 @@ public class DokumenFragment extends Fragment {
     protected RecyclerView mRecyclerView;
     protected MyAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected String[] mDataset, mDataset2, mDataset4;
+    protected String[] mDataset, mDataset2, mDataset4, mDataset5;
     protected int[] mDataset3;
 
-    int [] icon = {R.drawable.ic_perm_identity_black_24dp, R.drawable.ic_perm_identity_black_24dp,R.drawable.ic_perm_identity_black_24dp,R.drawable.ic_perm_identity_black_24dp,R.drawable.ic_perm_identity_black_24dp};
+    int [] icon = {R.mipmap.on_process, R.mipmap.complete,R.mipmap.complete,R.mipmap.complete,R.mipmap.on_process};
     String [] judul = {"Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GI...","Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GI...","Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GI...","Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GI...","Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GI..."};
     String [] deskripsi = {"PT. Adi Banuwa","PT. Adi Banuwa","PT. Adi Banuwa","PT. Adi Banuwa","PT. Adi Banuwa"};
-    String [] tanggal = {"12 Januari 2017", "12 Januari 2018","12 Februari 1998","12 Februari 1998","12 Februari 1998"};
+    String [] tanggal = {"12-04-2017", "12-04-2017","12-04-2017","12-04-2017","12-04-2017"};
+    String [] waktu = {"18.45", "18.45", "18.45", "18.45", "18.45"};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,7 +76,7 @@ public class DokumenFragment extends Fragment {
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-        mAdapter = new MyAdapter(mDataset,mDataset2,mDataset4,mDataset3);
+        mAdapter = new MyAdapter(mDataset,mDataset2,mDataset4,mDataset5,mDataset3);
         // Set CustomAdapter as the adapter for RecyclerView.
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
@@ -137,11 +138,13 @@ public class DokumenFragment extends Fragment {
         mDataset = new String[judul.length];
         mDataset2 = new String[deskripsi.length];
         mDataset4 = new String[tanggal.length];
+        mDataset5 = new String[waktu.length];
         mDataset3 = new int[icon.length];
         for (int i = 0; i < judul.length; i++) {
             mDataset[i] = judul[i];
             mDataset2[i] = deskripsi[i];
             mDataset4[i] = tanggal[i];
+            mDataset5[i] = waktu[i];
             mDataset3[i] = icon[i];
         }
     }
