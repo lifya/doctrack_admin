@@ -4,6 +4,8 @@ package com.pln.www.adapter;
  * Created by ACHI on 01/09/2017.
  */
 
+import android.support.design.widget.Snackbar;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,79 +13,37 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.pln.www.MainActivity;
 import com.pln.www.R;
-
-import org.w3c.dom.Text;
+import java.util.ArrayList;
 
 /**
  * Provide views to RecyclerView with data from mDataSet.
  */
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private static final String TAG = "MyAdapter";
+    private ArrayList<ItemModel> rvData;
 
-    private String[] mDataSet,mDataSet2, mDataSet4, mDataSet5;
-    private int[] mDataSet3;
+    public MyAdapter(ArrayList<ItemModel> inputData) {
+        rvData = inputData;
+    }
 
-    // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
-    /**
-     * Provide a reference to the type of views that you are using (custom ViewHolder)
-     */
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView,textView2,textView3, textView4;
-        private final ImageView icon;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView tvJudul,tvKonsultan,tvTanggal, tvWaktu;
+        public ImageView ivStatus;
+        public CardView cvMain;
 
         public ViewHolder(View v) {
             super(v);
-            // Define click listener for the ViewHolder's View.
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d(TAG, "Element " + getPosition() + " clicked.");
-                }
-            });
-            textView = (TextView) v.findViewById(R.id.judul);
-            textView2 = (TextView) v.findViewById(R.id.konsultan);
-            textView3 = (TextView) v.findViewById(R.id.tanggal);
-            textView4 = (TextView) v.findViewById(R.id.waktu);
-            icon = (ImageView) v.findViewById(R.id.status);
-        }
-
-        public TextView getTextView() {
-            return textView;
-        }
-        public TextView getTextView2() {
-            return textView2;
-        }
-        public TextView getTextView3() {
-            return textView3;
-        }
-        public TextView getTextView4() {
-            return textView4;
-        }
-        public ImageView getImageView() {
-            return icon;
+            tvJudul = (TextView) v.findViewById(R.id.judul);
+            tvKonsultan = (TextView) v.findViewById(R.id.konsultan);
+            tvTanggal = (TextView) v.findViewById(R.id.tanggal);
+            tvWaktu = (TextView) v.findViewById(R.id.waktu);
+            ivStatus = (ImageView) v.findViewById(R.id.status);
         }
     }
-    // END_INCLUDE(recyclerViewSampleViewHolder)
 
-    /**
-     * Initialize the dataset of the Adapter.
-     *
-     * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
-     */
-    public MyAdapter(String[] dataSet,String[] dataSet2,String[] dataSet4,String[] dataSet5, int[] dataSet3) {
-        this.mDataSet = dataSet;
-        this.mDataSet2 = dataSet2;
-        this.mDataSet4 = dataSet4;
-        this.mDataSet5 = dataSet5;
-        this.mDataSet3 = dataSet3;
-
-
-    }
-
-    // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
-    // Create new views (invoked by the layout manager)
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view.
@@ -92,27 +52,29 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         return new ViewHolder(v);
     }
-    // END_INCLUDE(recyclerViewOnCreateViewHolder)
 
-    // BEGIN_INCLUDE(recyclerViewOnBindViewHolder)
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        Log.d(TAG, "Element " + position + " set.");
+        final ItemModel name = rvData.get(position);
 
-        // Get element from your dataset at this position and replace the contents of the view
-        // with that element
-        viewHolder.getTextView().setText(mDataSet[position]);
-        viewHolder.getTextView2().setText(mDataSet2[position]);
-        viewHolder.getTextView3().setText(mDataSet4[position]);
-        viewHolder.getTextView4().setText(mDataSet5[position]);
-        viewHolder.getImageView().setImageResource(mDataSet3[position]);
+        viewHolder.tvJudul.setText(rvData.get(position).getmJudul());
+        viewHolder.tvKonsultan.setText(rvData.get(position).getmKonsultan());
+        viewHolder.tvTanggal.setText(rvData.get(position).getmTanggal());
+        viewHolder.tvWaktu.setText(rvData.get(position).getmWaktu());
+        viewHolder.ivStatus.setImageResource(rvData.get(position).getmStatus());
+
+//        viewHolder.cvMain.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Snackbar.make(v, "Clicked element " + name.getmJudul(), Snackbar.LENGTH_LONG).show();
+//            }
+//        });
     }
-    // END_INCLUDE(recyclerViewOnBindViewHolder)
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataSet.length;
+
+        return (rvData != null) ? rvData.size() : 0;
     }
+
 }
