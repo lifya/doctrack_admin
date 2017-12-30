@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import com.pln.www.R;
 //import com.pln.www.TambahDokumentActivity;
@@ -40,7 +41,7 @@ public class DokumenFragment extends Fragment {
 
     int [] icon = {R.mipmap.on_process, R.mipmap.complete,R.mipmap.complete,R.mipmap.complete,R.mipmap.on_process};
     String [] judul = {"Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GI...","Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GI...","Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GI...","Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GI...","Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GI..."};
-    String [] deskripsi = {"PT. Adi Banuwa","PT. Adi Banuwa","PT. Adi Banuwa","PT. Adi Banuwa","PT. Adi Banuwa"};
+    String [] konsultan = {"PT. Adi Banuwa","PT. Adi Banuwa","PT. Adi Banuwa","PT. Adi Banuwa","PT. Adi Banuwa"};
     String [] tanggal = {"12-04-2017", "12-04-2017","12-04-2017","12-04-2017","12-04-2017"};
     String [] waktu = {"18.45", "18.45", "18.45", "18.45", "18.45"};
 
@@ -58,6 +59,8 @@ public class DokumenFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_dokumen, container, false);
         rootView.setTag(TAG);
+
+
 
         // BEGIN_INCLUDE(initializeRecyclerView)
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
@@ -81,6 +84,8 @@ public class DokumenFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
         // END_INCLUDE(initializeRecyclerView)
 
+        return rootView;
+
 //        FloatingActionButton fabs = (FloatingActionButton)rootView.findViewById(R.id.fabs);
 //        fabs.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -89,7 +94,7 @@ public class DokumenFragment extends Fragment {
 //                startActivity(intent);
 //            }
 //        });
-        return rootView;
+
     }
 
     /**
@@ -136,13 +141,13 @@ public class DokumenFragment extends Fragment {
      */
     private void initDataset() {
         mDataset = new String[judul.length];
-        mDataset2 = new String[deskripsi.length];
+        mDataset2 = new String[konsultan.length];
         mDataset4 = new String[tanggal.length];
         mDataset5 = new String[waktu.length];
         mDataset3 = new int[icon.length];
         for (int i = 0; i < judul.length; i++) {
             mDataset[i] = judul[i];
-            mDataset2[i] = deskripsi[i];
+            mDataset2[i] = konsultan[i];
             mDataset4[i] = tanggal[i];
             mDataset5[i] = waktu[i];
             mDataset3[i] = icon[i];

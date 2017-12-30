@@ -17,7 +17,7 @@
         android:layout_alignStart="@+id/etPassword"
         android:layout_marginBottom="89dp"
         android:drawableLeft="@drawable/ic_action_user"
-        android:hint="Username"
+        android:hint="Email"
         android:inputType="textEmailAddress"
         android:textColorHint="#ffffff"
         android:textColor="#ffffff"
