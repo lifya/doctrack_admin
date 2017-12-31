@@ -1,16 +1,396 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RrlativetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.pln.www.AddDocumentActivity">
 
-    <EditText
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:hint="kosnultan"
-        android:textSize="15dp"
-        android:drawableLeft="@drawable/ic_action_user"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp">
 
-</RrlativetLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#1b9fe1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_search_white_24dp"
+                    android:padding="8dp"/>
+
+            </FrameLayout>
+
+            <EditText
+                android:id="@+id/etJudul"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_menu_camera"
+                android:hint="Nama Pekerjaan"
+                android:inputType="text"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="#060606"
+                android:textColorHint="#626562"
+                android:textSize="14dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            >
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#1b9ee0"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_search_white_24dp"
+                    android:padding="8dp"
+                    android:paddingRight="-5dp"/>
+            </FrameLayout>
+            <EditText
+                android:id="@+id/etKontrak"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_menu_camera"
+                android:padding="10dp"
+                android:hint="Konsultan"
+                android:textColorHint="#626562"
+                android:textSize="14dp"
+                android:inputType="text"
+                android:textColor="#050505"
+                android:singleLine="true"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            >
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#1b9ee0"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_search_white_24dp"
+                    android:padding="8dp"/>
+            </FrameLayout>
+            <EditText
+                android:id="@+id/etPerRTRW"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_menu_camera"
+                android:padding="10dp"
+                android:hint="Nomor Kontrak"
+                android:textColorHint="#626562"
+                android:textSize="14dp"
+                android:inputType="text"
+                android:textColor="#050505"
+                android:singleLine="true"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+
+                >
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="#1b9fe1"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_search_white_24dp"
+                        android:padding="8dp"/>
+                </FrameLayout>
+
+
+                <EditText
+                    android:id="@+id/pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_menu_camera"
+                    android:padding="10dp"
+                    android:hint="Mulai"
+                    android:textColorHint="#626562"
+                    android:textSize="14dp"
+                    android:singleLine="true"
+                    android:inputType="text"
+                    android:textColor="#080808"
+                    android:layout_marginRight="5dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                >
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="#1b9fe1"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_search_white_24dp"
+                        android:padding="8dp"/>
+                </FrameLayout>
+                <EditText
+                    android:id="@+id/again"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_menu_camera"
+                    android:padding="10dp"
+                    android:hint="Akhir"
+                    android:textColorHint="#626562"
+                    android:textSize="14dp"
+                    android:inputType="text"
+                    android:textColor="#050505"
+                    android:singleLine="true"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"
+                android:background="#dae4da" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:id="@+id/cont"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="#909390"
+                    android:padding="10dp"
+                    android:hint="Amandemen"
+                    android:textColorHint="#fff"
+                    android:textColor="#fff"
+                    android:textSize="14dp"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#1b9fe1"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_search_white_24dp"
+                    android:padding="8dp"
+                    />
+            </FrameLayout>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"
+                android:background="#dae4da" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Perwenangan RT/RW"
+                android:textSize="16dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                >
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/ic_1"
+                    android:paddingRight="-25dp"/>
+            </FrameLayout>
+            <TextView
+                android:id="@+id/etKonsultan"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#8b5eb7e1"
+                android:padding="10dp"
+                android:text="Permohonan RT/RW"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:singleLine="true"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_marginLeft="38dp">
+                <EditText
+                    android:id="@+id/etStatus"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_menu_camera"
+                    android:padding="10dp"
+                    android:hint="Belum"
+                    android:textColorHint="#626562"
+                    android:textColor="#fff"
+                    android:textSize="14dp"
+                    android:inputType=""
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#1b9fe1"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_search_white_24dp"
+                    android:padding="8dp"
+                    />
+            </FrameLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_marginLeft="38dp">
+                <EditText
+                    android:id="@+id/etTglProses1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_menu_camera"
+                    android:padding="10dp"
+                    android:hint="Tanggal"
+                    android:textColorHint="#626562"
+                    android:textColor="#fff"
+                    android:textSize="14dp"
+                    android:inputType=""
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#1b9fe1"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_search_white_24dp"
+                    android:padding="8dp"
+                    />
+            </FrameLayout>
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
