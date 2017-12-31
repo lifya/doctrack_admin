@@ -10,10 +10,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import com.pln.www.R;
 //import com.pln.www.TambahDokumentActivity;
+import com.pln.www.adapter.ItemModel;
 import com.pln.www.adapter.MyAdapter;
+
+import java.util.ArrayList;
 
 /**
  * Created by ACHI on 27/08/2017.
@@ -35,20 +39,13 @@ public class DokumenFragment extends Fragment {
     protected RecyclerView mRecyclerView;
     protected MyAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
-    protected String[] mDataset, mDataset2, mDataset4;
-    protected int[] mDataset3;
+    private ArrayList<ItemModel> dataSet;
 
-    int [] icon = {R.drawable.ic_perm_identity_black_24dp, R.drawable.ic_perm_identity_black_24dp,R.drawable.ic_perm_identity_black_24dp,R.drawable.ic_perm_identity_black_24dp,R.drawable.ic_perm_identity_black_24dp};
-    String [] judul = {"Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GI...","Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GI...","Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GI...","Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GI...","Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GI..."};
-    String [] deskripsi = {"PT. Adi Banuwa","PT. Adi Banuwa","PT. Adi Banuwa","PT. Adi Banuwa","PT. Adi Banuwa"};
-    String [] tanggal = {"12 Januari 2017", "12 Januari 2018","12 Februari 1998","12 Februari 1998","12 Februari 1998"};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Initialize dataset, this data would usually come from a local content provider or
-        // remote server.
         initDataset();
     }
 
@@ -58,27 +55,25 @@ public class DokumenFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_dokumen, container, false);
         rootView.setTag(TAG);
 
-        // BEGIN_INCLUDE(initializeRecyclerView)
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
 
-        // LinearLayoutManager is used here, this will layout the elements in a similar fashion
-        // to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
-        // elements are laid out.
         mLayoutManager = new LinearLayoutManager(getActivity());
 
         mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
 
         if (savedInstanceState != null) {
-            // Restore saved layout manager type.
+
             mCurrentLayoutManagerType = (LayoutManagerType) savedInstanceState
                     .getSerializable(KEY_LAYOUT_MANAGER);
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-        mAdapter = new MyAdapter(mDataset,mDataset2,mDataset4,mDataset3);
-        // Set CustomAdapter as the adapter for RecyclerView.
+        mAdapter = new MyAdapter(dataSet);
+
         mRecyclerView.setAdapter(mAdapter);
-        // END_INCLUDE(initializeRecyclerView)
+
+
+        return rootView;
 
 //        FloatingActionButton fabs = (FloatingActionButton)rootView.findViewById(R.id.fabs);
 //        fabs.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +83,7 @@ public class DokumenFragment extends Fragment {
 //                startActivity(intent);
 //            }
 //        });
-        return rootView;
+
     }
 
     /**
@@ -125,7 +120,6 @@ public class DokumenFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-        // Save currently selected layout manager.
         savedInstanceState.putSerializable(KEY_LAYOUT_MANAGER, mCurrentLayoutManagerType);
         super.onSaveInstanceState(savedInstanceState);
     }
@@ -134,16 +128,13 @@ public class DokumenFragment extends Fragment {
      * from a local content provider or remote server.
      */
     private void initDataset() {
-        mDataset = new String[judul.length];
-        mDataset2 = new String[deskripsi.length];
-        mDataset4 = new String[tanggal.length];
-        mDataset3 = new int[icon.length];
-        for (int i = 0; i < judul.length; i++) {
-            mDataset[i] = judul[i];
-            mDataset2[i] = deskripsi[i];
-            mDataset4[i] = tanggal[i];
-            mDataset3[i] = icon[i];
-        }
+
+        dataSet = new ArrayList<>();
+        dataSet.add(new ItemModel("Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GI...", "PT. Adi Banuwa", "25-02-2018", "18:30", R.mipmap.on_process));
+        dataSet.add(new ItemModel("Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GI...", "PT. Adi Banuwa", "25-02-2018", "18:30", R.mipmap.on_process));
+        dataSet.add(new ItemModel("Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GI...", "PT. Adi Banuwa", "25-02-2018", "18:30", R.mipmap.on_process));
+        dataSet.add(new ItemModel("Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GI...", "PT. Adi Banuwa", "25-02-2018", "18:30", R.mipmap.on_process));
+        dataSet.add(new ItemModel("Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GI...", "PT. Adi Banuwa", "25-02-2018", "18:30", R.mipmap.on_process));
     }
 }
 
