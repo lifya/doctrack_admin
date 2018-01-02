@@ -15,9 +15,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private FirebaseUser currentUser;
     private FirebaseAuth mAuth;
     private Button bLogin;
     private EditText etUsername, etPassword;
@@ -37,7 +39,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         bLogin.setOnClickListener(this);
     }
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        currentUser = mAuth.getCurrentUser();
 
+        if(currentUser != null) {
+            sendtoStart();
+        }
+
+    }
+
+    public void sendtoStart(){
+        Intent startIntent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(startIntent);
+        finish();
+    }
+
+    public void onWait(){
+        progressDialog.setMessage("Please Wait");
+        progressDialog.show();
+    }
 
     private void userLogin(){
         String username = etUsername.getText().toString().trim();
@@ -53,8 +75,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        progressDialog.setMessage("Please Wait");
-        progressDialog.show();
+        onWait();
 
         mAuth.signInWithEmailAndPassword(username, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
