@@ -1,6 +1,10 @@
 package com.pln.www;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
@@ -15,10 +19,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.pln.www.fragment.AboutFragment;
 
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AboutFragment.OnFragmentInteractionListener{
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -91,14 +95,18 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+
         if (id == R.id.nav_beranda) {
-
             // Handle the camera action
-        }  else if (id ==  R.id.nav_help) {
+        }
+        else if (id ==  R.id.nav_help) {
 
-        } else if (id == R.id.nav_about) {
-
-        } else if (id == R.id.nav_logout) {
+        }
+        else if (id == R.id.nav_about) {
+            AboutFragment aFrag = new AboutFragment();
+            setFragment(aFrag);
+        }
+        else if (id == R.id.nav_logout) {
             FirebaseAuth.getInstance().signOut();
             sendtoStart();
         }
@@ -108,10 +116,25 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+
     public void sendtoStart(){
         Intent startIntent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(startIntent);
         finish();
     }
 
+    public void setFragment(android.support.v4.app.Fragment frag)
+    {
+        android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction ft = manager.beginTransaction();
+        ft.replace(R.id.container, frag);
+        ft.addToBackStack(null);
+        ft.commit();
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }
