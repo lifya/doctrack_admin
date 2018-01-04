@@ -29,7 +29,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         rvData = inputData;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvJudul,tvKonsultan,tvTanggal, tvWaktu;
         public ImageView ivStatus;
         public CardView cvMain;
@@ -41,6 +41,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             tvTanggal = (TextView) v.findViewById(R.id.tanggal);
             tvWaktu = (TextView) v.findViewById(R.id.waktu);
             ivStatus = (ImageView) v.findViewById(R.id.status);
+            cvMain = (CardView) v.findViewById(R.id.cv_User);
         }
     }
 

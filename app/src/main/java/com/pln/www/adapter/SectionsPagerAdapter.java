@@ -1,4 +1,4 @@
-package com.pln.www;
+package com.pln.www.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -9,7 +9,9 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
 
+import com.pln.www.R;
 import com.pln.www.fragment.DokumenFragment;
+import com.pln.www.fragment.UserFragment;
 
 
 /**
@@ -37,7 +39,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 DokumenFragment fragment0=new DokumenFragment();
                 return fragment0;
             case 1:
-                DokumenFragment fragment1=new DokumenFragment();
+                UserFragment fragment1=new UserFragment();
                 return fragment1;
         }
         return null;

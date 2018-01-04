@@ -1,8 +1,5 @@
 package com.pln.www;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.NavigationView;
@@ -19,7 +16,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.pln.www.adapter.SectionsPagerAdapter;
 import com.pln.www.fragment.AboutFragment;
+import com.pln.www.fragment.UserFragment;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AboutFragment.OnFragmentInteractionListener{
@@ -41,10 +40,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
-
-       /* BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -96,11 +91,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_beranda) {
+        if (id == R.id.nav_home) {
             // Handle the camera action
         }
-        else if (id ==  R.id.nav_help) {
-
+        else if (id ==  R.id.nav_user) {
+            UserFragment uFrag = new UserFragment();
+            setFragment(uFrag);
         }
         else if (id == R.id.nav_about) {
             AboutFragment aFrag = new AboutFragment();

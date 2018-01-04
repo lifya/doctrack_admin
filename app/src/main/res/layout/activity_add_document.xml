@@ -17,6 +17,58 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_width="0dp">
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:id="@+id/rgTipe"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/rbA"
+                        android:padding="10dp"
+                        android:text="UKL-UPL"
+                        android:textSize="14dp"
+                        android:checked="true"
+                        android:singleLine="true"
+                        android:textColor="#080808"
+                        android:layout_marginRight="50dp"/>
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/rbU"
+                        android:padding="10dp"
+                        android:text="AMDAL"
+                        android:textSize="14dp"
+                        android:singleLine="true"
+                        android:textColor="#080808"
+                        android:layout_marginRight="5dp"/>
+
+
+                </RadioGroup>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <FrameLayout
@@ -37,7 +89,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/ic_menu_camera"
-                android:hint="Nama Pekerjaan"
+                android:hint="nama pekerjaan"
                 android:inputType="text"
                 android:padding="10dp"
                 android:singleLine="true"
@@ -67,12 +119,12 @@
                     android:paddingRight="-5dp"/>
             </FrameLayout>
             <EditText
-                android:id="@+id/etKontrak"
+                android:id="@+id/etKonsultan"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/ic_menu_camera"
                 android:padding="10dp"
-                android:hint="Konsultan"
+                android:hint="konsultan"
                 android:textColorHint="#626562"
                 android:textSize="14dp"
                 android:inputType="text"
@@ -100,12 +152,12 @@
                     android:padding="8dp"/>
             </FrameLayout>
             <EditText
-                android:id="@+id/etPerRTRW"
+                android:id="@+id/etKontrak"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/ic_menu_camera"
                 android:padding="10dp"
-                android:hint="Nomor Kontrak"
+                android:hint="nomor kontrak"
                 android:textColorHint="#626562"
                 android:textSize="14dp"
                 android:inputType="text"
@@ -124,9 +176,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="horizontal"
-
-                >
+                android:orientation="horizontal">
                 <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -135,22 +185,22 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_search_white_24dp"
+                        android:src="@drawable/ic_date_range_white_24dp"
                         android:padding="8dp"/>
                 </FrameLayout>
 
 
                 <EditText
-                    android:id="@+id/pass"
+                    android:id="@+id/etTglMulai"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/ic_menu_camera"
                     android:padding="10dp"
-                    android:hint="Mulai"
+                    android:hint="mulai"
                     android:textColorHint="#626562"
                     android:textSize="14dp"
                     android:singleLine="true"
-                    android:inputType="text"
+                    android:inputType="date"
                     android:textColor="#080808"
                     android:layout_marginRight="5dp"/>
             </LinearLayout>
@@ -168,20 +218,20 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_search_white_24dp"
+                        android:src="@drawable/ic_date_range_white_24dp"
                         android:padding="8dp"/>
                 </FrameLayout>
                 <EditText
-                    android:id="@+id/again"
+                    android:id="@+id/etTglAkhir"
 
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/ic_menu_camera"
                     android:padding="10dp"
-                    android:hint="Akhir"
+                    android:hint="akhir"
                     android:textColorHint="#626562"
                     android:textSize="14dp"
-                    android:inputType="text"
+                    android:inputType="date"
                     android:textColor="#050505"
                     android:singleLine="true"/>
             </LinearLayout>
@@ -216,14 +266,15 @@
                 android:orientation="horizontal"
                 android:layout_weight="1"
                 >
-                <TextView
-                    android:id="@+id/cont"
+                <EditText
+                    android:id="@+id/upload"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:background="#909390"
+                    android:background="#a8aca8"
                     android:padding="10dp"
-                    android:hint="Amandemen"
+                    android:hint="upload file"
+                    android:inputType="text"
                     android:textColorHint="#fff"
                     android:textColor="#fff"
                     android:textSize="14dp"
@@ -233,12 +284,58 @@
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="#1b9fe1"
+                android:background="#050505"
                 >
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_search_white_24dp"
+                    android:src="@drawable/ic_attach_file_white_24dp"
+                    android:padding="8dp"
+                    />
+            </FrameLayout>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                >
+                <EditText
+                    android:id="@+id/cont"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="#a7aba7"
+                    android:padding="10dp"
+                    android:hint="amandemen"
+                    android:textColorHint="#fff"
+                    android:textColor="#fff"
+                    android:inputType="text"
+                    android:textSize="14dp"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#060606"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_add_white_24dp"
                     android:padding="8dp"
                     />
             </FrameLayout>
@@ -260,135 +357,25 @@
 
         </LinearLayout>
 
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
+            android:layout_height="wrap_content">
 
-            <TextView
+            <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Perwenangan RT/RW"
-                android:textSize="16dp"
-                android:textStyle="bold"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                >
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@mipmap/ic_1"
-                    android:paddingRight="-25dp"/>
-            </FrameLayout>
-            <TextView
-                android:id="@+id/etKonsultan"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#8b5eb7e1"
-                android:padding="10dp"
-                android:text="Permohonan RT/RW"
-                android:textSize="14dp"
-                android:textStyle="bold"
-                android:textColor="#ffffff"
-                android:singleLine="true"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginTop="5dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="1"
-                android:layout_marginLeft="38dp">
-                <EditText
-                    android:id="@+id/etStatus"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/ic_menu_camera"
-                    android:padding="10dp"
-                    android:hint="Belum"
-                    android:textColorHint="#626562"
-                    android:textColor="#fff"
-                    android:textSize="14dp"
-                    android:inputType=""
-                    android:gravity="center"/>
-            </LinearLayout>
-
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:id="@+id/buttonProses"
                 android:background="#1b9fe1"
-                >
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_search_white_24dp"
-                    android:padding="8dp"
-                    />
-            </FrameLayout>
+                android:layout_marginTop="16dp"
+                android:text="Tambah Proses"
+                android:textColor="#ffff"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginTop="5dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_weight="1"
-                android:layout_marginLeft="38dp">
-                <EditText
-                    android:id="@+id/etTglProses1"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/ic_menu_camera"
-                    android:padding="10dp"
-                    android:hint="Tanggal"
-                    android:textColorHint="#626562"
-                    android:textColor="#fff"
-                    android:textSize="14dp"
-                    android:inputType=""
-                    android:gravity="center"/>
-            </LinearLayout>
-
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="#1b9fe1"
-                >
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_search_white_24dp"
-                    android:padding="8dp"
-                    />
-            </FrameLayout>
-
-
-
-        </LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/imagev1"/>
 
 
     </LinearLayout>
