@@ -1,4 +1,4 @@
-package com.pln.www.fragment;
+package com.pln.www.alert;
 
 
 import android.app.Dialog;
@@ -20,13 +20,13 @@ import com.pln.www.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListUserFragment extends AppCompatDialogFragment {
+public class FormUserDialog extends AppCompatDialogFragment {
 
 
 //    @Override
 //    public Dialog onCreateDialog(Bundle savedInstanceState) {
 //        View v = LayoutInflater.from(getActivity())
-//                .inflate(R.layout.fragment_add_user, null);
+//                .inflate(R.layout.dialog_form_user, null);
 //
 //        Button ethapus = (Button) v.findViewById(R.id.ethapus1);
 //        ethapus.setOnClickListener(new View.OnClickListener() {

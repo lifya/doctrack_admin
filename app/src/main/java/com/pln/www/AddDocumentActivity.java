@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +11,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.pln.www.fragment.FormFragment;
+import com.pln.www.alert.FormDocumentDialog;
 
 import java.util.Calendar;
 
@@ -80,7 +79,7 @@ public class AddDocumentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getSupportFragmentManager();
-                FormFragment dialog = new FormFragment();
+                FormDocumentDialog dialog = new FormDocumentDialog();
                 dialog.show(manager, "MessageDialog");
 
                 Log.i("TAG", "Just so the text");

@@ -7,7 +7,7 @@
     android:layout_marginRight="10dp"
     android:layout_marginLeft="10dp"
     android:paddingRight="15dp"
-    tools:context="com.pln.www.fragment.FormFragment">
+    tools:context="com.pln.www.alert.FormDocumentDialog">
 
     <LinearLayout
         android:layout_width="match_parent"

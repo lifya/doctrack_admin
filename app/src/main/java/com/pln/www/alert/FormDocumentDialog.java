@@ -1,24 +1,18 @@
-package com.pln.www.fragment;
+package com.pln.www.alert;
 
 
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.pln.www.AddDocumentActivity;
 import com.pln.www.R;
 
 import java.util.Calendar;
@@ -27,7 +21,7 @@ import java.util.Calendar;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FormFragment extends AppCompatDialogFragment {
+public class FormDocumentDialog extends AppCompatDialogFragment {
 
     ImageView imageView;
     EditText Ed;
@@ -37,7 +31,7 @@ public class FormFragment extends AppCompatDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View v = LayoutInflater.from(getActivity())
-                .inflate(R.layout.fragment_form, null);
+                .inflate(R.layout.dialog_form_document, null);
 
 //        Ed = (EditText) Ed.findViewById(R.id.etTglProses);
 //        mCurrentDate = Calendar.getInstance();
