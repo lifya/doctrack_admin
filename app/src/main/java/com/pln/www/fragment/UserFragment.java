@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.pln.www.R;
 import com.pln.www.adapter.ItemModel;
@@ -27,6 +28,11 @@ public class UserFragment extends Fragment {
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
     private static final int DATASET_COUNT = 60; // menampilkan data sebanyak value
+    private Button buttontmbPenguna;
+
+    public UserFragment(){
+
+    }
 
     private enum LayoutManagerType {
         GRID_LAYOUT_MANAGER,
@@ -50,6 +56,7 @@ public class UserFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
 
         View rootView = inflater.inflate(R.layout.fragment_user, container, false);
         rootView.setTag(TAG);

@@ -8,4 +8,19 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <array name="status">
+        <item>Belum</item>
+        <item>Proses</item>
+        <item>Sudah</item>
+    </array>
+
+    <array name="namaproses">
+        <item>Permohonan RTRW</item>
+        <item>Pembahasan RTRW</item>
+        <item>RTRW</item>
+        <item>Draft UKL-UPL</item>
+        <item>Pembahasan</item>
+        <item>Perbaikan Dok</item>
+    </array>
 </resources>

@@ -26,12 +26,12 @@
         </FrameLayout>
         <Spinner
             android:id="@+id/etProses1"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:background="#8b5eb7e1"
             android:padding="10dp"
-            android:hint="nama proses"
-            android:textSize="14dp"
+            android:textSize="24dp"
+            android:entries="@array/namaproses"
             android:textStyle="bold"
             android:textColorHint="#ffff"
             android:textColor="#ffffff"
@@ -53,33 +53,21 @@
             android:orientation="horizontal"
             android:layout_weight="1"
             android:layout_marginLeft="38dp">
+
             <Spinner
                 android:id="@+id/etStatus"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_menu_camera"
-                android:padding="10dp"
-                android:hint="Belum"
-                android:textColorHint="#626562"
-                android:textColor="#fff"
-                android:textSize="14dp"
-                android:inputType=""
-                android:gravity="center"/>
-        </LinearLayout>
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="#1b9fe1"
-            >
-            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_search_white_24dp"
-                android:padding="8dp"
-                />
-        </FrameLayout>
+                android:layout_weight="1"
+                android:background="@drawable/ic_menu_camera"
+                android:entries="@array/status"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="#fff"
+                android:textColorHint="#626562"
+                android:textSize="24dp" />
+        </LinearLayout>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
