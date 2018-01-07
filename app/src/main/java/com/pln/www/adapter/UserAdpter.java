@@ -1,5 +1,6 @@
 package com.pln.www.adapter;
 
+import android.app.Activity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,8 +18,11 @@ import java.util.ArrayList;
 
 public class UserAdpter extends RecyclerView.Adapter<UserAdpter.ViewHolder> {
     private ArrayList<UserModel> rvUser;
+    private Activity context;
 
-    public UserAdpter(ArrayList<UserModel> inputUser) {
+    public UserAdpter(Activity newActivity, ArrayList<UserModel> inputUser) {
+        super();
+        context = newActivity;
         rvUser = inputUser;
     }
 
@@ -28,8 +32,8 @@ public class UserAdpter extends RecyclerView.Adapter<UserAdpter.ViewHolder> {
 
         public ViewHolder(View v) {
             super(v);
-            tvNama = (TextView) v.findViewById(R.id.nama);
-            tvEmail = (TextView) v.findViewById(R.id.email);
+            tvNama = (TextView) v.findViewById(R.id.tvNama);
+            tvEmail = (TextView) v.findViewById(R.id.tvEmail);
             cvUser = (CardView) v.findViewById(R.id.cv_User);
         }
     }
@@ -46,8 +50,10 @@ public class UserAdpter extends RecyclerView.Adapter<UserAdpter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         final UserModel name = rvUser.get(position);
 
-        holder.tvNama.setText(rvUser.get(position).getmNama());
-        holder.tvEmail.setText(rvUser.get(position).getmEmail());
+        //holder.tvNama.setText(rvUser.get(position).getNama());
+        //holder.tvEmail.setText(rvUser.get(position).getEmail());
+        holder.tvNama.setText(name.getNama());
+        holder.tvEmail.setText(name.getEmail());
     }
 
     @Override

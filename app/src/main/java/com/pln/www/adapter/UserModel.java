@@ -1,27 +1,36 @@
 package com.pln.www.adapter;
 
+import android.widget.ArrayAdapter;
+
 /**
  * Created by ACHI on 04/01/2018.
  */
 
 public class UserModel {
 
-    private String mNama, mEmail, mPassword;
+    //private List<User> userList;
+    private String Nama, Email;
 
-    public UserModel(String nNama, String nEmail) {
-        this.mNama = nNama;
-        this.mEmail = nEmail;
+    public UserModel(){}
+
+    public UserModel(String nama, String email) {
+        Nama = nama;
+        Email = email;
     }
 
-    public String getmNama() {return mNama;}
+    public String getNama() {
+        return Nama;
+    }
 
-    public void setmNama(String mNama) {this.mNama = mNama;}
+    public void setNama(String nama) {
+        Nama = nama;
+    }
 
-    public String getmEmail() {return mEmail;}
+    public String getEmail() {
+        return Email;
+    }
 
-    public void setmEmail(String nEMail) {this.mEmail = mEmail;}
-
-    public String getmPassword() {return mPassword;}
-
-    public void setmPassword(String nEMail) {this.mPassword = mPassword;}
+    public void setEmail(String email) {
+        Email = email;
+    }
 }

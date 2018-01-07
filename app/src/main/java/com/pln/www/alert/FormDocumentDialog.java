@@ -32,6 +32,7 @@ public class FormDocumentDialog extends AppCompatDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View v = LayoutInflater.from(getActivity())
                 .inflate(R.layout.dialog_form_document, null);
+        setCancelable(false);
 
 //        Ed = (EditText) Ed.findViewById(R.id.etTglProses);
 //        mCurrentDate = Calendar.getInstance();

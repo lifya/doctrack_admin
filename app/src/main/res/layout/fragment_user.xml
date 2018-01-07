@@ -11,13 +11,12 @@
     </android.support.v7.widget.RecyclerView>
 
     <Button
+        android:id="@+id/bAddUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="Tambah Pengguna"
         android:background="#1b9fe1"
-        android:textColor="#fff"
-        android:id="@+id/ethapus1"
-        />
+        android:text="Tambah Pengguna"
+        android:textColor="#fff" />
 
 </RelativeLayout>

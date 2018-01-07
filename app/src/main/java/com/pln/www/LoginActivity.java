@@ -57,6 +57,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void onWait(){
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
     }

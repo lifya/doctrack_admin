@@ -25,6 +25,16 @@
         android:hint="Email" />
 
     <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="text"
+        android:textSize="14dp" />
+
+    <EditText
         android:id="@+id/etPass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,6 +43,18 @@
         android:layout_marginTop="5dp"
         android:hint="Password"
         android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/bCancel"
+        android:layout_width="188dp"
+        android:layout_height="wrap_content"
+        android:text="Cancel" />
+
+    <Button
+        android:id="@+id/bAdd"
+        android:layout_width="186dp"
+        android:layout_height="wrap_content"
+        android:text="Add User" />
 
 
 </LinearLayout>
