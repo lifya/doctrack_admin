@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,8 +25,9 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.pln.www.R;
 import com.pln.www.adapter.ItemModel;
 import com.pln.www.adapter.MyAdapter;
-import com.pln.www.adapter.UserAdpter;
+//import com.pln.www.adapter.UserAdpter;
 import com.pln.www.adapter.UserModel;
+import com.pln.www.adapter.UserModelViewHolder;
 import com.pln.www.alert.FormUserDialog;
 
 import java.util.ArrayList;
@@ -64,7 +66,7 @@ public class UserFragment extends Fragment implements View.OnClickListener{
     protected UserFragment.LayoutManagerType mCurrentLayoutManagerType;
 
     protected RecyclerView mRecyclerView;
-    protected UserAdpter mAdapter;
+    //protected UserAdpter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
 
     @Override
@@ -95,24 +97,26 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
     }
 
-    public static class UserModelViewHolder extends RecyclerView.ViewHolder{
-        TextView tvEmail, tvNama;
-        View mView;
-
-        public UserModelViewHolder(View itemView){
-            super(itemView);
-            mView = itemView;
-            tvEmail = (TextView) mView.findViewById(R.id.tvEmail);
-            tvNama = (TextView) mView.findViewById(R.id.tvNama);
-        }
-        public void setEmail(String email){
-            tvEmail.setText(email);
-
-        }
-        public void setNama(String nama){
-            tvNama.setText(nama);
-        }
-    }
+//    public static class UserModelViewHolder extends RecyclerView.ViewHolder{
+//        TextView tvEmail, tvNama;
+//        ImageView ivHapus;
+//        View mView;
+//
+//        public UserModelViewHolder(View itemView){
+//            super(itemView);
+//            mView = itemView;
+//            tvEmail = (TextView) mView.findViewById(R.id.tvEmail);
+//            tvNama = (TextView) mView.findViewById(R.id.tvNama);
+//            ivHapus = (ImageView) mView.findViewById(R.id.ivHapus);
+//        }
+//        public void setEmail(String email){
+//            tvEmail.setText(email);
+//
+//        }
+//        public void setNama(String nama){
+//            tvNama.setText(nama);
+//        }
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -135,9 +139,9 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-        mAdapter = new UserAdpter(getActivity(), (ArrayList<UserModel>) userList);
-
-        mRecyclerView.setAdapter(mAdapter);
+//        mAdapter = new UserAdpter(getActivity(), (ArrayList<UserModel>) userList);
+//
+//        mRecyclerView.setAdapter(mAdapter);
 
         dbUsers = FirebaseDatabase.getInstance().getReferenceFromUrl("https://tracking-user.firebaseio.com/Users");
 
