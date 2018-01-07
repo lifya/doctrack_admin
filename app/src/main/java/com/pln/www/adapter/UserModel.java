@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 
 public class UserModel {
 
-    //private List<User> userList;
     private String Nama, Email;
 
     public UserModel(){}
