@@ -1,7 +1,9 @@
 package com.pln.www.fragment;
 
 
+import android.app.AlertDialog;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,7 +17,11 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,10 +32,12 @@ import com.pln.www.R;
 import com.pln.www.adapter.ItemModel;
 import com.pln.www.adapter.MyAdapter;
 //import com.pln.www.adapter.UserAdpter;
+import com.pln.www.adapter.RecycleAdapter;
 import com.pln.www.adapter.UserModel;
 import com.pln.www.adapter.UserModelViewHolder;
 import com.pln.www.alert.FormUserDialog;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,9 +51,13 @@ public class UserFragment extends Fragment implements View.OnClickListener{
     private static final int SPAN_COUNT = 2;
     private static final int DATASET_COUNT = 60; // menampilkan data sebanyak value
     private Button bAddUser;
+    //private ImageView ivHapus;
     private ListView listviewUsers;
     private DatabaseReference dbUsers;
     private List<UserModel> userList;
+    private FirebaseRecyclerAdapter firebaseRecyclerAdapter;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
 
     public UserFragment(){
 
@@ -56,6 +68,10 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         if(v == bAddUser){
             AddUser();
         }
+//        if(v == ivHapus){
+//            Toast.makeText(getActivity(), "Successed", Toast.LENGTH_LONG).show();
+//            return;
+//        }
     }
 
     private enum LayoutManagerType {
@@ -66,7 +82,7 @@ public class UserFragment extends Fragment implements View.OnClickListener{
     protected UserFragment.LayoutManagerType mCurrentLayoutManagerType;
 
     protected RecyclerView mRecyclerView;
-    //protected UserAdpter mAdapter;
+    protected RecycleAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
 
     @Override
@@ -77,9 +93,7 @@ public class UserFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onStart(){
         super.onStart();
-
-        FirebaseRecyclerAdapter<UserModel, UserModelViewHolder> firebaseRecyclerAdapter =
-                new FirebaseRecyclerAdapter<UserModel, UserModelViewHolder>
+        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<UserModel, UserModelViewHolder>
                         (
                                 UserModel.class,
                                 R.layout.list_user,
@@ -88,35 +102,49 @@ public class UserFragment extends Fragment implements View.OnClickListener{
                         )
                 {
                     @Override
-                    protected void populateViewHolder(UserModelViewHolder viewHolder, UserModel model, int position) {
+                    protected void populateViewHolder(final UserModelViewHolder viewHolder, final UserModel model, int position) {
                         viewHolder.setEmail(model.getEmail());
                         viewHolder.setNama(model.getNama());
-                    }
-                };
+                        viewHolder.setOnClickListener(new UserModelViewHolder.ClickListener() {
+                            @Override
+                            public void onItemClick(View view, final int position) {
+                                final AlertDialog.Builder alertDelete = new AlertDialog.Builder(getActivity());
+                                alertDelete.setMessage("Are you sure want to delete this user ?").setCancelable(false)
+                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                int selectedItem = position;
+                                                firebaseRecyclerAdapter.getRef(selectedItem).removeValue();
+                                                firebaseRecyclerAdapter.notifyItemRemoved(selectedItem);
+                                                mRecyclerView.invalidate();
 
+                                                onStart();
+                                            }
+
+                                        })
+                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.cancel();
+                                            }
+                                        });
+                                AlertDialog alert = alertDelete.create();
+                                alert.setTitle("Warning");
+                                alert.show();
+                            }
+
+                            @Override
+                            public void onItemLongClick(View view, int position) {
+                                Toast.makeText(getActivity(), "Successed", Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                        });
+                    }
+
+
+                };
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
     }
-
-//    public static class UserModelViewHolder extends RecyclerView.ViewHolder{
-//        TextView tvEmail, tvNama;
-//        ImageView ivHapus;
-//        View mView;
-//
-//        public UserModelViewHolder(View itemView){
-//            super(itemView);
-//            mView = itemView;
-//            tvEmail = (TextView) mView.findViewById(R.id.tvEmail);
-//            tvNama = (TextView) mView.findViewById(R.id.tvNama);
-//            ivHapus = (ImageView) mView.findViewById(R.id.ivHapus);
-//        }
-//        public void setEmail(String email){
-//            tvEmail.setText(email);
-//
-//        }
-//        public void setNama(String nama){
-//            tvNama.setText(nama);
-//        }
-//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -139,14 +167,15 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-//        mAdapter = new UserAdpter(getActivity(), (ArrayList<UserModel>) userList);
-//
-//        mRecyclerView.setAdapter(mAdapter);
+        mAdapter = new RecycleAdapter(userList, getActivity());
+
+        mRecyclerView.setAdapter(mAdapter);
 
         dbUsers = FirebaseDatabase.getInstance().getReferenceFromUrl("https://tracking-user.firebaseio.com/Users");
 
         listviewUsers = (ListView) rootView.findViewById(R.layout.list_user);
 
+        //ivHapus = (ImageView) rootView.findViewById(R.id.ivHapus);
         bAddUser = (Button) rootView.findViewById(R.id.bAddUser);
         bAddUser.setOnClickListener(this);
 
@@ -185,6 +214,10 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         android.support.v4.app.FragmentManager manager = getFragmentManager();
         FormUserDialog dialogAdd = new FormUserDialog();
         dialogAdd.show(manager, dialogAdd.getTag());
+    }
+
+    private void deleteUser(FirebaseUser uid){
+        //firebaseUser = firebaseAuth.getCurrentUser().getUid(uid);
     }
 
 }

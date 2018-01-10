@@ -16,6 +16,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -24,6 +30,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button bLogin;
     private EditText etUsername, etPassword;
     private ProgressDialog progressDialog;
+    private DatabaseReference databaseReference, users;
+    private Query query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +39,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
@@ -63,8 +72,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void userLogin(){
-        String username = etUsername.getText().toString().trim();
-        String password = etPassword.getText().toString().trim();
+        final String username = etUsername.getText().toString().trim();
+        final String password = etPassword.getText().toString().trim();
 
         if(TextUtils.isEmpty(username)){
             Toast.makeText(LoginActivity.this, "Please Enter Email", Toast.LENGTH_LONG).show();
@@ -78,21 +87,38 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         onWait();
 
-        mAuth.signInWithEmailAndPassword(username, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressDialog.dismiss();
-                        if(task.isSuccessful()){
-                            finish();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        query = databaseReference.child("uiD").orderByChild("username").equalTo(username);
+//        Toast.makeText(this, "hi" + query, Toast.LENGTH_LONG).show();
+//        return;
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null && dataSnapshot.getChildren()!=null &&
+                        dataSnapshot.getChildren().iterator().hasNext()){
+                    progressDialog.dismiss();
+                    mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            }
+                            else{
+                                Toast.makeText(LoginActivity.this, "Failed to login", Toast.LENGTH_LONG).show();
+                                return;
+                            }
                         }
-                        else{
-                            Toast.makeText(LoginActivity.this, "Failed to login", Toast.LENGTH_LONG).show();
-                            return;
-                        }
-                    }
-                });
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getParent(), "Failed", Toast.LENGTH_LONG).show();
+                return;
+            }
+        });
     }
 
     @Override
