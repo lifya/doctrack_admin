@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.pln.www.ItemClickListener;
 import com.pln.www.R;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Provide views to RecyclerView with data from mDataSet.
@@ -61,11 +62,11 @@ class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
 }
 
 public class MyAdapter extends RecyclerView.Adapter<ViewHolder> {
-    private ArrayList<ItemModel> rvData;
+    private List<ItemModel> rvData;
     private Context context;
 
-    public MyAdapter(ArrayList<ItemModel> inputData) {
-        rvData = inputData;
+    public MyAdapter(List<ItemModel> documentModels) {
+        rvData = documentModels;
         this.context = context;
     }
 
@@ -103,7 +104,13 @@ public class MyAdapter extends RecyclerView.Adapter<ViewHolder> {
     @Override
     public int getItemCount() {
 
-        return (rvData != null) ? rvData.size() : 0;
+        return rvData.size();
+    }
+
+    public void setFilter(List<ItemModel> documentModels) {
+        rvData = new ArrayList<>();
+        rvData.addAll(documentModels);
+        notifyDataSetChanged();
     }
 
 }
