@@ -4,46 +4,72 @@ package com.pln.www.adapter;
  * Created by ACHI on 01/09/2017.
  */
 
+import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.pln.www.MainActivity;
+import com.pln.www.ItemClickListener;
 import com.pln.www.R;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Provide views to RecyclerView with data from mDataSet.
  */
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private ArrayList<ItemModel> rvData;
+class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+    public TextView tvJudul,tvKonsultan,tvTanggal, tvWaktu;
+    public ImageView ivStatus;
+    public CardView cvMain;
 
-    public MyAdapter(ArrayList<ItemModel> inputData) {
-        rvData = inputData;
+    private ItemClickListener itemClickListener;
+
+    public ViewHolder(View itemView) {
+        super(itemView);
+        tvJudul = (TextView) itemView.findViewById(R.id.judul);
+        tvKonsultan = (TextView) itemView.findViewById(R.id.konsultan);
+        tvTanggal = (TextView) itemView.findViewById(R.id.tanggal);
+        tvWaktu = (TextView) itemView.findViewById(R.id.waktu);
+        ivStatus = (ImageView) itemView.findViewById(R.id.status);
+        cvMain = (CardView) itemView.findViewById(R.id.cv_User);
+
+        itemView.setOnClickListener(this);
+        itemView.setOnLongClickListener(this);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvJudul,tvKonsultan,tvTanggal, tvWaktu;
-        public ImageView ivStatus;
-        public CardView cvMain;
 
-        public ViewHolder(View v) {
-            super(v);
-            tvJudul = (TextView) v.findViewById(R.id.judul);
-            tvKonsultan = (TextView) v.findViewById(R.id.konsultan);
-            tvTanggal = (TextView) v.findViewById(R.id.tanggal);
-            tvWaktu = (TextView) v.findViewById(R.id.waktu);
-            ivStatus = (ImageView) v.findViewById(R.id.status);
-            cvMain = (CardView) v.findViewById(R.id.cv_User);
-        }
+    public void setItemClickListener(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
     }
+
+    @Override
+    public void onClick(View v) {
+
+        itemClickListener.onClick(v, getAdapterPosition(), false);
+
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        itemClickListener.onClick(v, getAdapterPosition(), true);
+        return false;
+    }
+}
+
+public class MyAdapter extends RecyclerView.Adapter<ViewHolder> {
+    private List<ItemModel> rvData;
+    private Context context;
+
+    public MyAdapter(List<ItemModel> documentModels) {
+        rvData = documentModels;
+        this.context = context;
+    }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -64,18 +90,27 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         viewHolder.tvWaktu.setText(rvData.get(position).getmWaktu());
         viewHolder.ivStatus.setImageResource(rvData.get(position).getmStatus());
 
-//        viewHolder.cvMain.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Snackbar.make(v, "Clicked element " + name.getmJudul(), Snackbar.LENGTH_LONG).show();
-//            }
-//        });
+        viewHolder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View v, int position, boolean isLongClick) {
+                if(isLongClick)
+                    Snackbar.make(v, "Clicked element " + name.getmJudul(), Snackbar.LENGTH_LONG).show();
+                else
+                    Snackbar.make(v, "Clicked element " + name.getmJudul(), Snackbar.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
 
-        return (rvData != null) ? rvData.size() : 0;
+        return rvData.size();
+    }
+
+    public void setFilter(List<ItemModel> documentModels) {
+        rvData = new ArrayList<>();
+        rvData.addAll(documentModels);
+        notifyDataSetChanged();
     }
 
 }

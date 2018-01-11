@@ -68,10 +68,6 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         if(v == bAddUser){
             AddUser();
         }
-//        if(v == ivHapus){
-//            Toast.makeText(getActivity(), "Successed", Toast.LENGTH_LONG).show();
-//            return;
-//        }
     }
 
     private enum LayoutManagerType {
@@ -214,10 +210,6 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         android.support.v4.app.FragmentManager manager = getFragmentManager();
         FormUserDialog dialogAdd = new FormUserDialog();
         dialogAdd.show(manager, dialogAdd.getTag());
-    }
-
-    private void deleteUser(FirebaseUser uid){
-        //firebaseUser = firebaseAuth.getCurrentUser().getUid(uid);
     }
 
 }
