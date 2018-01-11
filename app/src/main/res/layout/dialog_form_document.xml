@@ -2,156 +2,236 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
     android:orientation="vertical"
-    android:layout_marginRight="10dp"
-    android:layout_marginLeft="10dp"
-    android:paddingRight="15dp"
     tools:context="com.pln.www.alert.FormDocumentDialog">
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            >
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@mipmap/ic_1"
-                android:paddingRight="-25dp"/>
-        </FrameLayout>
-        <Spinner
-            android:id="@+id/etProses1"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:background="#8b5eb7e1"
-            android:padding="10dp"
-            android:textSize="24dp"
-            android:entries="@array/namaproses"
-            android:textStyle="bold"
-            android:textColorHint="#ffff"
-            android:textColor="#ffffff"
-            android:singleLine="true"/>
-
-    </LinearLayout>
+        android:layout_height="50dp"
+        android:text="Tambah Proses"
+        android:background="#1b9ee0"
+        android:textColor="#fff"
+        android:gravity="center_vertical"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textStyle="bold"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginTop="5dp">
+        android:orientation="vertical"
+        android:layout_margin="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="1"
-            android:layout_marginLeft="38dp">
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
             <Spinner
-                android:id="@+id/etStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/ic_menu_camera"
-                android:entries="@array/status"
-                android:gravity="center"
+                android:id="@+id/etProses1"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:background="#67339ed4"
                 android:padding="10dp"
-                android:textColor="#fff"
-                android:textColorHint="#626562"
-                android:textSize="24dp" />
-        </LinearLayout>
+                android:textSize="24dp"
+                android:entries="@array/namaproses"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:singleLine="true"/>
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginTop="5dp">
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#1b9fe1"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_date_range_white_24dp"
+                    android:padding="8dp"
+                    />
+            </FrameLayout>
+
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_weight="1"
-            android:layout_marginLeft="38dp">
-            <EditText
-                android:id="@+id/etTglProses"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_menu_camera"
-                android:padding="10dp"
-                android:hint="tanggal"
-                android:textColorHint="#626562"
-                android:textColor="#fff"
-                android:textSize="14dp"
-                android:inputType=""
-                android:gravity="center"/>
-        </LinearLayout>
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="5dp">
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="#1b9fe1"
-            >
-            <ImageView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_date_range_white_24dp"
-                android:padding="8dp"
-                />
-        </FrameLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginTop="5dp">
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <Spinner
+                    android:id="@+id/etStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/ic_menu_camera"
+                    android:entries="@array/status"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:textColor="#fff"
+                    android:textColorHint="#626562"
+                    android:textSize="14dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <EditText
+                    android:id="@+id/etTglProses"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_menu_camera"
+                    android:paddingLeft="20dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:hint="dd/mm/yy"
+                    android:textColorHint="#626562"
+                    android:textColor="#000000"
+                    android:textSize="14dp"
+                    android:inputType="date"
+                    android:gravity="left"/>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#1b9fe1"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_date_range_white_24dp"
+                    android:padding="8dp"
+                    />
+            </FrameLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <EditText
+                    android:id="@+id/etUpload"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_menu_camera"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:hint="upload file"
+                    android:textColorHint="#626562"
+                    android:textColor="#000000"
+                    android:textSize="14dp"
+                    android:inputType=""
+                    android:gravity="left"/>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#1b9fe1"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_attach_file_white_24dp"
+                    android:padding="8dp"
+                    />
+            </FrameLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_weight="1"
-            android:layout_marginLeft="38dp">
-            <EditText
-                android:id="@+id/etUpload"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_menu_camera"
-                android:padding="10dp"
-                android:hint="upload file"
-                android:textColorHint="#626562"
-                android:textColor="#fff"
-                android:textSize="14dp"
-                android:inputType=""
-                android:gravity="center"/>
-        </LinearLayout>
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="5dp">
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="#1b9fe1"
-            >
-            <ImageView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_attach_file_white_24dp"
-                android:padding="8dp"
-                />
-        </FrameLayout>
+                android:orientation="horizontal"
+                android:layout_weight="1">
+                <EditText
+                    android:id="@+id/etKeterangan"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="100dp"
+                    android:background="@drawable/ic_menu_camera"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:hint="keterangan"
+                    android:textColorHint="#626562"
+                    android:textColor="#000000"
+                    android:textSize="14dp"
+                    android:inputType=""
+                    android:gravity="left"/>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:layout_width="145dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnCancel"
+            android:text="Cancel"
+            android:background="#1b9ddf"
+            android:textColor="#fff"/>
+        <View
+            android:layout_width="2dp"
+            android:layout_height="15dp"/>
+
+        <Button
+            android:layout_width="145dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnAdd"
+            android:text="Add"
+            android:background="#1b9ddf"
+            android:textColor="#fff"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>

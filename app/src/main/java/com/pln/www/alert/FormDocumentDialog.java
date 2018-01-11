@@ -73,9 +73,7 @@ public class FormDocumentDialog extends AppCompatDialogFragment {
         };
 
         return new AlertDialog.Builder(getActivity())
-                .setTitle("ubah aja")
                 .setView(v)
-                .setPositiveButton(android.R.string.ok, listener)
                 .create();
     }
 }
