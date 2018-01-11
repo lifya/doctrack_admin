@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/tbDoc"
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#1b9fe1">
@@ -9,30 +9,26 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginLeft="20dp"
-        android:background="@drawable/ic_arrow_back" />
+        android:background="@drawable/ic_action_arrow_back"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-=======
-        android:text="Detail Proses"
+        android:text="Dokumen Baru"
         android:textSize="18sp"
->>>>>>> b614172cb7231459c8ec542507e1973568be4056
         android:layout_gravity="center"
         android:gravity="bottom"
-        android:text="Detail Proses"
-        android:textColor="#ffffff"
-        android:textSize="20dp" />
+        android:textColor="#ffffff"/>
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="SAVE"
+        android:textSize="14dp"
         android:layout_gravity="right"
         android:layout_marginRight="20dp"
-        android:text="SAVE"
-        android:textColor="#ffffff"
-        android:textSize="14dp" />
+        android:textColor="#ffffff"/>
+
 
 </android.support.v7.widget.Toolbar>
