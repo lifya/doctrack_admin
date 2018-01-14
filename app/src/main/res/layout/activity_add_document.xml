@@ -43,27 +43,27 @@
                         android:orientation="horizontal">
 
                         <RadioButton
+                            android:id="@+id/rbUKL"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/rbA"
-                            android:padding="10dp"
-                            android:text="UKL-UPL"
-                            android:textSize="14dp"
+                            android:layout_marginRight="50dp"
                             android:checked="true"
+                            android:padding="10dp"
                             android:singleLine="true"
+                            android:text="UKL-UPL"
                             android:textColor="#080808"
-                            android:layout_marginRight="50dp"/>
+                            android:textSize="14dp" />
 
                         <RadioButton
+                            android:id="@+id/rbAmdal"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:id="@+id/rbU"
+                            android:layout_marginRight="5dp"
                             android:padding="10dp"
-                            android:text="AMDAL"
-                            android:textSize="14dp"
                             android:singleLine="true"
+                            android:text="AMDAL"
                             android:textColor="#080808"
-                            android:layout_marginRight="5dp"/>
+                            android:textSize="14dp" />
 
 
                     </RadioGroup>
@@ -202,6 +202,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/ic_menu_camera"
+                        android:focusableInTouchMode="true"
                         android:padding="10dp"
                         android:hint="mulai"
                         android:textColorHint="#626562"
@@ -234,6 +235,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/ic_menu_camera"
+                        android:focusableInTouchMode="true"
                         android:padding="10dp"
                         android:hint="akhir"
                         android:textColorHint="#626562"

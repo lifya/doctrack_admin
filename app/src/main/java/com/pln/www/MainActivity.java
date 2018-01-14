@@ -119,14 +119,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         finish();
     }
 
-    public void setFragment(android.support.v4.app.Fragment frag)
-    {
+    public void setFragment(android.support.v4.app.Fragment frag) {
         android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction ft = manager.beginTransaction();
         ft.replace(R.id.container, frag);
         ft.addToBackStack(null);
         ft.commit();
-
     }
 
     @Override

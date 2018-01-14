@@ -6,19 +6,16 @@
     android:background="#1b9fe1">
 
     <ImageView
+        android:id="@+id/ivBack"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginLeft="20dp"
         android:background="@drawable/ic_arrow_back" />
 
     <TextView
+        android:id="@+id/tvDetailProses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-=======
-        android:text="Detail Proses"
-        android:textSize="18sp"
->>>>>>> b614172cb7231459c8ec542507e1973568be4056
         android:layout_gravity="center"
         android:gravity="bottom"
         android:text="Detail Proses"
@@ -27,6 +24,7 @@
 
 
     <TextView
+        android:id="@+id/tvSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"

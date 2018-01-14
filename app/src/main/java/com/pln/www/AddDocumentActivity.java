@@ -1,43 +1,81 @@
 package com.pln.www;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.pln.www.adapter.KonsultanClass;
+import com.pln.www.adapter.KontrakClass;
+import com.pln.www.adapter.PekerjaanClass;
 import com.pln.www.alert.FormDocumentDialog;
+import com.pln.www.alert.FormUserDialog;
+import com.pln.www.fragment.DokumenFragment;
+
+import org.w3c.dom.Text;
 
 import java.util.Calendar;
+import java.util.List;
 
-public class AddDocumentActivity extends AppCompatActivity {
+public class AddDocumentActivity extends AppCompatActivity{
 
-    ImageView imageView;
-    EditText Ed1;
-    EditText Ed2;
-    Calendar mCurrentDate;
-    int day, month, year;
+    private ImageView imageView, ivBack;
+    private RadioGroup radioGroup;
+    private RadioButton radioButton;
+    private EditText Ed1, Ed2, etJudul, etKonsultan, etKontrak;
+    private TextView tvSave;
+    private Calendar mCurrentDate;
+    private int day, month, year;
+    private Button bAddDoc;
+    private ProgressDialog progressDialog;
+    private DatabaseReference dbKonsultan, dbKontrak, dbPekerjaan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_document);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.tbAddDoc);
+//        setSupportActionBar(toolbar);
+       RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.tbDoc);
-        setSupportActionBar(toolbar);
-
-        ImageView imageView = (ImageView) findViewById(R.id.imagev1);
-
-        setupSetForm();
-
+        dbKonsultan = FirebaseDatabase.getInstance().getReference("Konsultan");
+        dbKontrak = FirebaseDatabase.getInstance().getReference("Kontrak");
+        dbPekerjaan = FirebaseDatabase.getInstance().getReference("Pekerjaan");
+        //ImageView imageView = (ImageView) findViewById(R.id.imagev1);
+        tvSave = (TextView) findViewById(R.id.tvSave);
+        ivBack = (ImageView) findViewById(R.id.ivBack);
+        radioGroup = (RadioGroup) findViewById(R.id.rgTipe);
+        etJudul = (EditText) findViewById(R.id.etJudul);
+        etKonsultan = (EditText) findViewById(R.id.etKonsultan);
+        etKontrak = (EditText) findViewById(R.id.etKontrak);
         Ed1 = (EditText) findViewById(R.id.etTglMulai);
         Ed2 = (EditText) findViewById(R.id.etTglAkhir);
+        bAddDoc = (Button) findViewById(R.id.buttonProses);
         mCurrentDate = Calendar.getInstance();
         day = mCurrentDate.get(Calendar.DAY_OF_MONTH);
         month = mCurrentDate.get(Calendar.MONTH);
@@ -75,20 +113,120 @@ public class AddDocumentActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void setupSetForm () {
-        Button btn = (Button) findViewById(R.id.buttonProses);
-        btn.setOnClickListener(new View.OnClickListener() {
+        ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager manager = getSupportFragmentManager();
-                FormDocumentDialog dialog = new FormDocumentDialog();
-                dialog.show(manager, "MessageDialog");
+                onBackPressed();
+            }
+        });
 
-                Log.i("TAG", "Just so the text");
+        tvSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    saveData();
+                }
+        });
+
+        bAddDoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToAddDoc();
             }
         });
     }
 
+    private String addListeneronButton(){
+        int radiobuttonid = radioGroup.getCheckedRadioButtonId();
+        radioButton = (RadioButton) findViewById(radiobuttonid);
+        String jenisDoc = radioButton.getText().toString().trim();
+        return jenisDoc;
+    }
+
+    private void saveData(){
+        String jenisDoc = addListeneronButton();
+        String judul = etJudul.getText().toString().trim();
+        String konsultan = etKonsultan.getText().toString().trim();
+        String kontrak = etKontrak.getText().toString().trim();
+        String tglMulai = Ed1.getText().toString().trim();
+        String tglAkhir = Ed2.getText().toString().trim();
+
+//        Toast.makeText(this, " " + jenisDoc, Toast.LENGTH_LONG).show();
+//        return;
+
+        if(TextUtils.isEmpty(judul)){
+            Toast.makeText(this, "Please Enter The Title", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(TextUtils.isEmpty(konsultan)){
+            Toast.makeText(this, "Please Enter The Consultant", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(TextUtils.isEmpty(kontrak)){
+            Toast.makeText(this, "Please Enter The Contract", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(TextUtils.isEmpty(tglMulai)){
+            Toast.makeText(this, "Please Enter The Date", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(TextUtils.isEmpty(tglAkhir)){
+            Toast.makeText(this, "Please Enter The Date", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        onWait();
+
+        String idKonsultan = dbKonsultan.push().getKey();
+        KonsultanClass konsultanClass = new KonsultanClass(idKonsultan, konsultan);
+        dbKonsultan.child(idKonsultan).setValue(konsultanClass);
+
+        String idKontrak = dbKontrak.push().getKey();
+        KontrakClass kontrakClass = new KontrakClass(idKontrak, kontrak, tglMulai, tglAkhir);
+        dbKontrak.child(idKontrak).setValue(kontrakClass);
+
+        String idPekerjaan = dbPekerjaan.push().getKey();
+        PekerjaanClass pekerjaanClass = new PekerjaanClass(idPekerjaan, idKonsultan, idKontrak, judul, jenisDoc);
+        //dbPekerjaan.child(idPekerjaan).child(idKonsultan).child(idKontrak).setValue(pekerjaanClass);
+        dbPekerjaan.child(idPekerjaan).setValue(pekerjaanClass);
+
+        progressDialog.dismiss();
+        finish();
+        startActivity(getIntent());
+        Toast.makeText(this, "Successed", Toast.LENGTH_LONG).show();
+        return;
+
+    }
+
+    public void onWait(){
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.show();
+    }
+
+    private void checkData(String jenisDoc, String judul, String konsultan, String kontrak, String tglMulai, String tglAkhir){
+        if(TextUtils.isEmpty(jenisDoc)){
+            Toast.makeText(this, "Please Enter The Document Type", Toast.LENGTH_LONG).show();
+        }
+        if(TextUtils.isEmpty(judul)){
+            Toast.makeText(this, "Please Enter The Title", Toast.LENGTH_LONG).show();
+        }
+        if(TextUtils.isEmpty(konsultan)){
+            Toast.makeText(this, "Please Enter The Consultant", Toast.LENGTH_LONG).show();
+        }
+        if(TextUtils.isEmpty(kontrak)){
+            Toast.makeText(this, "Please Enter The Contract", Toast.LENGTH_LONG).show();
+        }
+        if(TextUtils.isEmpty(tglMulai)){
+            Toast.makeText(this, "Please Enter The Date", Toast.LENGTH_LONG).show();
+        }
+        if(TextUtils.isEmpty(tglAkhir)){
+            Toast.makeText(this, "Please Enter The Date", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void goToAddDoc(){
+        FragmentManager manager = getSupportFragmentManager();
+        FormDocumentDialog dialogAdd = new FormDocumentDialog();
+        dialogAdd.show(manager, dialogAdd.getTag());
+    }
 }
