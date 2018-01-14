@@ -28,15 +28,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="#67339ed4">
 
             <Spinner
                 android:id="@+id/spProses1"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:background="#67339ed4"
                 android:entries="@array/namaproses"
                 android:padding="10dp"
+                android:backgroundTint="#1b9fe1"
                 android:singleLine="true"
                 android:textColor="#ffffff"
                 android:textSize="24dp"
@@ -70,15 +71,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:background="@drawable/ic_menu_camera">
 
                 <Spinner
                     android:id="@+id/etStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/ic_menu_camera"
                     android:entries="@array/status"
+                    android:backgroundTint="#1b9fe1"
                     android:gravity="center"
                     android:padding="10dp"
                     android:textColor="#fff"

@@ -322,19 +322,18 @@
                     android:orientation="horizontal"
                     android:layout_weight="1"
                     >
-                    <EditText
+                    <TextView
                         android:id="@+id/cont"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:background="#a7aba7"
                         android:padding="10dp"
-                        android:hint="amandemen"
-                        android:textColorHint="#fff"
-                        android:textColor="#fff"
+                        android:text="Amandemen"
+                        android:textStyle="bold"
+                        android:textColor="#a7aba7"
                         android:inputType="text"
                         android:textSize="14dp"
-                        android:gravity="center" />
+                        android:gravity="left" />
                 </LinearLayout>
 
                 <FrameLayout
