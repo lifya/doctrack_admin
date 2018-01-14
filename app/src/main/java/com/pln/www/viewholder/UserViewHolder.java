@@ -1,10 +1,9 @@
-package com.pln.www.adapter;
+package com.pln.www.viewholder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 import com.pln.www.R;
 
@@ -12,13 +11,13 @@ import com.pln.www.R;
  * Created by User on 07/01/2018.
  */
 
-public class UserModelViewHolder extends RecyclerView.ViewHolder{
-    private UserModelViewHolder.ClickListener mClickListener;
+public class UserViewHolder extends RecyclerView.ViewHolder{
+    private UserViewHolder.ClickListener mClickListener;
     public TextView tvEmail, tvNama;
     public ImageView ivHapus;
     public View mView;
 
-    public UserModelViewHolder(View itemView){
+    public UserViewHolder(View itemView){
         super(itemView);
         mView = itemView;
         tvEmail = (TextView) mView.findViewById(R.id.tvEmail);
@@ -46,7 +45,7 @@ public class UserModelViewHolder extends RecyclerView.ViewHolder{
         public void onItemLongClick(View view, int position);
     }
 
-    public void setOnClickListener(UserModelViewHolder.ClickListener clickListener){
+    public void setOnClickListener(UserViewHolder.ClickListener clickListener){
         mClickListener = clickListener;
     }
 

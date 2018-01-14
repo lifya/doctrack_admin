@@ -14,8 +14,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.pln.www.ItemClickListener;
+import com.pln.www.interfacee.ItemClickListener;
 import com.pln.www.R;
+import com.pln.www.model.ItemModel;
+
 import java.util.ArrayList;
 import java.util.List;
 

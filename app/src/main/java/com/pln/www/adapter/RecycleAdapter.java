@@ -9,8 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pln.www.R;
-
-import org.w3c.dom.Text;
+import com.pln.www.model.UserModel;
 
 import java.util.List;
 

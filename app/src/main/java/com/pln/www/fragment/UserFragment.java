@@ -2,7 +2,6 @@ package com.pln.www.fragment;
 
 
 import android.app.AlertDialog;
-import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,32 +12,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.pln.www.R;
-import com.pln.www.adapter.ItemModel;
-import com.pln.www.adapter.MyAdapter;
 //import com.pln.www.adapter.UserAdpter;
 import com.pln.www.adapter.RecycleAdapter;
-import com.pln.www.adapter.UserModel;
-import com.pln.www.adapter.UserModelViewHolder;
+import com.pln.www.model.UserModel;
+import com.pln.www.viewholder.UserViewHolder;
 import com.pln.www.alert.FormUserDialog;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -89,19 +77,19 @@ public class UserFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onStart(){
         super.onStart();
-        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<UserModel, UserModelViewHolder>
+        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<UserModel, UserViewHolder>
                         (
                                 UserModel.class,
                                 R.layout.list_user,
-                                UserModelViewHolder.class,
+                                UserViewHolder.class,
                                 dbUsers
                         )
                 {
                     @Override
-                    protected void populateViewHolder(final UserModelViewHolder viewHolder, final UserModel model, int position) {
+                    protected void populateViewHolder(final UserViewHolder viewHolder, final UserModel model, int position) {
                         viewHolder.setEmail(model.getEmail());
                         viewHolder.setNama(model.getNama());
-                        viewHolder.setOnClickListener(new UserModelViewHolder.ClickListener() {
+                        viewHolder.setOnClickListener(new UserViewHolder.ClickListener() {
                             @Override
                             public void onItemClick(View view, final int position) {
                                 final AlertDialog.Builder alertDelete = new AlertDialog.Builder(getActivity());

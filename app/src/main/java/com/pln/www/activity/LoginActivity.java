@@ -1,4 +1,4 @@
-package com.pln.www;
+package com.pln.www.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.pln.www.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 

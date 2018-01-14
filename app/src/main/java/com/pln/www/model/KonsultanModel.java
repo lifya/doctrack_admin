@@ -1,13 +1,13 @@
-package com.pln.www.adapter;
+package com.pln.www.model;
 
 /**
  * Created by User on 13/01/2018.
  */
 
-public class KonsultanClass {
+public class KonsultanModel {
     String namaKonsultan, idKonsultan;
 
-    public KonsultanClass(String idKonsultan, String namaKonsultan){
+    public KonsultanModel(String idKonsultan, String namaKonsultan){
         this.idKonsultan = idKonsultan;
         this.namaKonsultan = namaKonsultan;
     }

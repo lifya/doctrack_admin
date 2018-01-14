@@ -2,7 +2,6 @@ package com.pln.www.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -17,17 +16,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
-import com.pln.www.AddDocumentActivity;
+import com.pln.www.activity.AddDocumentActivity;
 import com.pln.www.R;
 //import com.pln.www.TambahDokumentActivity;
-import com.pln.www.adapter.ItemModel;
+import com.pln.www.model.ItemModel;
 import com.pln.www.adapter.MyAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by ACHI on 27/08/2017.

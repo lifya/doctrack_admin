@@ -1,13 +1,13 @@
-package com.pln.www.adapter;
+package com.pln.www.model;
 
 /**
  * Created by User on 13/01/2018.
  */
 
-public class PekerjaanClass {
+public class PekerjaanModel {
     String idPekerjaan, idKontrak, idKonsultan, namaPekerjaan, jenisPekerjaan, file;
 
-    public PekerjaanClass(String idPekerjaan, String idKonsultan, String idKontrak, String namaPekerjaan, String jenisPekerjaan){
+    public PekerjaanModel(String idPekerjaan, String idKonsultan, String idKontrak, String namaPekerjaan, String jenisPekerjaan){
         this.idPekerjaan = idPekerjaan;
         this.idKonsultan = idKonsultan;
         this.idKontrak = idKontrak;

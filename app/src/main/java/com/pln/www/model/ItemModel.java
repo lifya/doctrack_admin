@@ -1,4 +1,4 @@
-package com.pln.www.adapter;
+package com.pln.www.model;
 
 import java.util.Date;
 

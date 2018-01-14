@@ -1,4 +1,4 @@
-package com.pln.www.adapter;
+package com.pln.www.model;
 
 import java.util.Date;
 
@@ -6,10 +6,10 @@ import java.util.Date;
  * Created by User on 13/01/2018.
  */
 
-public class KontrakClass {
+public class KontrakModel {
     String idKontrak, noKontrak, tglMulai, tglAkhir;
 
-    public KontrakClass(String idKontrak, String noKontrak, String tglMulai, String tglAkhir) {
+    public KontrakModel(String idKontrak, String noKontrak, String tglMulai, String tglAkhir) {
         this.idKontrak = idKontrak;
         this.noKontrak = noKontrak;
         this.tglMulai = tglMulai;

@@ -1,28 +1,17 @@
-package com.pln.www;
+package com.pln.www.activity;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -30,17 +19,13 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.pln.www.adapter.KonsultanClass;
-import com.pln.www.adapter.KontrakClass;
-import com.pln.www.adapter.PekerjaanClass;
+import com.pln.www.R;
+import com.pln.www.model.KonsultanModel;
+import com.pln.www.model.KontrakModel;
+import com.pln.www.model.PekerjaanModel;
 import com.pln.www.alert.FormDocumentDialog;
-import com.pln.www.alert.FormUserDialog;
-import com.pln.www.fragment.DokumenFragment;
-
-import org.w3c.dom.Text;
 
 import java.util.Calendar;
-import java.util.List;
 
 public class AddDocumentActivity extends AppCompatActivity{
 
@@ -177,17 +162,17 @@ public class AddDocumentActivity extends AppCompatActivity{
         onWait();
 
         String idKonsultan = dbKonsultan.push().getKey();
-        KonsultanClass konsultanClass = new KonsultanClass(idKonsultan, konsultan);
-        dbKonsultan.child(idKonsultan).setValue(konsultanClass);
+        KonsultanModel konsultanModel = new KonsultanModel(idKonsultan, konsultan);
+        dbKonsultan.child(idKonsultan).setValue(konsultanModel);
 
         String idKontrak = dbKontrak.push().getKey();
-        KontrakClass kontrakClass = new KontrakClass(idKontrak, kontrak, tglMulai, tglAkhir);
-        dbKontrak.child(idKontrak).setValue(kontrakClass);
+        KontrakModel kontrakModel = new KontrakModel(idKontrak, kontrak, tglMulai, tglAkhir);
+        dbKontrak.child(idKontrak).setValue(kontrakModel);
 
         String idPekerjaan = dbPekerjaan.push().getKey();
-        PekerjaanClass pekerjaanClass = new PekerjaanClass(idPekerjaan, idKonsultan, idKontrak, judul, jenisDoc);
-        //dbPekerjaan.child(idPekerjaan).child(idKonsultan).child(idKontrak).setValue(pekerjaanClass);
-        dbPekerjaan.child(idPekerjaan).setValue(pekerjaanClass);
+        PekerjaanModel pekerjaanModel = new PekerjaanModel(idPekerjaan, idKonsultan, idKontrak, judul, jenisDoc);
+        //dbPekerjaan.child(idPekerjaan).child(idKonsultan).child(idKontrak).setValue(pekerjaanModel);
+        dbPekerjaan.child(idPekerjaan).setValue(pekerjaanModel);
 
         progressDialog.dismiss();
         finish();

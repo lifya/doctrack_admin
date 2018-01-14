@@ -1,4 +1,4 @@
-package com.pln.www;
+package com.pln.www.activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.pln.www.R;
 import com.pln.www.adapter.SectionsPagerAdapter;
 import com.pln.www.fragment.AboutFragment;
 import com.pln.www.fragment.UserFragment;
