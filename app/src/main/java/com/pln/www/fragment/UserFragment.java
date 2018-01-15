@@ -155,7 +155,7 @@ public class UserFragment extends Fragment implements View.OnClickListener{
 
         mRecyclerView.setAdapter(mAdapter);
 
-        dbUsers = FirebaseDatabase.getInstance().getReferenceFromUrl("https://tracking-user.firebaseio.com/Users");
+        dbUsers = FirebaseDatabase.getInstance().getReferenceFromUrl("https://doctrack-3a9e1.firebaseio.com/Users");
 
         listviewUsers = (ListView) rootView.findViewById(R.layout.list_user);
 
