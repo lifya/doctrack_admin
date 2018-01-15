@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setFragment(uFrag);
         }
         else if (id == R.id.nav_about) {
-            UserFragment aFrag = new UserFragment();
+            AboutFragment aFrag = new AboutFragment();
             setFragment(aFrag);
         }
         else if (id == R.id.nav_logout) {
