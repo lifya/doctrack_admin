@@ -3,7 +3,6 @@ package com.pln.www.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,14 +11,13 @@ import android.support.v7.widget.Toolbar;
 
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.pln.www.R;
-import com.pln.www.ViewPageAdapter;
+import com.pln.www.adapter.ViewPageAdapter;
 import com.pln.www.adapter.SectionsPagerAdapter;
 import com.pln.www.fragment.AboutFragment;
 import com.pln.www.fragment.ArchiveFragment;
