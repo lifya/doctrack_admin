@@ -57,13 +57,6 @@ public class FormUserDialog extends AppCompatDialogFragment implements View.OnCl
         super.onStart();
     }
 
-    public void onWait(){
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Please Wait");
-        progressDialog.show();
-    }
-
     @Override
     public void onClick(View v) {
         if(v == bAddUser){
@@ -84,7 +77,7 @@ public class FormUserDialog extends AppCompatDialogFragment implements View.OnCl
             return;
         }
         if(TextUtils.isEmpty(name)){
-            Toast.makeText(getActivity(), "Please Enter Password", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Please Enter Name", Toast.LENGTH_LONG).show();
             return;
         }
         if(TextUtils.isEmpty(password)){
@@ -92,7 +85,9 @@ public class FormUserDialog extends AppCompatDialogFragment implements View.OnCl
             return;
         }
 
-        onWait();
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.show();
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
             @Override
@@ -100,7 +95,7 @@ public class FormUserDialog extends AppCompatDialogFragment implements View.OnCl
                 if(task.isSuccessful()){
                     String user_id = mAuth.getCurrentUser().getUid();
                     dbUsers = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
-                    UserModel userModel = new UserModel(name,email);
+                    UserModel userModel = new UserModel(user_id,name,email);
                     dbUsers.setValue(userModel);
                     progressDialog.dismiss();
                     getDialog().dismiss();

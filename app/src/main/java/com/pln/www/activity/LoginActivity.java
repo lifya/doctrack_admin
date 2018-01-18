@@ -27,25 +27,25 @@ import com.pln.www.R;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseUser currentUser;
+    private FirebaseUser firebaseUser;
     private FirebaseAuth mAuth;
     private Button bLogin;
     private EditText etUsername, etPassword;
     private ProgressDialog progressDialog;
-    private DatabaseReference databaseReference, users;
-    private Query query;
+    //private DatabaseReference databaseReference;
+    //private Query query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         mAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+
+        //databaseReference = FirebaseDatabase.getInstance().getReference();
 
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
         bLogin = (Button) findViewById(R.id.bLogin);
-        progressDialog = new ProgressDialog(this);
         bLogin.setOnClickListener(this);
     }
 
@@ -66,12 +66,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         finish();
     }
 
-    public void onWait(){
-        ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Please Wait");
-        progressDialog.show();
-    }
-
     private void userLogin(){
         final String username = etUsername.getText().toString().trim();
         final String password = etPassword.getText().toString().trim();
@@ -86,19 +80,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        onWait();
+        progressDialog.setMessage("Please Wait");
+        progressDialog.show();
 
-        query = databaseReference.child("uiD").orderByChild("username").equalTo(username);
-//        Toast.makeText(this, "hi" + query, Toast.LENGTH_LONG).show();
-//        return;
-
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot!=null && dataSnapshot.getChildren()!=null &&
-                        dataSnapshot.getChildren().iterator().hasNext()){
-                    progressDialog.dismiss();
-                    mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(username, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
@@ -111,15 +97,41 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             }
                         }
                     });
-                }
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getParent(), "Failed", Toast.LENGTH_LONG).show();
-                return;
-            }
-        });
+//        databaseReference.child("Users").orderByChild("email").equalTo(username).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                if(dataSnapshot!=null && dataSnapshot.getChildren()!=null &&
+//                        dataSnapshot.getChildren().iterator().hasNext()){
+//                    progressDialog.dismiss();
+//                    mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<AuthResult> task) {
+//                            if(task.isSuccessful()){
+//                                finish();
+//                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                            }
+//                            else{
+//                                Toast.makeText(LoginActivity.this, "Failed to login", Toast.LENGTH_LONG).show();
+//                                return;
+//                            }
+//                        }
+//                    });
+//                }
+//                else {
+//                    progressDialog.dismiss();
+//                    Toast.makeText(LoginActivity.this, "Failed", Toast.LENGTH_LONG).show();
+//                    return;
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                progressDialog.dismiss();
+//                Toast.makeText(getParent(), "Failed", Toast.LENGTH_LONG).show();
+//                return;
+//            }
+//        });
     }
 
     @Override

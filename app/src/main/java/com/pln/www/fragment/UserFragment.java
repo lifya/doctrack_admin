@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +24,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.pln.www.R;
 //import com.pln.www.adapter.UserAdpter;
 import com.pln.www.adapter.RecycleAdapter;
+import com.pln.www.model.KontrakModel;
 import com.pln.www.model.UserModel;
 import com.pln.www.viewholder.UserViewHolder;
 import com.pln.www.alert.FormUserDialog;
@@ -41,7 +43,7 @@ public class UserFragment extends Fragment implements View.OnClickListener{
     private Button bAddUser;
     //private ImageView ivHapus;
     private ListView listviewUsers;
-    private DatabaseReference dbUsers;
+    private DatabaseReference dbUsers, dbKontrak;
     private List<UserModel> userList;
     private FirebaseRecyclerAdapter firebaseRecyclerAdapter;
     private FirebaseAuth firebaseAuth;
@@ -101,6 +103,8 @@ public class UserFragment extends Fragment implements View.OnClickListener{
                                                 firebaseRecyclerAdapter.getRef(selectedItem).removeValue();
                                                 firebaseRecyclerAdapter.notifyItemRemoved(selectedItem);
                                                 mRecyclerView.invalidate();
+                                                //Task<UserModel> task = FirebaseAuth.getInstance().deleteUser();
+                                                //firebaseAuth = FirebaseAuth.getInstance().deleteUser();
 
                                                 onStart();
                                             }
@@ -156,13 +160,13 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         mRecyclerView.setAdapter(mAdapter);
 
         dbUsers = FirebaseDatabase.getInstance().getReferenceFromUrl("https://tracking-user.firebaseio.com/Users");
+        dbKontrak = FirebaseDatabase.getInstance().getReferenceFromUrl("https://tracking-user.firebaseio.com/Kontrak");
 
         listviewUsers = (ListView) rootView.findViewById(R.layout.list_user);
 
         //ivHapus = (ImageView) rootView.findViewById(R.id.ivHapus);
         bAddUser = (Button) rootView.findViewById(R.id.bAddUser);
         bAddUser.setOnClickListener(this);
-
         return rootView;
 
     }
