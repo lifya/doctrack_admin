@@ -55,9 +55,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onStart();
         currentUser = mAuth.getCurrentUser();
 
-        if(currentUser != null) {
-            sendtoStart();
-        }
+//        if(currentUser != null) {
+//            sendtoStart();
+//        }
 
     }
 

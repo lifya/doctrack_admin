@@ -5,11 +5,13 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pln.www.R;
+import com.pln.www.activity.AddDocumentActivity;
 
 import java.util.Calendar;
 
@@ -34,9 +37,9 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
 
     private ImageView imageView;
     private Button bCancel, bAddDoc;
-    private EditText Ed, etFile, etKeterangan;
-    private Spinner spinner;
-    private String getItem;
+    public EditText Ed, etFile, etKeterangan;
+    public Spinner spinnerProses, spinnerStatus;
+    private String getSpinnerProses, getSpinnerStatus;
     private Calendar mCurrentDate;
     private int day, month, year;
     private ProgressDialog progressDialog;
@@ -49,7 +52,8 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
 
         bCancel = (Button) v.findViewById(R.id.btnCancel);
         bAddDoc = (Button) v.findViewById(R.id.btnAdd);
-        spinner = (Spinner) v.findViewById(R.id.spProses1);
+        spinnerProses = (Spinner) v.findViewById(R.id.spProses1);
+        spinnerStatus = (Spinner) v.findViewById(R.id.spStatus);
         etKeterangan = (EditText) v.findViewById(R.id.etKeterangan);
         Ed = (EditText) v.findViewById(R.id.etTglProses);
         mCurrentDate = Calendar.getInstance();
@@ -105,22 +109,191 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         }
         if(v == bAddDoc){
             addDetailData();
-            Toast.makeText(getActivity(), "" + getItem, Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "" + getSpinnerProses, Toast.LENGTH_LONG).show();
             return;
         }
     }
 
     private void addDetailData(){
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        String etTanggal = Ed.getText().toString();
+        String etKet = etKeterangan.getText().toString();
+        spinnerProses.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                getItem = spinner.getSelectedItem().toString();
+                getSpinnerProses = spinnerProses.getSelectedItem().toString();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                return;
             }
         });
+        spinnerStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                getSpinnerStatus = spinnerStatus.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                return;
+            }
+        });
+
+        if(TextUtils.isEmpty(getSpinnerProses)){
+            Toast.makeText(getActivity(), "Please Enter The Process", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(TextUtils.isEmpty(getSpinnerStatus)){
+            Toast.makeText(getActivity(), "Please Enter The Status", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(TextUtils.isEmpty(etTanggal)){
+            Toast.makeText(getActivity(), "Please Enter The Date", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(getSpinnerProses.equals("Permohonan RTRW")){
+            if(getSpinnerStatus.equals("Belum")){
+                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent.putExtra("namaProses_1", getSpinnerProses);
+                intent.putExtra("namaStatus_1", getSpinnerStatus);
+                intent.putExtra("tanggal_1", etTanggal);
+                intent.putExtra("keterangan_1", etKet);
+            }
+            if(getSpinnerStatus.equals("Proses")){
+                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent.putExtra("namaProses_1", getSpinnerProses);
+                intent.putExtra("namaStatus_1", getSpinnerStatus);
+                intent.putExtra("tanggal_1", etTanggal);
+                intent.putExtra("keterangan_1", etKet);
+            }
+            if(getSpinnerStatus.equals("Sudah")){
+                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent.putExtra("namaProses_1", getSpinnerProses);
+                intent.putExtra("namaStatus_1", getSpinnerStatus);
+                intent.putExtra("tanggal_1", etTanggal);
+                intent.putExtra("keterangan_1", etKet);
+            }
+        }
+        if(getSpinnerProses.equals("Pembahasan RTRW")){
+            if(getSpinnerStatus.equals("Belum")){
+                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent.putExtra("namaProses_2", getSpinnerProses);
+                intent.putExtra("namaStatus_2", getSpinnerStatus);
+                intent.putExtra("tanggal_2", etTanggal);
+                intent.putExtra("keterangan_2", etKet);
+            }
+            if(getSpinnerStatus.equals("Proses")){
+                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent.putExtra("namaProses_2", getSpinnerProses);
+                intent.putExtra("namaStatus_2", getSpinnerStatus);
+                intent.putExtra("tanggal_2", etTanggal);
+                intent.putExtra("keterangan_2", etKet);
+            }
+            if(getSpinnerStatus.equals("Sudah")){
+                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent.putExtra("namaProses_2", getSpinnerProses);
+                intent.putExtra("namaStatus_2", getSpinnerStatus);
+                intent.putExtra("tanggal_2", etTanggal);
+                intent.putExtra("keterangan_2", etKet);
+            }
+        }
+        if(getSpinnerProses.equals("RTRW")){
+            if(getSpinnerStatus.equals("Belum")){
+                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent.putExtra("namaProses_3", getSpinnerProses);
+                intent.putExtra("namaStatus_3", getSpinnerStatus);
+                intent.putExtra("tanggal_3", etTanggal);
+                intent.putExtra("keterangan_3", etKet);
+            }
+            if(getSpinnerStatus.equals("Proses")){
+                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent.putExtra("namaProses_3", getSpinnerProses);
+                intent.putExtra("namaStatus_3", getSpinnerStatus);
+                intent.putExtra("tanggal_3", etTanggal);
+                intent.putExtra("keterangan_3", etKet);
+            }
+            if(getSpinnerStatus.equals("Sudah")){
+                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent.putExtra("namaProses_3", getSpinnerProses);
+                intent.putExtra("namaStatus_3", getSpinnerStatus);
+                intent.putExtra("tanggal_3", etTanggal);
+                intent.putExtra("keterangan_3", etKet);
+            }
+        }
+        if(getSpinnerProses.equals("Draft UKL-UPL")){
+            if(getSpinnerStatus.equals("Belum")){
+                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent.putExtra("namaProses_4", getSpinnerProses);
+                intent.putExtra("namaStatus_4", getSpinnerStatus);
+                intent.putExtra("tanggal_4", etTanggal);
+                intent.putExtra("keterangan_4", etKet);
+            }
+            if(getSpinnerStatus.equals("Proses")){
+                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent.putExtra("namaProses_4", getSpinnerProses);
+                intent.putExtra("namaStatus_4", getSpinnerStatus);
+                intent.putExtra("tanggal_4", etTanggal);
+                intent.putExtra("keterangan_4", etKet);
+            }
+            if(getSpinnerStatus.equals("Sudah")){
+                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent.putExtra("namaProses_4", getSpinnerProses);
+                intent.putExtra("namaStatus_4", getSpinnerStatus);
+                intent.putExtra("tanggal_4", etTanggal);
+                intent.putExtra("keterangan_4", etKet);
+            }
+        }
+        if(getSpinnerProses.equals("Pembahasan")){
+            if(getSpinnerStatus.equals("Belum")){
+                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent.putExtra("namaProses_5", getSpinnerProses);
+                intent.putExtra("namaStatus_5", getSpinnerStatus);
+                intent.putExtra("tanggal_5", etTanggal);
+                intent.putExtra("keterangan_5", etKet);
+            }
+            if(getSpinnerStatus.equals("Proses")){
+                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent.putExtra("namaProses_5", getSpinnerProses);
+                intent.putExtra("namaStatus_5", getSpinnerStatus);
+                intent.putExtra("tanggal_5", etTanggal);
+                intent.putExtra("keterangan_5", etKet);
+            }
+            if(getSpinnerStatus.equals("Sudah")){
+                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent.putExtra("namaProses_5", getSpinnerProses);
+                intent.putExtra("namaStatus_5", getSpinnerStatus);
+                intent.putExtra("tanggal_5", etTanggal);
+                intent.putExtra("keterangan_5", etKet);
+            }
+        }
+        if(getSpinnerProses.equals("Perbaikan Dok")){
+            if(getSpinnerStatus.equals("Belum")){
+                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent.putExtra("namaProses_6", getSpinnerProses);
+                intent.putExtra("namaStatus_6", getSpinnerStatus);
+                intent.putExtra("tanggal_6", etTanggal);
+                intent.putExtra("keterangan_6", etKet);
+            }
+            if(getSpinnerStatus.equals("Proses")){
+                if(getSpinnerStatus.equals("Belum")){
+                    Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                    intent.putExtra("namaProses_6", getSpinnerProses);
+                    intent.putExtra("namaStatus_6", getSpinnerStatus);
+                    intent.putExtra("tanggal_6", etTanggal);
+                    intent.putExtra("keterangan_6", etKet);
+                }
+            }
+            if(getSpinnerStatus.equals("Sudah")){
+                if(getSpinnerStatus.equals("Belum")){
+                    Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                    intent.putExtra("namaProses_6", getSpinnerProses);
+                    intent.putExtra("namaStatus_6", getSpinnerStatus);
+                    intent.putExtra("tanggal_6", etTanggal);
+                    intent.putExtra("keterangan_6", etKet);
+                }
+            }
+        }
     }
 }

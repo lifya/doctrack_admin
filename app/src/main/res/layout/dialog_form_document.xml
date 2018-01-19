@@ -75,12 +75,12 @@
                 android:background="@drawable/ic_menu_camera">
 
                 <Spinner
-                    android:id="@+id/etStatus"
+                    android:id="@+id/spStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:entries="@array/status"
                     android:backgroundTint="#1b9fe1"
+                    android:entries="@array/status"
                     android:gravity="center"
                     android:padding="10dp"
                     android:textColor="#fff"

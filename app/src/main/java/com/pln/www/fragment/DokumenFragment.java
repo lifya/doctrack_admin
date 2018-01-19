@@ -1,6 +1,8 @@
 package com.pln.www.fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -54,7 +56,7 @@ public class DokumenFragment extends Fragment implements View.OnClickListener {
     protected RecyclerView mRecyclerView;
     protected MyAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
-    private FirebaseRecyclerAdapter firebaseRecyclerAdapter1, firebaseRecyclerAdapter2;
+    private FirebaseRecyclerAdapter firebaseRecyclerAdapter;
     private DatabaseReference dbPekerjaan;
     private List<ItemModel> dataSet;
 
@@ -104,7 +106,7 @@ public class DokumenFragment extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
 
-        firebaseRecyclerAdapter1 = new FirebaseRecyclerAdapter<PekerjaanModel, PekerjaanModelViewHolder>(
+        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<PekerjaanModel, PekerjaanModelViewHolder>(
                 PekerjaanModel.class,
                 R.layout.list_view,
                 PekerjaanModelViewHolder.class,
@@ -145,7 +147,7 @@ public class DokumenFragment extends Fragment implements View.OnClickListener {
                     }
                 });
 
-                viewHolder.setOnClickListener(new UserViewHolder.ClickListener() {
+                viewHolder.setOnClickListener(new PekerjaanModelViewHolder.ClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
                         Intent intent = new Intent(getActivity(), DetailDocumentActivity.class);
@@ -160,9 +162,21 @@ public class DokumenFragment extends Fragment implements View.OnClickListener {
 
                     }
                 });
+
+//                viewHolder.setOnClickListener(new PekerjaanModelViewHolder.ClickListener(){
+//                    @Override
+//                    public void onItemClick(View view, int position) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onItemLongClick(View view, int position) {
+//
+//                    }
+//                });
             }
         };
-        mRecyclerView.setAdapter(firebaseRecyclerAdapter1);
+        mRecyclerView.setAdapter(firebaseRecyclerAdapter);
     }
 
     @Override

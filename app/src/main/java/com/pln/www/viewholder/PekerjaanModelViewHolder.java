@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pln.www.R;
+import com.pln.www.model.PekerjaanModel;
 
 import org.w3c.dom.Text;
 
@@ -14,9 +15,9 @@ import org.w3c.dom.Text;
  */
 
 public class PekerjaanModelViewHolder extends RecyclerView.ViewHolder {
-    private UserViewHolder.ClickListener mClickListener;
+    private PekerjaanModelViewHolder.ClickListener mClickListener;
     public TextView tvNamaPekerjaan, tvNamaKonsultan, tvTanggal, tvWaktu, tvLastUpdate;
-    public ImageView ivStatus;
+    public ImageView ivStatus, ivHapus;
     public View mView;
 
     public PekerjaanModelViewHolder(View itemView) {
@@ -32,6 +33,14 @@ public class PekerjaanModelViewHolder extends RecyclerView.ViewHolder {
                 mClickListener.onItemClick(v, getAdapterPosition());
             }
         });
+
+        ivHapus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mClickListener.onItemClick(v, getAdapterPosition());
+            }
+        });
+
     }
 
     public interface ClickListener{
@@ -39,7 +48,7 @@ public class PekerjaanModelViewHolder extends RecyclerView.ViewHolder {
         public void onItemLongClick(View view, int position);
     }
 
-    public void setOnClickListener(UserViewHolder.ClickListener clickListener){
+    public void setOnClickListener(PekerjaanModelViewHolder.ClickListener clickListener){
         mClickListener = clickListener;
     }
 
