@@ -276,19 +276,20 @@
                     android:orientation="horizontal"
                     android:layout_weight="1"
                     >
+
                     <EditText
-                        android:id="@+id/upload"
+                        android:id="@+id/etUploadFile"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:background="#a8aca8"
-                        android:padding="10dp"
+                        android:gravity="center"
                         android:hint="upload file"
                         android:inputType="text"
-                        android:textColorHint="#fff"
+                        android:padding="10dp"
                         android:textColor="#fff"
-                        android:textSize="14dp"
-                        android:gravity="center" />
+                        android:textColorHint="#fff"
+                        android:textSize="14dp" />
                 </LinearLayout>
 
                 <FrameLayout
@@ -296,12 +297,13 @@
                     android:layout_height="match_parent"
                     android:background="#050505"
                     >
+
                     <ImageView
+                        android:id="@+id/ivGetFile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_attach_file_white_24dp"
                         android:padding="8dp"
-                        />
+                        android:src="@drawable/ic_attach_file_white_24dp" />
                 </FrameLayout>
 
 

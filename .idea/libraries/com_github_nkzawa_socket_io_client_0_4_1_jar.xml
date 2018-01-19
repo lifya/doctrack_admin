@@ -5,7 +5,7 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.nkzawa/socket.io-client/0.4.1/be3c414dabe067882634db70ba60d2f063f0b107/socket.io-client-0.4.1-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.AndroidStudio3.0/system/gradle/gradle-4.1-all/caches/modules-2/files-2.1/com.github.nkzawa/socket.io-client/0.4.1/be3c414dabe067882634db70ba60d2f063f0b107/socket.io-client-0.4.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

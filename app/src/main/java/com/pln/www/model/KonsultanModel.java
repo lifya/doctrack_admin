@@ -7,6 +7,9 @@ package com.pln.www.model;
 public class KonsultanModel {
     String namaKonsultan, idKonsultan;
 
+    public KonsultanModel(){}
+
+
     public KonsultanModel(String idKonsultan, String namaKonsultan){
         this.idKonsultan = idKonsultan;
         this.namaKonsultan = namaKonsultan;

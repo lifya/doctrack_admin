@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_menu_home"
+    tools:context="com.pln.www.activity.SplashScreen">
+
+    <ImageView
+        android:id="@+id/splashscreen"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        app:srcCompat="@mipmap/logo_white"
+        tools:layout_editor_absoluteX="76dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.512"
+        tools:layout_editor_absoluteY="-1dp" />
+
+</RelativeLayout>

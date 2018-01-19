@@ -7,6 +7,8 @@ package com.pln.www.model;
 public class PekerjaanModel {
     String idPekerjaan, idKontrak, idKonsultan, namaPekerjaan, jenisPekerjaan, file;
 
+    public PekerjaanModel(){}
+
     public PekerjaanModel(String idPekerjaan, String idKonsultan, String idKontrak, String namaPekerjaan, String jenisPekerjaan){
         this.idPekerjaan = idPekerjaan;
         this.idKonsultan = idKonsultan;
@@ -45,5 +47,21 @@ public class PekerjaanModel {
 
     public void setFile(String file) {
         this.file = file;
+    }
+
+    public void setIdKontrak (String idKontrak){
+        this.idKontrak = idKontrak;
+    }
+
+    public String getIdKontrak (){
+        return idKontrak;
+    }
+
+    public void setIdKonsultan (String idKonsultan){
+        this.idKonsultan = idKonsultan;
+    }
+
+    public String getIdKonsultan (){
+        return idKonsultan;
     }
 }

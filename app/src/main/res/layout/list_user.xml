@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginTop="5dp"
-            android:layout_toRightOf="@+id/status"
+            android:layout_toRightOf="@+id/ivStatus"
             android:text="Nama Pegawai"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textColor="#000000"

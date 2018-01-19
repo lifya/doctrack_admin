@@ -29,10 +29,10 @@ import java.util.Calendar;
 
 public class AddDocumentActivity extends AppCompatActivity{
 
-    private ImageView imageView, ivBack;
+    private ImageView ivGetFile, ivBack;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
-    private EditText Ed1, Ed2, etJudul, etKonsultan, etKontrak;
+    private EditText Ed1, Ed2, etJudul, etKonsultan, etKontrak, etUploadFile;
     private TextView tvSave;
     private Calendar mCurrentDate;
     private int day, month, year;
@@ -58,6 +58,8 @@ public class AddDocumentActivity extends AppCompatActivity{
         etJudul = (EditText) findViewById(R.id.etJudul);
         etKonsultan = (EditText) findViewById(R.id.etKonsultan);
         etKontrak = (EditText) findViewById(R.id.etKontrak);
+        etUploadFile = (EditText) findViewById(R.id.etUploadFile);
+        etUploadFile.setEnabled(false);
         Ed1 = (EditText) findViewById(R.id.etTglMulai);
         Ed2 = (EditText) findViewById(R.id.etTglAkhir);
         bAddDoc = (Button) findViewById(R.id.buttonProses);

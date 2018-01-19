@@ -7,12 +7,24 @@
     tools:context="com.pln.www.fragment.AboutFragment">
 
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <TextView
+        android:id="@+id/about"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="202dp"
-        android:src="@mipmap/icon_app" />
+        android:layout_centerVertical="true"
+        android:text="V.1.0.0"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_above="@+id/about"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="12dp"
+        android:src="@mipmap/logo" />
 </RelativeLayout>

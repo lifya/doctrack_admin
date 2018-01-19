@@ -16,7 +16,7 @@
             android:gravity="center">
 
                 <ImageView
-                    android:id="@+id/status"
+                    android:id="@+id/ivStatus"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_alignParentLeft="true"
@@ -25,25 +25,25 @@
                     android:scaleType="centerCrop"/>
 
                 <TextView
-                    android:id="@+id/judul"
+                    android:id="@+id/tvJudul"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
                     android:layout_marginTop="5dp"
-                    android:layout_toRightOf="@+id/status"
+                    android:layout_toRightOf="@+id/ivStatus"
                     android:text="Judul"
                     android:textAppearance="?attr/textAppearanceListItem"
                     android:textColor="#000000"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/konsultan"
+                    android:id="@+id/tvKonsultan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/judul"
+                    android:layout_below="@+id/tvJudul"
                     android:paddingTop="3dp"
                     android:layout_marginLeft="12dp"
-                    android:layout_toRightOf="@+id/status"
+                    android:layout_toRightOf="@+id/ivStatus"
                     android:ellipsize="end"
                     android:singleLine="true"
                     android:text="Konsultan"
@@ -52,12 +52,12 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/tanggal"
+                    android:id="@+id/tvTanggal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/konsultan"
+                    android:layout_below="@+id/tvKonsultan"
                     android:layout_marginLeft="12dp"
-                    android:layout_toRightOf="@+id/status"
+                    android:layout_toRightOf="@+id/ivStatus"
                     android:ellipsize="end"
                     android:singleLine="true"
                     android:text="Tanggal"
@@ -65,12 +65,12 @@
                     android:textSize="10sp" />
 
                 <TextView
-                    android:id="@+id/waktu"
+                    android:id="@+id/tvWaktu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/konsultan"
-                    android:layout_toEndOf="@+id/tanggal"
-                    android:layout_toRightOf="@+id/tanggal"
+                    android:layout_below="@+id/tvKonsultan"
+                    android:layout_toEndOf="@+id/tvTanggal"
+                    android:layout_toRightOf="@+id/tvTanggal"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="2dp"
                     android:textSize="10sp"
@@ -78,16 +78,17 @@
                     android:text="Waktu" />
 
                 <TextView
+                    android:id="@+id/tvLastUpdate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/waktu"
-                    android:layout_alignBottom="@+id/waktu"
+                    android:layout_alignBaseline="@+id/tvWaktu"
+                    android:layout_alignBottom="@+id/tvWaktu"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginEnd="11dp"
                     android:layout_marginRight="11dp"
-                    android:textSize="10dp"
                     android:text="last update"
+                    android:textSize="10dp"
                     android:textStyle="italic" />
         </RelativeLayout>
 </android.support.v7.widget.CardView>

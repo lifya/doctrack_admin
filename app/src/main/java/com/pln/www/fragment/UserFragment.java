@@ -49,6 +49,7 @@ public class UserFragment extends Fragment implements View.OnClickListener{
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
 
+
     public UserFragment(){
 
     }
@@ -160,7 +161,6 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         mRecyclerView.setAdapter(mAdapter);
 
         dbUsers = FirebaseDatabase.getInstance().getReferenceFromUrl("https://tracking-user.firebaseio.com/Users");
-        dbKontrak = FirebaseDatabase.getInstance().getReferenceFromUrl("https://tracking-user.firebaseio.com/Kontrak");
 
         listviewUsers = (ListView) rootView.findViewById(R.layout.list_user);
 

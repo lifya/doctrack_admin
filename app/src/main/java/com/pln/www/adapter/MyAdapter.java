@@ -33,11 +33,11 @@ class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
 
     public ViewHolder(View itemView) {
         super(itemView);
-        tvJudul = (TextView) itemView.findViewById(R.id.judul);
-        tvKonsultan = (TextView) itemView.findViewById(R.id.konsultan);
-        tvTanggal = (TextView) itemView.findViewById(R.id.tanggal);
-        tvWaktu = (TextView) itemView.findViewById(R.id.waktu);
-        ivStatus = (ImageView) itemView.findViewById(R.id.status);
+        tvJudul = (TextView) itemView.findViewById(R.id.tvJudul);
+        tvKonsultan = (TextView) itemView.findViewById(R.id.tvKonsultan);
+        tvTanggal = (TextView) itemView.findViewById(R.id.tvTanggal);
+        tvWaktu = (TextView) itemView.findViewById(R.id.tvWaktu);
+        ivStatus = (ImageView) itemView.findViewById(R.id.ivStatus);
         cvMain = (CardView) itemView.findViewById(R.id.cv_User);
 
         itemView.setOnClickListener(this);

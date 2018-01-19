@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mAuth = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(this);
 
         //databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -80,19 +81,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             return;
         }
 
-        progressDialog.setMessage("Please Wait");
+        progressDialog.setMessage("Please wait");
         progressDialog.show();
 
         mAuth.signInWithEmailAndPassword(username, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+                            progressDialog.dismiss();
                             if(task.isSuccessful()){
                                 finish();
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             }
                             else{
-                                Toast.makeText(LoginActivity.this, "Failed to login", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, "Failed to login" + task.getException(), Toast.LENGTH_LONG).show();
                                 return;
                             }
                         }

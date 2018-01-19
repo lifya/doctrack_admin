@@ -45,35 +45,38 @@
                         android:layout_marginRight="10dp">
 
                         <TextView
+                            android:id="@+id/tvJudul"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GIguliMaroko Teluk Kijing (Paket 2)"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp"
-                            android:textSize="16dp"
+                            android:text="Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GIguliMaroko Teluk Kijing (Paket 2)"
                             android:textAlignment="center"
                             android:textColor="#ffffff"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="ukl-upl/03/kn02"
-                            android:textColor="#77000000"
-                            android:textSize="14dp"
-                            android:textAlignment="center"
-                            android:padding="5dp"
-                            android:textColorHint="#000"
-                            android:background="#00000000"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="PT Adi Banuwa"
-                            android:textColor="#ededed"
                             android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvJenis"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#00000000"
                             android:padding="5dp"
-                            android:textAlignment="center"/>
+                            android:text="ukl-upl/03/kn02"
+                            android:textAlignment="center"
+                            android:textColor="#77000000"
+                            android:textColorHint="#000"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:id="@+id/tvKonsultan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="PT Adi Banuwa"
+                            android:textAlignment="center"
+                            android:textColor="#ededed"
+                            android:textSize="16dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -104,6 +107,7 @@
                                     android:background="@drawable/ic_date_range_white_24dp" />
 
                                 <TextView
+                                    android:id="@+id/tvTanggalMulai"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="5dp"
@@ -135,13 +139,14 @@
                                     android:background="@drawable/ic_date_range_white_24dp"/>
 
                                 <TextView
+                                    android:id="@+id/tvTanggalAkhir"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="25 April 2018"
                                     android:layout_marginLeft="5dp"
                                     android:layout_marginTop="2dp"
-                                    android:textSize="14dp"
-                                    android:textColor="#7000"/>
+                                    android:text="25 April 2018"
+                                    android:textColor="#7000"
+                                    android:textSize="14dp" />
                             </LinearLayout>
 
                         </LinearLayout>

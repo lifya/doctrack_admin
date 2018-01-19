@@ -9,6 +9,8 @@ import java.util.Date;
 public class KontrakModel {
     String idKontrak, noKontrak, tglMulai, tglAkhir;
 
+    public KontrakModel(){}
+
     public KontrakModel(String idKontrak, String noKontrak, String tglMulai, String tglAkhir) {
         this.idKontrak = idKontrak;
         this.noKontrak = noKontrak;
