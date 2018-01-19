@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,6 +33,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button bLogin;
     private EditText etUsername, etPassword;
     private ProgressDialog progressDialog;
+    private TextView fpass;
     //private DatabaseReference databaseReference;
     //private Query query;
 
@@ -48,6 +50,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         etPassword = (EditText) findViewById(R.id.etPassword);
         bLogin = (Button) findViewById(R.id.bLogin);
         bLogin.setOnClickListener(this);
+
+        fpass = (TextView) findViewById(R.id.fpass);
+        fpass.setOnClickListener(this);
+
     }
 
     @Override
@@ -136,10 +142,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //        });
     }
 
+public void sentoReset() {
+    Intent startIntent = new Intent(LoginActivity.this, RessetPasswordActivity.class);
+    startActivity(startIntent);
+    finish();
+}
+
     @Override
     public void onClick(View v) {
         if(v == bLogin){
             userLogin();
+        }
+        else if (v == fpass) {
+            RessetPasswordActivity home = new RessetPasswordActivity();
+            sentoReset();
         }
     }
 }
