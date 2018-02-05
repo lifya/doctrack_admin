@@ -14,14 +14,26 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.pln.www.R;
 import com.pln.www.adapter.ViewPageAdapter;
 import com.pln.www.adapter.SectionsPagerAdapter;
 import com.pln.www.fragment.AboutFragment;
 import com.pln.www.fragment.ArchiveFragment;
 import com.pln.www.fragment.UserFragment;
+import com.pln.www.model.UserModel;
+
+import org.w3c.dom.Text;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,15 +42,20 @@ import java.util.TimerTask;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AboutFragment.OnFragmentInteractionListener, ViewPager.OnClickListener{
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    ViewPager viewPager;
-    ImageView imagev1;
-    ImageView imagev2;
-
+    private ViewPager viewPager;
+    private ImageView imagev1, imagev2;
+    private TextView tvName, tvEmail;
+    private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users");
 
         imagev1 = (ImageView) findViewById(R.id.imagev1);
         imagev1.setOnClickListener(this);
@@ -64,10 +81,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
+        tvEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tvEmailUser);
+        tvName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.tvNameUser);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        currentUser = mAuth.getCurrentUser();
+        String email = currentUser.getEmail();
+        tvEmail.setText(email);
+//        Query query = databaseReference.orderByChild("email").equalTo(email);
+//        query.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
+//                    UserModel userModel = singleSnapshot.getValue(UserModel.class);
+//                    String name = userModel.getNama();
+//                    tvName.setText(name);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+    }
 
     @Override
     public void onBackPressed() {

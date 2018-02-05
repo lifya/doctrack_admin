@@ -158,22 +158,32 @@ public class DokumenFragment extends Fragment implements View.OnClickListener {
                     }
 
                     @Override
-                    public void onItemLongClick(View view, int position) {
+                    public void onItemLongClick(View view, final int position) {
+                        final AlertDialog.Builder alertDelete = new AlertDialog.Builder(getActivity());
+                        alertDelete.setMessage("Are you sure want to delete this document ?").setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        int selectedItem = position;
+                                        firebaseRecyclerAdapter.getRef(selectedItem).removeValue();
+                                        firebaseRecyclerAdapter.notifyItemRemoved(selectedItem);
+                                        mRecyclerView.invalidate();
+                                        onStart();
+                                    }
 
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+                        AlertDialog alert = alertDelete.create();
+                        alert.setTitle("Warning");
+                        alert.show();
                     }
                 });
 
-//                viewHolder.setOnClickListener(new PekerjaanModelViewHolder.ClickListener(){
-//                    @Override
-//                    public void onItemClick(View view, int position) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onItemLongClick(View view, int position) {
-//
-//                    }
-//                });
             }
         };
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
@@ -202,7 +212,7 @@ public class DokumenFragment extends Fragment implements View.OnClickListener {
 
         //mRecyclerView.setAdapter(mAdapter);
 
-        dbPekerjaan = FirebaseDatabase.getInstance().getReferenceFromUrl("https://tracking-user.firebaseio.com");
+        dbPekerjaan = FirebaseDatabase.getInstance().getReference();
 
         fabDocument = (FloatingActionButton) rootView.findViewById(R.id.fabDocument);
         fabDocument.setOnClickListener(this);

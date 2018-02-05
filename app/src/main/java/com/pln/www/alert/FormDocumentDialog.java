@@ -43,6 +43,7 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
     private Calendar mCurrentDate;
     private int day, month, year;
     private ProgressDialog progressDialog;
+    private Intent intent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -115,6 +116,7 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
     }
 
     private void addDetailData(){
+
         String etTanggal = Ed.getText().toString();
         String etKet = etKeterangan.getText().toString();
         spinnerProses.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -155,21 +157,21 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
 
         if(getSpinnerProses.equals("Permohonan RTRW")){
             if(getSpinnerStatus.equals("Belum")){
-                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent = new Intent(getActivity(), AddDocumentActivity.class);
                 intent.putExtra("namaProses_1", getSpinnerProses);
                 intent.putExtra("namaStatus_1", getSpinnerStatus);
                 intent.putExtra("tanggal_1", etTanggal);
                 intent.putExtra("keterangan_1", etKet);
             }
             if(getSpinnerStatus.equals("Proses")){
-                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent = new Intent(getActivity(), AddDocumentActivity.class);
                 intent.putExtra("namaProses_1", getSpinnerProses);
                 intent.putExtra("namaStatus_1", getSpinnerStatus);
                 intent.putExtra("tanggal_1", etTanggal);
                 intent.putExtra("keterangan_1", etKet);
             }
             if(getSpinnerStatus.equals("Sudah")){
-                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent = new Intent(getActivity(), AddDocumentActivity.class);
                 intent.putExtra("namaProses_1", getSpinnerProses);
                 intent.putExtra("namaStatus_1", getSpinnerStatus);
                 intent.putExtra("tanggal_1", etTanggal);
@@ -178,21 +180,21 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         }
         if(getSpinnerProses.equals("Pembahasan RTRW")){
             if(getSpinnerStatus.equals("Belum")){
-                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent = new Intent(getActivity(), AddDocumentActivity.class);
                 intent.putExtra("namaProses_2", getSpinnerProses);
                 intent.putExtra("namaStatus_2", getSpinnerStatus);
                 intent.putExtra("tanggal_2", etTanggal);
                 intent.putExtra("keterangan_2", etKet);
             }
             if(getSpinnerStatus.equals("Proses")){
-                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent = new Intent(getActivity(), AddDocumentActivity.class);
                 intent.putExtra("namaProses_2", getSpinnerProses);
                 intent.putExtra("namaStatus_2", getSpinnerStatus);
                 intent.putExtra("tanggal_2", etTanggal);
                 intent.putExtra("keterangan_2", etKet);
             }
             if(getSpinnerStatus.equals("Sudah")){
-                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent = new Intent(getActivity(), AddDocumentActivity.class);
                 intent.putExtra("namaProses_2", getSpinnerProses);
                 intent.putExtra("namaStatus_2", getSpinnerStatus);
                 intent.putExtra("tanggal_2", etTanggal);
@@ -201,21 +203,21 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         }
         if(getSpinnerProses.equals("RTRW")){
             if(getSpinnerStatus.equals("Belum")){
-                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent = new Intent(getActivity(), AddDocumentActivity.class);
                 intent.putExtra("namaProses_3", getSpinnerProses);
                 intent.putExtra("namaStatus_3", getSpinnerStatus);
                 intent.putExtra("tanggal_3", etTanggal);
                 intent.putExtra("keterangan_3", etKet);
             }
             if(getSpinnerStatus.equals("Proses")){
-                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent = new Intent(getActivity(), AddDocumentActivity.class);
                 intent.putExtra("namaProses_3", getSpinnerProses);
                 intent.putExtra("namaStatus_3", getSpinnerStatus);
                 intent.putExtra("tanggal_3", etTanggal);
                 intent.putExtra("keterangan_3", etKet);
             }
             if(getSpinnerStatus.equals("Sudah")){
-                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent = new Intent(getActivity(), AddDocumentActivity.class);
                 intent.putExtra("namaProses_3", getSpinnerProses);
                 intent.putExtra("namaStatus_3", getSpinnerStatus);
                 intent.putExtra("tanggal_3", etTanggal);
@@ -224,21 +226,21 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         }
         if(getSpinnerProses.equals("Draft UKL-UPL")){
             if(getSpinnerStatus.equals("Belum")){
-                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent = new Intent(getActivity(), AddDocumentActivity.class);
                 intent.putExtra("namaProses_4", getSpinnerProses);
                 intent.putExtra("namaStatus_4", getSpinnerStatus);
                 intent.putExtra("tanggal_4", etTanggal);
                 intent.putExtra("keterangan_4", etKet);
             }
             if(getSpinnerStatus.equals("Proses")){
-                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent = new Intent(getActivity(), AddDocumentActivity.class);
                 intent.putExtra("namaProses_4", getSpinnerProses);
                 intent.putExtra("namaStatus_4", getSpinnerStatus);
                 intent.putExtra("tanggal_4", etTanggal);
                 intent.putExtra("keterangan_4", etKet);
             }
             if(getSpinnerStatus.equals("Sudah")){
-                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent = new Intent(getActivity(), AddDocumentActivity.class);
                 intent.putExtra("namaProses_4", getSpinnerProses);
                 intent.putExtra("namaStatus_4", getSpinnerStatus);
                 intent.putExtra("tanggal_4", etTanggal);
@@ -247,21 +249,21 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         }
         if(getSpinnerProses.equals("Pembahasan")){
             if(getSpinnerStatus.equals("Belum")){
-                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent = new Intent(getActivity(), AddDocumentActivity.class);
                 intent.putExtra("namaProses_5", getSpinnerProses);
                 intent.putExtra("namaStatus_5", getSpinnerStatus);
                 intent.putExtra("tanggal_5", etTanggal);
                 intent.putExtra("keterangan_5", etKet);
             }
             if(getSpinnerStatus.equals("Proses")){
-                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent = new Intent(getActivity(), AddDocumentActivity.class);
                 intent.putExtra("namaProses_5", getSpinnerProses);
                 intent.putExtra("namaStatus_5", getSpinnerStatus);
                 intent.putExtra("tanggal_5", etTanggal);
                 intent.putExtra("keterangan_5", etKet);
             }
             if(getSpinnerStatus.equals("Sudah")){
-                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent = new Intent(getActivity(), AddDocumentActivity.class);
                 intent.putExtra("namaProses_5", getSpinnerProses);
                 intent.putExtra("namaStatus_5", getSpinnerStatus);
                 intent.putExtra("tanggal_5", etTanggal);
@@ -270,30 +272,28 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         }
         if(getSpinnerProses.equals("Perbaikan Dok")){
             if(getSpinnerStatus.equals("Belum")){
-                Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent = new Intent(getActivity(), AddDocumentActivity.class);
                 intent.putExtra("namaProses_6", getSpinnerProses);
                 intent.putExtra("namaStatus_6", getSpinnerStatus);
                 intent.putExtra("tanggal_6", etTanggal);
                 intent.putExtra("keterangan_6", etKet);
             }
             if(getSpinnerStatus.equals("Proses")){
-                if(getSpinnerStatus.equals("Belum")){
-                    Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
-                    intent.putExtra("namaProses_6", getSpinnerProses);
-                    intent.putExtra("namaStatus_6", getSpinnerStatus);
-                    intent.putExtra("tanggal_6", etTanggal);
-                    intent.putExtra("keterangan_6", etKet);
-                }
+                intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent.putExtra("namaProses_6", getSpinnerProses);
+                intent.putExtra("namaStatus_6", getSpinnerStatus);
+                intent.putExtra("tanggal_6", etTanggal);
+                intent.putExtra("keterangan_6", etKet);
             }
             if(getSpinnerStatus.equals("Sudah")){
-                if(getSpinnerStatus.equals("Belum")){
-                    Intent intent = new Intent(getActivity(), AddDocumentActivity.class);
-                    intent.putExtra("namaProses_6", getSpinnerProses);
-                    intent.putExtra("namaStatus_6", getSpinnerStatus);
-                    intent.putExtra("tanggal_6", etTanggal);
-                    intent.putExtra("keterangan_6", etKet);
-                }
+                intent = new Intent(getActivity(), AddDocumentActivity.class);
+                intent.putExtra("namaProses_6", getSpinnerProses);
+                intent.putExtra("namaStatus_6", getSpinnerStatus);
+                intent.putExtra("tanggal_6", etTanggal);
+                intent.putExtra("keterangan_6", etKet);
             }
         }
+        startActivity(intent);
+        getDialog().dismiss();
     }
 }

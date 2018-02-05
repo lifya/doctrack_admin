@@ -2,7 +2,14 @@ package com.pln.www.activity;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -12,18 +19,28 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.pln.www.Helper.Constant;
+//import com.pln.www.Manifest;
 import com.pln.www.R;
 import com.pln.www.model.KonsultanModel;
 import com.pln.www.model.KontrakModel;
 import com.pln.www.model.PekerjaanModel;
 import com.pln.www.alert.FormDocumentDialog;
+import com.pln.www.model.UploadFileModel;
 
 import java.util.Calendar;
 
@@ -38,7 +55,11 @@ public class AddDocumentActivity extends AppCompatActivity{
     private int day, month, year;
     private Button bAddDoc;
     private ProgressDialog progressDialog;
-    private DatabaseReference dbKonsultan, dbKontrak, dbPekerjaan;
+    private DatabaseReference dbKonsultan, dbKontrak, dbPekerjaan, databaseReference;
+    private StorageReference storageReference;
+    private ProgressBar progressBar;
+    final static int PICK_PDF_CODE = 2342;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +68,20 @@ public class AddDocumentActivity extends AppCompatActivity{
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.tbAddDoc);
 //        setSupportActionBar(toolbar);
        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-
+        databaseReference = FirebaseDatabase.getInstance().getReference(Constant.DATABASE_PATH_UPLOADS);
+        storageReference = FirebaseStorage.getInstance().getReference();
         dbKonsultan = FirebaseDatabase.getInstance().getReference("Konsultan");
         dbKontrak = FirebaseDatabase.getInstance().getReference("Kontrak");
         dbPekerjaan = FirebaseDatabase.getInstance().getReference("Pekerjaan");
         //ImageView imageView = (ImageView) findViewById(R.id.imagev1);
         tvSave = (TextView) findViewById(R.id.tvSave);
         ivBack = (ImageView) findViewById(R.id.ivBack);
+        ivGetFile = (ImageView) findViewById(R.id.ivGetFile);
         radioGroup = (RadioGroup) findViewById(R.id.rgTipe);
         etJudul = (EditText) findViewById(R.id.etJudul);
         etKonsultan = (EditText) findViewById(R.id.etKonsultan);
         etKontrak = (EditText) findViewById(R.id.etKontrak);
         etUploadFile = (EditText) findViewById(R.id.etUploadFile);
-        etUploadFile.setEnabled(false);
         Ed1 = (EditText) findViewById(R.id.etTglMulai);
         Ed2 = (EditText) findViewById(R.id.etTglAkhir);
         bAddDoc = (Button) findViewById(R.id.buttonProses);
@@ -100,6 +122,13 @@ public class AddDocumentActivity extends AppCompatActivity{
             }
         });
 
+        ivGetFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPDF();
+            }
+        });
+
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,6 +165,7 @@ public class AddDocumentActivity extends AppCompatActivity{
         String kontrak = etKontrak.getText().toString().trim();
         String tglMulai = Ed1.getText().toString().trim();
         String tglAkhir = Ed2.getText().toString().trim();
+        String fileName = etUploadFile.getText().toString().trim();
 
 //        Toast.makeText(this, " " + jenisDoc, Toast.LENGTH_LONG).show();
 //        return;
@@ -160,6 +190,10 @@ public class AddDocumentActivity extends AppCompatActivity{
             Toast.makeText(this, "Please Enter The Date", Toast.LENGTH_LONG).show();
             return;
         }
+        if(TextUtils.isEmpty(fileName)){
+            Toast.makeText(this, "Please Enter The File Name", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         onWait();
 
@@ -181,16 +215,83 @@ public class AddDocumentActivity extends AppCompatActivity{
         startActivity(getIntent());
         Toast.makeText(this, "Successed", Toast.LENGTH_LONG).show();
         return;
+    }
+
+    private void getPDF() {
+        //for greater than lolipop versions we need the permissions asked on runtime
+        //so if the permission is not available user will go to the screen to allow storage permission
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(AddDocumentActivity.this,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                    Uri.parse("package:" + getPackageName()));
+            startActivity(intent);
+            return;
+        }
+
+        //creating an intent for file chooser
+        Intent intent = new Intent();
+        intent.setType("application/pdf");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Document"), PICK_PDF_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //when the user choses the file
+        if (requestCode == PICK_PDF_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            //if a file is selected
+            if (data.getData() != null) {
+                //uploading the file
+                uploadFile(data.getData());
+            }else{
+                Toast.makeText(this, "No file chosen", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void uploadFile(Uri data) {
+        final String fileName = etUploadFile.getText().toString().trim();
+        progressBar.setVisibility(View.VISIBLE);
+        StorageReference sRef = storageReference.child(Constant.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + ".pdf");
+        sRef.putFile(data)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @SuppressWarnings("VisibleForTests")
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        progressBar.setVisibility(View.GONE);
+                        //textViewStatus.setText("File Uploaded Successfully");
+                        String id_file = databaseReference.push().getKey();
+
+                        UploadFileModel upload = new UploadFileModel(id_file, fileName, taskSnapshot.getDownloadUrl().toString());
+                        databaseReference.child(id_file).setValue(upload);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @SuppressWarnings("VisibleForTests")
+                    @Override
+                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                        double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                        progressDialog.setMessage(progress + "%");
+                    }
+                });
 
     }
 
     public void onWait(){
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please Wait");
+        progressDialog.setCancelable(false);
         progressDialog.show();
     }
 
-    private void checkData(String jenisDoc, String judul, String konsultan, String kontrak, String tglMulai, String tglAkhir){
+    private void checkData(String jenisDoc, String judul, String konsultan, String kontrak, String tglMulai, String tglAkhir, String fileName){
         if(TextUtils.isEmpty(jenisDoc)){
             Toast.makeText(this, "Please Enter The Document Type", Toast.LENGTH_LONG).show();
         }
@@ -208,6 +309,9 @@ public class AddDocumentActivity extends AppCompatActivity{
         }
         if(TextUtils.isEmpty(tglAkhir)){
             Toast.makeText(this, "Please Enter The Date", Toast.LENGTH_LONG).show();
+        }
+        if (TextUtils.isEmpty(fileName)) {
+            Toast.makeText(this, "Please Enter The File Name", Toast.LENGTH_LONG).show();
         }
     }
 

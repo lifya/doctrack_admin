@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="com.firebaseui:firebase-ui-database-0.4.1">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/firebase-ui-database-0.4.1.aar/583f84e9d17361112286d76262e30f7a/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/firebase-ui-database-0.4.1.aar/583f84e9d17361112286d76262e30f7a/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/firebase-ui-database-0.4.1.aar/892a20c69bfb5e8c623fdddbbb94ac7f/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/firebase-ui-database-0.4.1.aar/892a20c69bfb5e8c623fdddbbb94ac7f/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.firebaseui/firebase-ui-database/0.4.1/16e437b7d89d75bb59c35d24aabb5880d0eca626/firebase-ui-database-0.4.1-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.AndroidStudio3.0/system/gradle/gradle-4.1-all/caches/modules-2/files-2.1/com.firebaseui/firebase-ui-database/0.4.1/16e437b7d89d75bb59c35d24aabb5880d0eca626/firebase-ui-database-0.4.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

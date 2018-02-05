@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,6 +33,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button bLogin;
     private EditText etUsername, etPassword;
     private ProgressDialog progressDialog;
+    private TextView fpass;
+    private String email, name;
     //private DatabaseReference databaseReference;
     //private Query query;
 
@@ -48,21 +51,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         etPassword = (EditText) findViewById(R.id.etPassword);
         bLogin = (Button) findViewById(R.id.bLogin);
         bLogin.setOnClickListener(this);
+
+        fpass = (TextView) findViewById(R.id.fpass);
+        fpass.setOnClickListener(this);
+
     }
 
     @Override
     public void onStart(){
         super.onStart();
         currentUser = mAuth.getCurrentUser();
-
-//        if(currentUser != null) {
-//            sendtoStart();
-//        }
-
+        if(currentUser != null) {
+            sendtoStart();
+        }
     }
 
     public void sendtoStart(){
         Intent startIntent = new Intent(LoginActivity.this, MainActivity.class);
+        startIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(startIntent);
         finish();
     }
@@ -82,6 +88,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
         progressDialog.setMessage("Please wait");
+        progressDialog.setCancelable(false);
         progressDialog.show();
 
         mAuth.signInWithEmailAndPassword(username, password)
@@ -94,7 +101,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             }
                             else{
-                                Toast.makeText(LoginActivity.this, "Failed to login" + task.getException(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, "Failed ! Check Your Email or Password", Toast.LENGTH_LONG).show();
                                 return;
                             }
                         }
@@ -136,10 +143,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //        });
     }
 
+public void sentoReset() {
+    Intent startIntent = new Intent(LoginActivity.this, RessetPasswordActivity.class);
+    startActivity(startIntent);
+    finish();
+}
+
     @Override
     public void onClick(View v) {
         if(v == bLogin){
             userLogin();
+        }
+        else if (v == fpass) {
+            RessetPasswordActivity home = new RessetPasswordActivity();
+            sentoReset();
         }
     }
 }

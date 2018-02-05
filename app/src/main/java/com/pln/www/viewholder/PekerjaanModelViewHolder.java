@@ -26,6 +26,7 @@ public class PekerjaanModelViewHolder extends RecyclerView.ViewHolder {
         tvNamaPekerjaan = (TextView) mView.findViewById(R.id.tvJudul);
         tvNamaKonsultan = (TextView) mView.findViewById(R.id.tvKonsultan);
         tvTanggal = (TextView) mView.findViewById(R.id.tvTanggal);
+        ivHapus = (ImageView) mView.findViewById(R.id.ivHapus);
 
         mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,10 +35,11 @@ public class PekerjaanModelViewHolder extends RecyclerView.ViewHolder {
             }
         });
 
-        ivHapus.setOnClickListener(new View.OnClickListener() {
+        mView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View v) {
-                mClickListener.onItemClick(v, getAdapterPosition());
+            public boolean onLongClick(View v) {
+                mClickListener.onItemLongClick(v, getAdapterPosition());
+                return true;
             }
         });
 
