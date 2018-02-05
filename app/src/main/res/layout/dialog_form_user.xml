@@ -131,7 +131,6 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-<<<<<<< HEAD
         android:layout_height="wrap_content"
         android:ems="10"
         android:textSize="14dp"
@@ -147,18 +146,8 @@
         android:hint="Re-Enter Password"
         android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/bCancel"
-        android:layout_width="188dp"
-        android:layout_height="wrap_content"
-        android:text="Cancel" />
-=======
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:gravity="center">
->>>>>>> 4a572876baba52acb43a0f48ce252a0c8ae500b0
+
+
 
         <LinearLayout
             android:layout_width="4dp"
@@ -196,6 +185,6 @@
                 android:textColor="#fff" />
 
         </LinearLayout>
-    </LinearLayout>
+
 
 </LinearLayout>
