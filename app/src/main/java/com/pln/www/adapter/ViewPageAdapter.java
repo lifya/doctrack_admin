@@ -17,7 +17,7 @@ import com.pln.www.R;
 public class ViewPageAdapter extends PagerAdapter {
     private Context context;
     private LayoutInflater layoutInflater;
-    private Integer [] images = {R.mipmap.slider_2,R.mipmap.slider_3,R.mipmap.slider_2};
+    private Integer [] images = {R.mipmap.slider_4,R.mipmap.slider_3,R.mipmap.slider_2};
 
     public ViewPageAdapter(Context context) {this.context = context;}
 

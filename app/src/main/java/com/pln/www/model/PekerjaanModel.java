@@ -5,15 +5,18 @@ package com.pln.www.model;
  */
 
 public class PekerjaanModel {
-    String idPekerjaan, idKontrak, idKonsultan, namaPekerjaan, jenisPekerjaan, file;
+    String idPekerjaan, idKontrak, idKonsultan, namaPekerjaan, tegangan, kms, provinsi, jenisPekerjaan, file;
 
     public PekerjaanModel(){}
 
-    public PekerjaanModel(String idPekerjaan, String idKonsultan, String idKontrak, String namaPekerjaan, String jenisPekerjaan){
+    public PekerjaanModel(String idPekerjaan, String idKonsultan, String idKontrak, String namaPekerjaan, String tegangan, String kms, String provinsi, String jenisPekerjaan){
         this.idPekerjaan = idPekerjaan;
         this.idKonsultan = idKonsultan;
         this.idKontrak = idKontrak;
         this.namaPekerjaan = namaPekerjaan;
+        this.tegangan = tegangan;
+        this.kms = kms;
+        this.provinsi = provinsi;
         this.jenisPekerjaan = jenisPekerjaan;
     }
 
@@ -33,13 +36,21 @@ public class PekerjaanModel {
         this.namaPekerjaan = namaPekerjaan;
     }
 
-    public String getJenisPekerjaan() {
-        return jenisPekerjaan;
-    }
+    public String getTegangan() { return tegangan; }
 
-    public void setJenisPekerjaan(String jenisPekerjaan) {
-        this.jenisPekerjaan = jenisPekerjaan;
-    }
+    public void setTegangan(String tegangan) { this.tegangan = tegangan; }
+
+    public String getKms() { return kms; }
+
+    public void setKms(String kms) { this.kms = kms; }
+
+    public String getProvinsi() { return provinsi; }
+
+    public void setProvinsi(String provinsi) { this.provinsi = provinsi; }
+
+    public String getJenisPekerjaan() { return jenisPekerjaan; }
+
+    public void setJenisPekerjaan(String jenisPekerjaan) { this.jenisPekerjaan = jenisPekerjaan; }
 
     public String getFile() {
         return file;

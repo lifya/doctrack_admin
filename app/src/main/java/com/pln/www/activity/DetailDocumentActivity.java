@@ -4,8 +4,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.pln.www.R;
+import com.pln.www.alert.FormDocumentDialog;
 import com.pln.www.model.KonsultanModel;
 import com.pln.www.model.KontrakModel;
 import com.pln.www.model.PekerjaanModel;
@@ -26,11 +29,13 @@ import com.pln.www.model.PekerjaanModel;
 
 public class DetailDocumentActivity extends AppCompatActivity {
     private ImageView ivBack;
-    private TextView tvSave, tvJudul, tvKonsultan, tvTanggalMulai, tvTanggalAKhir, tvJenis;
+    private Button bAddDoc;
+    private TextView tvSave, tvJudul, tvKonsultan, tvTanggalMulai, tvTanggalAKhir, tvTegangan, tvKms, tvProvinsi, tvKontrak;
     private ProgressDialog progressDialog;
     private DatabaseReference dbKonsultan, dbKontrak, dbPekerjaan;
     private Intent intent;
     private Bundle bundle;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,11 +50,15 @@ public class DetailDocumentActivity extends AppCompatActivity {
 
         tvJudul = (TextView) findViewById(R.id.tvJudul);
         tvKonsultan = (TextView) findViewById(R.id.tvKonsultan);
-        tvJenis = (TextView) findViewById(R.id.tvJenis);
+        tvTegangan = (TextView) findViewById(R.id.tvTegangan);
+        tvKms = (TextView) findViewById(R.id.tvKms);
+        tvProvinsi = (TextView) findViewById(R.id.tvProvinsi);
+        tvKontrak = (TextView) findViewById(R.id.tvKontrak);
         tvTanggalMulai = (TextView) findViewById(R.id.tvTanggalMulai);
         tvTanggalAKhir = (TextView) findViewById(R.id.tvTanggalAkhir);
         ivBack = (ImageView) findViewById(R.id.ivBack);
         tvSave = (TextView) findViewById(R.id.tvSave);
+        bAddDoc = (Button) findViewById(R.id.buttonProses);
 
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +71,13 @@ public class DetailDocumentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        bAddDoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToAddDoc();
             }
         });
     }
@@ -81,9 +97,14 @@ public class DetailDocumentActivity extends AppCompatActivity {
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     PekerjaanModel pekerjaanModel = dataSnapshot.getValue(PekerjaanModel.class);
                     String namaPekerjaan = pekerjaanModel.getNamaPekerjaan();
-                    String jenisPekerjaan = pekerjaanModel.getJenisPekerjaan();
+                    String tegangan = pekerjaanModel.getTegangan();
+                    String kms = pekerjaanModel.getKms();
+                    String provinsi = pekerjaanModel.getProvinsi();
                     tvJudul.setText(namaPekerjaan);
-                    tvJenis.setText(jenisPekerjaan);
+                    tvTegangan.setText(tegangan);
+                    tvKms.setText(kms);
+                    tvProvinsi.setText(provinsi);
+
                 }
 
                 @Override
@@ -110,8 +131,10 @@ public class DetailDocumentActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     KontrakModel kontrakModel = dataSnapshot.getValue(KontrakModel.class);
+                    String noKontrak = kontrakModel.getNoKontrak();
                     String tglMulai = kontrakModel.getTglMulai();
                     String tglAkhir = kontrakModel.getTglAkhir();
+                    tvKontrak.setText(noKontrak);
                     tvTanggalMulai.setText(tglMulai);
                     tvTanggalAKhir.setText(tglAkhir);
                 }
@@ -123,5 +146,11 @@ public class DetailDocumentActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void goToAddDoc(){
+        FragmentManager manager = getSupportFragmentManager();
+        FormDocumentDialog dialogAdd = new FormDocumentDialog();
+        dialogAdd.show(manager, dialogAdd.getTag());
     }
 }

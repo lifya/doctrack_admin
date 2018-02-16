@@ -97,6 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:focusableInTouchMode="true"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <FrameLayout
@@ -126,31 +127,56 @@
                 android:textSize="14dp" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#1b9fe1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_lock_white_24dp" />
+
+            </FrameLayout>
+
+            <EditText
+                android:id="@+id/etRePass"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_menu_camera"
+                android:hint="Konfirmasi Password"
+                android:inputType="text"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="#060606"
+                android:textColorHint="#626562"
+                android:textSize="14dp" />
+        </LinearLayout>
+
 
     </LinearLayout>
 
+        <View
+            android:layout_width="2dp"
+            android:layout_height="15dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:textSize="14dp"
-        android:layout_marginTop="5dp"
-        android:hint="Password"
-        android:inputType="textPassword" />
-
-    <EditText
-        android:id="@+id/etRePass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Re-Enter Password"
-        android:inputType="textPassword" />
-
-
-
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
 
         <LinearLayout
-            android:layout_width="4dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal">
@@ -185,6 +211,10 @@
                 android:textColor="#fff" />
 
         </LinearLayout>
+
+
+
+    </LinearLayout>
 
 
 </LinearLayout>

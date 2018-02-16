@@ -41,27 +41,6 @@
             android:textColor="#1b9fe1"
             android:textSize="12sp" />
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_margin="0dp">
-
-        </FrameLayout>
-
-        <ImageView
-            android:id="@+id/ivHapus"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:backgroundTint="#1ba1e2"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="7dp"
-            android:layout_marginRight="7dp"
-            android:padding="0dp"
-            android:src="@drawable/ic_delete" />
-
 
     </RelativeLayout>
 

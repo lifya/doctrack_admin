@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="6dp"
     android:foreground="?attr/selectableItemBackground">
 
         <RelativeLayout
@@ -15,92 +15,120 @@
             android:layout_height="wrap_content"
             android:gravity="center">
 
-                <ImageView
-                    android:id="@+id/ivStatus"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:scaleType="centerCrop"/>
-
-                <TextView
-                    android:id="@+id/tvJudul"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_toRightOf="@+id/ivStatus"
-                    android:text="Judul"
-                    android:textAppearance="?attr/textAppearanceListItem"
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tvKonsultan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvJudul"
-                    android:paddingTop="3dp"
-                    android:layout_marginLeft="12dp"
-                    android:layout_toRightOf="@+id/ivStatus"
-                    android:ellipsize="end"
-                    android:singleLine="true"
-                    android:text="Konsultan"
-                    android:textAppearance="?attr/textAppearanceListItem"
-                    android:textColor="#1b9fe1"
-                    android:textSize="12sp" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center|top"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp">
 
-                <TextView
-                    android:id="@+id/tvTanggal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvKonsultan"
-                    android:layout_marginLeft="12dp"
-                    android:layout_toRightOf="@+id/ivStatus"
-                    android:ellipsize="end"
-                    android:singleLine="true"
-                    android:text="Tanggal"
-                    android:layout_marginTop="10dp"
-                    android:textSize="10sp" />
+                             <ImageView
+                                 android:id="@+id/ivStatus"
+                                 android:layout_width="50dp"
+                                 android:layout_height="50dp"
+                                 android:src="@mipmap/on_process"
+                                 android:scaleType="centerCrop"/>
 
-                <TextView
-                    android:id="@+id/tvWaktu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvKonsultan"
-                    android:layout_toEndOf="@+id/tvTanggal"
-                    android:layout_toRightOf="@+id/tvTanggal"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="2dp"
-                    android:textSize="10sp"
-                    android:layout_marginBottom="5dp"
-                    android:text="Waktu" />
+                        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tvLastUpdate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/tvWaktu"
-                    android:layout_alignBottom="@+id/tvWaktu"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginEnd="11dp"
-                    android:layout_marginRight="11dp"
-                    android:text="last update"
-                    android:textSize="10dp"
-                    android:textStyle="italic" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="10dp">
 
-                <ImageView
-                    android:id="@+id/ivHapus"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:backgroundTint="#1b9fe1"
-                    android:src="@drawable/ic_delete" />
+                                <TextView
+                                    android:id="@+id/tvJudul"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Judul"
+                                    android:textAppearance="?attr/textAppearanceListItem"
+                                    android:textColor="#000000"
+                                    android:textSize="14sp" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="2dp">
+
+                                        <TextView
+                                            android:id="@+id/tvTegangan"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginRight="5dp"
+                                            android:text="Tegangan"
+                                            android:textSize="8sp"
+                                            android:textColor="#fc5757"/>
+
+                                        <TextView
+                                            android:id="@+id/tvKms"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:gravity="center"
+                                            android:text="KMS"
+                                            android:textSize="8sp"
+                                            android:textColor="#37aae5"/>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/tvKontrak"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Kontrak"
+                                    android:textSize="10sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#1b9fe1"/>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="5dp">
+
+                                        <TextView
+                                            android:id="@+id/tvProvinsi"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:text="Provinsi"
+                                            android:textSize="12sp"
+                                            android:textStyle="bold"
+                                            android:textColor="#1d1d1c"/>
+
+                                        <TextView
+                                            android:id="@+id/tvLastUpdate"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:gravity="center"
+                                            android:text="last update"
+                                            android:textSize="10sp"
+                                            android:textStyle="italic" />
+                                </LinearLayout>
+
+                        </LinearLayout>
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+
         </RelativeLayout>
 </android.support.v7.widget.CardView>
 

@@ -72,7 +72,6 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyHoder>
             super(itemView);
             tvName = (TextView) itemView.findViewById(R.id.tvNama);
             tvEmail = (TextView) itemView.findViewById(R.id.tvEmail);
-            ivDelete = (ImageView) itemView.findViewById(R.id.ivHapus);
         }
     }
 }

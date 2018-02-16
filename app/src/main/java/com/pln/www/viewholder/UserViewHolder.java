@@ -22,7 +22,6 @@ public class UserViewHolder extends RecyclerView.ViewHolder{
         mView = itemView;
         tvEmail = (TextView) mView.findViewById(R.id.tvEmail);
         tvNama = (TextView) mView.findViewById(R.id.tvNama);
-        ivHapus = (ImageView) mView.findViewById(R.id.ivHapus);
 
         ivHapus.setOnClickListener(new View.OnClickListener() {
             @Override

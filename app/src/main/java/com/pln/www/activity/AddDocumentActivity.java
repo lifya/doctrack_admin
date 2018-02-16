@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -49,11 +48,10 @@ public class AddDocumentActivity extends AppCompatActivity{
     private ImageView ivGetFile, ivBack;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
-    private EditText Ed1, Ed2, etJudul, etKonsultan, etKontrak, etUploadFile;
+    private EditText Ed1, Ed2, etJudul, etTegangan, etKms, etProvinsi, etKonsultan, etKontrak, etUploadFile;
     private TextView tvSave;
     private Calendar mCurrentDate;
     private int day, month, year;
-    private Button bAddDoc;
     private ProgressDialog progressDialog;
     private DatabaseReference dbKonsultan, dbKontrak, dbPekerjaan, databaseReference;
     private StorageReference storageReference;
@@ -65,26 +63,24 @@ public class AddDocumentActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_document);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.tbAddDoc);
-//        setSupportActionBar(toolbar);
-       RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         databaseReference = FirebaseDatabase.getInstance().getReference(Constant.DATABASE_PATH_UPLOADS);
         storageReference = FirebaseStorage.getInstance().getReference();
         dbKonsultan = FirebaseDatabase.getInstance().getReference("Konsultan");
         dbKontrak = FirebaseDatabase.getInstance().getReference("Kontrak");
         dbPekerjaan = FirebaseDatabase.getInstance().getReference("Pekerjaan");
-        //ImageView imageView = (ImageView) findViewById(R.id.imagev1);
         tvSave = (TextView) findViewById(R.id.tvSave);
         ivBack = (ImageView) findViewById(R.id.ivBack);
         ivGetFile = (ImageView) findViewById(R.id.ivGetFile);
         radioGroup = (RadioGroup) findViewById(R.id.rgTipe);
         etJudul = (EditText) findViewById(R.id.etJudul);
+        etTegangan = (EditText) findViewById(R.id.etTegangan);
+        etKms = (EditText) findViewById(R.id.etKms);
+        etProvinsi = (EditText) findViewById(R.id.etProvinsi);
         etKonsultan = (EditText) findViewById(R.id.etKonsultan);
         etKontrak = (EditText) findViewById(R.id.etKontrak);
         etUploadFile = (EditText) findViewById(R.id.etUploadFile);
         Ed1 = (EditText) findViewById(R.id.etTglMulai);
         Ed2 = (EditText) findViewById(R.id.etTglAkhir);
-        bAddDoc = (Button) findViewById(R.id.buttonProses);
         mCurrentDate = Calendar.getInstance();
         day = mCurrentDate.get(Calendar.DAY_OF_MONTH);
         month = mCurrentDate.get(Calendar.MONTH);
@@ -140,15 +136,24 @@ public class AddDocumentActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                     saveData();
+                    Intent intent = new Intent(AddDocumentActivity.this, DetailDocumentActivity.class);
+                    startActivity(intent);
+
                 }
         });
 
-        bAddDoc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToAddDoc();
-            }
-        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        AddDocumentActivity doc = new AddDocumentActivity();
+        sentoDocumentList();
+    }
+
+    private void sentoDocumentList() {
+        Intent startIntent = new Intent(AddDocumentActivity.this, DocumentTrackingActivity.class);
+        startActivity(startIntent);
+        finish();
     }
 
     private String addListeneronButton(){
@@ -161,19 +166,36 @@ public class AddDocumentActivity extends AppCompatActivity{
     private void saveData(){
         String jenisDoc = addListeneronButton();
         String judul = etJudul.getText().toString().trim();
+        String tegangan = etTegangan.getText().toString().trim();
+        String kms = etKms.getText().toString().trim();
+        String provinsi = etProvinsi.getText().toString().trim();
         String konsultan = etKonsultan.getText().toString().trim();
         String kontrak = etKontrak.getText().toString().trim();
         String tglMulai = Ed1.getText().toString().trim();
         String tglAkhir = Ed2.getText().toString().trim();
         String fileName = etUploadFile.getText().toString().trim();
 
-//        Toast.makeText(this, " " + jenisDoc, Toast.LENGTH_LONG).show();
-//        return;
 
         if(TextUtils.isEmpty(judul)){
             Toast.makeText(this, "Please Enter The Title", Toast.LENGTH_LONG).show();
             return;
         }
+
+        if(TextUtils.isEmpty(tegangan)){
+            Toast.makeText(this, "Please Enter The Tegangan", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(TextUtils.isEmpty(kms)){
+            Toast.makeText(this, "Please Enter The KMS", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(TextUtils.isEmpty(provinsi)){
+            Toast.makeText(this, "Please Enter The Provinsi", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         if(TextUtils.isEmpty(konsultan)){
             Toast.makeText(this, "Please Enter The Consultant", Toast.LENGTH_LONG).show();
             return;
@@ -206,20 +228,18 @@ public class AddDocumentActivity extends AppCompatActivity{
         dbKontrak.child(idKontrak).setValue(kontrakModel);
 
         String idPekerjaan = dbPekerjaan.push().getKey();
-        PekerjaanModel pekerjaanModel = new PekerjaanModel(idPekerjaan, idKonsultan, idKontrak, judul, jenisDoc);
+        PekerjaanModel pekerjaanModel = new PekerjaanModel(idPekerjaan, idKonsultan, idKontrak, judul, tegangan, kms, provinsi, jenisDoc);
         //dbPekerjaan.child(idPekerjaan).child(idKonsultan).child(idKontrak).setValue(pekerjaanModel);
         dbPekerjaan.child(idPekerjaan).setValue(pekerjaanModel);
 
-        progressDialog.dismiss();
+        //progressDialog.dismiss();
         finish();
-        startActivity(getIntent());
+        //startActivity(getIntent());
         Toast.makeText(this, "Successed", Toast.LENGTH_LONG).show();
         return;
     }
 
     private void getPDF() {
-        //for greater than lolipop versions we need the permissions asked on runtime
-        //so if the permission is not available user will go to the screen to allow storage permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(AddDocumentActivity.this,
                 android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
@@ -315,9 +335,5 @@ public class AddDocumentActivity extends AppCompatActivity{
         }
     }
 
-    private void goToAddDoc(){
-        FragmentManager manager = getSupportFragmentManager();
-        FormDocumentDialog dialogAdd = new FormDocumentDialog();
-        dialogAdd.show(manager, dialogAdd.getTag());
-    }
+
 }

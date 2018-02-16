@@ -97,13 +97,88 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/ic_menu_camera"
-                    android:hint="nama pekerjaan"
+                    android:hint="nama jalur"
                     android:inputType="text"
                     android:padding="10dp"
                     android:singleLine="true"
                     android:textColor="#060606"
                     android:textColorHint="#626562"
                     android:textSize="14dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:gravity="center">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="#1b9fe1"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_date_range_white_24dp"
+                            android:padding="8dp"/>
+                    </FrameLayout>
+
+
+                    <EditText
+                        android:id="@+id/etTegangan"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ic_menu_camera"
+                        android:focusableInTouchMode="true"
+                        android:padding="10dp"
+                        android:hint="tegangan"
+                        android:textColorHint="#626562"
+                        android:textSize="14dp"
+                        android:singleLine="true"
+                        android:inputType="text"
+                        android:textColor="#080808"
+                        android:layout_marginRight="5dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    >
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="#1b9fe1"
+                        >
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_date_range_white_24dp"
+                            android:padding="8dp"/>
+                    </FrameLayout>
+                    <EditText
+                        android:id="@+id/etKms"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/ic_menu_camera"
+                        android:focusableInTouchMode="true"
+                        android:padding="10dp"
+                        android:hint="kms"
+                        android:textColorHint="#626562"
+                        android:textSize="14dp"
+                        android:inputType="text"
+                        android:textColor="#050505"
+                        android:singleLine="true"/>
+                </LinearLayout>
+
+
             </LinearLayout>
 
             <LinearLayout
@@ -157,7 +232,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_search_white_24dp"
-                        android:padding="8dp"/>
+                        android:padding="8dp"
+                        android:paddingRight="-5dp"/>
                 </FrameLayout>
                 <EditText
                     android:id="@+id/etKontrak"
@@ -166,6 +242,40 @@
                     android:background="@drawable/ic_menu_camera"
                     android:padding="10dp"
                     android:hint="nomor kontrak"
+                    android:textColorHint="#626562"
+                    android:textSize="14dp"
+                    android:inputType="text"
+                    android:textColor="#050505"
+                    android:singleLine="true"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                >
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="#1b9ee0"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_search_white_24dp"
+                        android:padding="8dp"
+                        android:paddingRight="-5dp"/>
+                </FrameLayout>
+                <EditText
+                    android:id="@+id/etProvinsi"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_menu_camera"
+                    android:padding="10dp"
+                    android:hint="provinsi"
                     android:textColorHint="#626562"
                     android:textSize="14dp"
                     android:inputType="text"
@@ -232,7 +342,6 @@
                     </FrameLayout>
                     <EditText
                         android:id="@+id/etTglAkhir"
-
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/ic_menu_camera"
@@ -319,39 +428,25 @@
                 android:layout_marginTop="10dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_weight="1"
-                    >
-                    <TextView
+                    android:layout_weight="1">
+                    <EditText
                         android:id="@+id/cont"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:background="@drawable/ic_menu_camera"
+                        android:singleLine="true"
+                        android:textColorHint="#626562"
                         android:padding="10dp"
-                        android:text="Amandemen"
-                        android:textStyle="bold"
+                        android:hint="detail amandemen"
                         android:textColor="#a7aba7"
                         android:inputType="text"
                         android:textSize="14dp"
                         android:gravity="left" />
+
                 </LinearLayout>
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="#060606"
-                    >
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_add_white_24dp"
-                        android:padding="8dp"
-                        />
-                </FrameLayout>
-
-
 
             </LinearLayout>
 
@@ -368,32 +463,11 @@
 
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/imagev1"/>
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/rvProses">
-
-            </android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/buttonProses"
-            android:text="Tambah Proses"
-            android:textColor="#ffff"
-            android:background="#1b9fe1"/>
+
+
     </LinearLayout>
 
 </RelativeLayout>

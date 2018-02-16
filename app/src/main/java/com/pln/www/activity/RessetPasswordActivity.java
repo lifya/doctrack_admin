@@ -27,8 +27,8 @@ public class RessetPasswordActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resset_password);
-        imageback = (ImageView) findViewById(R.id.back);
-        bReset = (Button) findViewById(R.id.bReset);
+        imageback = (ImageView) findViewById(R.id.ivBack);
+        bReset = (Button) findViewById(R.id.breset);
         etEmail = (EditText) findViewById(R.id.etEmail);
         imageback.setOnClickListener(this);
         bReset.setOnClickListener(this);
@@ -44,6 +44,17 @@ public class RessetPasswordActivity extends AppCompatActivity implements View.On
         if(view == bReset){
             resetPassword();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        sentoLogin();
+    }
+
+    private void sentoLogin() {
+        Intent startIntent = new Intent(RessetPasswordActivity.this, LoginActivity.class);
+        startActivity(startIntent);
+        finish();
     }
 
     public void resetPassword(){

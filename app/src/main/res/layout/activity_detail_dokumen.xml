@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#fff">
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="#fff">
 
@@ -19,7 +15,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="#1b9fe1">
 
@@ -27,20 +23,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginTop="10dp"
                 android:background="#1b9fe1">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp">
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_marginTop="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp">
 
@@ -56,13 +52,45 @@
                             android:textSize="16dp"
                             android:textStyle="bold" />
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvTegangan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Tegangan"
+                                android:layout_marginRight="5dp"
+                                android:textAlignment="center"
+                                android:textColor="#ffffff"
+                                android:textSize="16dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tvKms"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="KMS"
+                                android:textAlignment="center"
+                                android:textColor="#ffffff"
+                                android:textSize="16dp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
                         <TextView
-                            android:id="@+id/tvJenis"
+                            android:id="@+id/tvKontrak"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="#00000000"
                             android:padding="5dp"
-                            android:text="ukl-upl/03/kn02"
+                            android:text="Kontrak"
                             android:textAlignment="center"
                             android:textColor="#77000000"
                             android:textColorHint="#000"
@@ -72,83 +100,80 @@
                             android:id="@+id/tvKonsultan"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="5dp"
                             android:text="PT Adi Banuwa"
                             android:textAlignment="center"
                             android:textColor="#ededed"
                             android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/tvProvinsi"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Provinsi"
+                            android:textAlignment="center"
+                            android:textColor="#ededed"
+                            android:textSize="16dp" />
+
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="horizontal"
+                        android:layout_gravity="center"
                         android:layout_marginTop="10dp"
-                        android:layout_marginLeft="5dp">
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center"
+                        android:layout_marginLeft="48dp"
+                        android:layout_marginRight="48dp">
+
 
                         <LinearLayout
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_gravity="right"
-                            android:gravity="right">
+                            android:layout_weight="1"
+                            android:layout_marginRight="10dp"
+                            android:orientation="horizontal">
 
-                            <LinearLayout
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/ic_date_range_white_24dp" />
+
+                            <TextView
+                                android:id="@+id/tvTanggalMulai"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="right">
-
-                                <ImageView
-                                    android:layout_width="15dp"
-                                    android:layout_height="15dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginTop="5dp"
-                                    android:background="@drawable/ic_date_range_white_24dp" />
-
-                                <TextView
-                                    android:id="@+id/tvTanggalMulai"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="5dp"
-                                    android:layout_marginTop="2dp"
-                                    android:gravity="end"
-                                    android:text="25 April 1997"
-                                    android:textAlignment="textEnd"
-                                    android:textColor="#7000"
-                                    android:textSize="14dp" />
-                            </LinearLayout>
-
+                                android:layout_marginTop="2dp"
+                                android:layout_marginLeft="5dp"
+                                android:text="25/04/2018"
+                                android:textColor="#7000"
+                                android:textSize="14dp"
+                                />
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_weight="1"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
 
-                            <LinearLayout
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/ic_date_range_white_24dp"/>
+
+                            <TextView
+                                android:id="@+id/tvTanggalAkhir"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                <ImageView
-                                    android:layout_width="13dp"
-                                    android:layout_height="13dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginTop="5dp"
-                                    android:background="@drawable/ic_date_range_white_24dp"/>
-
-                                <TextView
-                                    android:id="@+id/tvTanggalAkhir"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="5dp"
-                                    android:layout_marginTop="2dp"
-                                    android:text="25 April 2018"
-                                    android:textColor="#7000"
-                                    android:textSize="14dp" />
-                            </LinearLayout>
-
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="2dp"
+                                android:text="25/04/2018"
+                                android:textColor="#7000"
+                                android:textSize="14dp" />
                         </LinearLayout>
 
                     </LinearLayout>
@@ -169,49 +194,39 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <android.support.v7.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                app:cardElevation="10dp"
-                app:cardBackgroundColor="#ffff">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_gravity="center">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_gravity="center">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Amandemen"
-                        android:layout_marginLeft="15dp"/>
+                    android:text="Detail Amandemen"
+                    android:layout_margin="8dp"
+                    android:textColor="#7b7777"/>
 
 
-                </LinearLayout>
+            </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imgDropdown"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_gravity="right|center"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp">
+                    android:gravity="left"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/ic_drop_down"
+                    android:textSize="14dp" />
 
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="right"
-                        android:background="@drawable/ic_action_download_file"/>
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-
-
-
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -228,9 +243,32 @@
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:id="@+id/rvDetailProses">
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>
+
+
+
+
+
+
     </LinearLayout>
-</FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/buttonProses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1b9fe1"
+            android:text="Tambah Proses"
+            android:textColor="#ffff" />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

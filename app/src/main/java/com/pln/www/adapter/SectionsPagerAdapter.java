@@ -10,7 +10,7 @@ import android.text.Spanned;
 import android.text.style.ImageSpan;
 
 import com.pln.www.R;
-import com.pln.www.fragment.DokumenFragment;
+import com.pln.www.fragment.AmdalFragment;
 import com.pln.www.fragment.UserFragment;
 
 
@@ -36,7 +36,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                DokumenFragment fragment0=new DokumenFragment();
+                AmdalFragment fragment0=new AmdalFragment();
                 return fragment0;
             case 1:
                 UserFragment fragment1=new UserFragment();

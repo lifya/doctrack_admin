@@ -16,11 +16,13 @@
         android:id="@+id/tvDetailProses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
         android:gravity="bottom"
-        android:text="Detail Proses"
+        android:text="Update Pekerjaan"
         android:textColor="#ffffff"
-        android:textSize="20dp" />
+        android:textSize="18dp"
+        android:textStyle="bold"/>
 
 
     <TextView
