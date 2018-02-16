@@ -116,7 +116,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="28dp"
-                            android:text="Materi"
+                            android:text="Pengguna"
                             android:textColor="@color/cardview_dark_background"
                             android:textSize="20dp" />
                     </LinearLayout>

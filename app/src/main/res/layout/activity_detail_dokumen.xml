@@ -46,7 +46,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="5dp"
-                            android:text="Studi UKL-UPL Pembangunan SUT 70 KV Dukong- Manggar Tanjung batu Itam dan GIguliMaroko Teluk Kijing (Paket 2)"
+                            android:text="Nama Jalur"
                             android:textAlignment="center"
                             android:textColor="#ffffff"
                             android:textSize="16dp"
@@ -69,7 +69,7 @@
                                 android:layout_marginRight="5dp"
                                 android:textAlignment="center"
                                 android:textColor="#ffffff"
-                                android:textSize="16dp"
+                                android:textSize="12dp"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -79,7 +79,7 @@
                                 android:text="KMS"
                                 android:textAlignment="center"
                                 android:textColor="#ffffff"
-                                android:textSize="16dp"
+                                android:textSize="12dp"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
@@ -100,10 +100,10 @@
                             android:id="@+id/tvKonsultan"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="PT Adi Banuwa"
+                            android:text="Konsultan"
                             android:textAlignment="center"
                             android:textColor="#ededed"
-                            android:textSize="16dp" />
+                            android:textSize="14dp" />
 
                         <TextView
                             android:id="@+id/tvProvinsi"
@@ -147,7 +147,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
                                 android:layout_marginLeft="5dp"
-                                android:text="25/04/2018"
+                                android:text="Tanggal Mulai"
                                 android:textColor="#7000"
                                 android:textSize="14dp"
                                 />
@@ -171,7 +171,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginTop="2dp"
-                                android:text="25/04/2018"
+                                android:text="Tanggal Selesai"
                                 android:textColor="#7000"
                                 android:textSize="14dp" />
                         </LinearLayout>

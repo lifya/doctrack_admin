@@ -16,6 +16,7 @@ import android.widget.ImageView;
 
 import com.pln.www.R;
 import com.pln.www.fragment.AmdalFragment;
+import com.pln.www.fragment.UklUplFragment;
 
 public class DocumentTrackingActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -101,7 +102,7 @@ public class DocumentTrackingActivity extends AppCompatActivity implements View.
                     AmdalFragment amdalFragment = new AmdalFragment();
                     return amdalFragment;
                 case 1 :
-                    AmdalFragment uklFragment = new AmdalFragment();
+                    UklUplFragment uklFragment = new UklUplFragment();
                     return uklFragment;
             }
             return null;
