@@ -26,6 +26,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:id="@+id/layoutPager"
                 android:orientation="vertical">
@@ -33,9 +34,7 @@
                 <android.support.v4.view.ViewPager
                     android:layout_width="match_parent"
                     android:id="@+id/contain"
-                    android:layout_height="235dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
+                    android:layout_height="match_parent"
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="0dp"/>
 
@@ -117,7 +116,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="28dp"
-                            android:text="Users"
+                            android:text="Materi"
                             android:textColor="@color/cardview_dark_background"
                             android:textSize="20dp" />
                     </LinearLayout>
