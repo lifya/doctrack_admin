@@ -7,9 +7,9 @@
             android:icon="@drawable/ic_action_beranda"
             android:title="Home" />
         <item
-            android:id="@+id/nav_archive"
+            android:id="@+id/nav_setting"
             android:icon="@drawable/ic_action_archive"
-            android:title="Archive" />
+            android:title="Setting" />
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_action_about"

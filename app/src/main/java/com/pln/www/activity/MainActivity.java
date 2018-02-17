@@ -19,21 +19,14 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.pln.www.R;
 import com.pln.www.adapter.ViewPageAdapter;
 import com.pln.www.adapter.SectionsPagerAdapter;
 import com.pln.www.fragment.AboutFragment;
-import com.pln.www.fragment.ArchiveFragment;
+import com.pln.www.fragment.SettingFragment;
 import com.pln.www.fragment.UserFragment;
-import com.pln.www.model.UserModel;
-
-import org.w3c.dom.Text;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -158,8 +151,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             MainActivity main = new MainActivity();
             sentoBeranda();
         }
-        else if (id ==  R.id.nav_archive) {
-            ArchiveFragment uFrag = new ArchiveFragment();
+        else if (id ==  R.id.nav_setting) {
+            SettingFragment uFrag = new SettingFragment();
             setFragment(uFrag);
         }
         else if (id == R.id.nav_about) {

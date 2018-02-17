@@ -31,6 +31,8 @@ import com.pln.www.model.ItemModel;
 import com.pln.www.model.KonsultanModel;
 import com.pln.www.model.KontrakModel;
 import com.pln.www.model.PekerjaanModel;
+import com.pln.www.model.ProsesModel;
+import com.pln.www.model.DetailProsesModel;
 import com.pln.www.viewholder.PekerjaanModelViewHolder;
 
 import java.util.List;

@@ -17,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.pln.www.R;
 import com.pln.www.alert.FormDocumentDialog;
 import com.pln.www.model.KonsultanModel;
@@ -36,6 +37,14 @@ public class DetailDocumentActivity extends AppCompatActivity {
     private Intent intent;
     private Bundle bundle;
 
+    ExpandableTextView expandableTextView;
+    TextView textView;
+    String longText = "Detail " +
+           "Amandemen" +
+            "fcghjnkmjijiubhkmlljiugyvhnkjkmlkkloj" +
+            "bgvhjn.lkklol8ghjnkjloiyftgbjnlkjiif" +
+            "gfytuhloilkjcfyuuol, bctrdtuyj/o;lp897f5y4w6" +
+            "cftcvhjbn.iui767fvhmmoiklkgtrx";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -78,6 +87,16 @@ public class DetailDocumentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 goToAddDoc();
+            }
+        });
+
+        expandableTextView = (ExpandableTextView)findViewById(R.id.expandable_text_view);
+        expandableTextView.setText(longText);
+
+        expandableTextView.setOnExpandStateChangeListener(new ExpandableTextView.OnExpandStateChangeListener() {
+            @Override
+            public void onExpandStateChanged(TextView textView, boolean isExpanded) {
+                Toast.makeText(DetailDocumentActivity.this, "Expandable : "+isExpanded, Toast.LENGTH_SHORT).show();
             }
         });
     }

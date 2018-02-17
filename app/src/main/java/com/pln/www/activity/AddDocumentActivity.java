@@ -137,6 +137,9 @@ public class AddDocumentActivity extends AppCompatActivity{
             public void onClick(View v) {
                     saveData();
                     Intent intent = new Intent(AddDocumentActivity.this, DetailDocumentActivity.class);
+                    intent.putExtra("idPekerjaan");
+                    intent.putExtra("idKonsultan");
+                    intent.putExtra("idKontrak");
                     startActivity(intent);
 
                 }
@@ -176,46 +179,7 @@ public class AddDocumentActivity extends AppCompatActivity{
         String fileName = etUploadFile.getText().toString().trim();
 
 
-        if(TextUtils.isEmpty(judul)){
-            Toast.makeText(this, "Please Enter The Title", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        if(TextUtils.isEmpty(tegangan)){
-            Toast.makeText(this, "Please Enter The Tegangan", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        if(TextUtils.isEmpty(kms)){
-            Toast.makeText(this, "Please Enter The KMS", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        if(TextUtils.isEmpty(provinsi)){
-            Toast.makeText(this, "Please Enter The Provinsi", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        if(TextUtils.isEmpty(konsultan)){
-            Toast.makeText(this, "Please Enter The Consultant", Toast.LENGTH_LONG).show();
-            return;
-        }
-        if(TextUtils.isEmpty(kontrak)){
-            Toast.makeText(this, "Please Enter The Contract", Toast.LENGTH_LONG).show();
-            return;
-        }
-        if(TextUtils.isEmpty(tglMulai)){
-            Toast.makeText(this, "Please Enter The Date", Toast.LENGTH_LONG).show();
-            return;
-        }
-        if(TextUtils.isEmpty(tglAkhir)){
-            Toast.makeText(this, "Please Enter The Date", Toast.LENGTH_LONG).show();
-            return;
-        }
-        if(TextUtils.isEmpty(fileName)){
-            Toast.makeText(this, "Please Enter The File Name", Toast.LENGTH_LONG).show();
-            return;
-        }
+        checkData(judul, tegangan, kms, provinsi, konsultan, kontrak, tglMulai, tglAkhir, fileName);
 
         onWait();
 
@@ -311,27 +275,46 @@ public class AddDocumentActivity extends AppCompatActivity{
         progressDialog.show();
     }
 
-    private void checkData(String jenisDoc, String judul, String konsultan, String kontrak, String tglMulai, String tglAkhir, String fileName){
-        if(TextUtils.isEmpty(jenisDoc)){
-            Toast.makeText(this, "Please Enter The Document Type", Toast.LENGTH_LONG).show();
-        }
+    private void checkData(String judul, String tegangan, String kms, String provinsi, String konsultan, String kontrak, String tglMulai, String tglAkhir, String fileName){
         if(TextUtils.isEmpty(judul)){
             Toast.makeText(this, "Please Enter The Title", Toast.LENGTH_LONG).show();
+            return;
         }
+
+        if(TextUtils.isEmpty(tegangan)){
+            Toast.makeText(this, "Please Enter The Tegangan", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(TextUtils.isEmpty(kms)){
+            Toast.makeText(this, "Please Enter The KMS", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(TextUtils.isEmpty(provinsi)){
+            Toast.makeText(this, "Please Enter The Provinsi", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         if(TextUtils.isEmpty(konsultan)){
             Toast.makeText(this, "Please Enter The Consultant", Toast.LENGTH_LONG).show();
+            return;
         }
         if(TextUtils.isEmpty(kontrak)){
             Toast.makeText(this, "Please Enter The Contract", Toast.LENGTH_LONG).show();
+            return;
         }
         if(TextUtils.isEmpty(tglMulai)){
             Toast.makeText(this, "Please Enter The Date", Toast.LENGTH_LONG).show();
+            return;
         }
         if(TextUtils.isEmpty(tglAkhir)){
             Toast.makeText(this, "Please Enter The Date", Toast.LENGTH_LONG).show();
+            return;
         }
-        if (TextUtils.isEmpty(fileName)) {
+        if(TextUtils.isEmpty(fileName)){
             Toast.makeText(this, "Please Enter The File Name", Toast.LENGTH_LONG).show();
+            return;
         }
     }
 

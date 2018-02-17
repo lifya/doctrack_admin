@@ -20,7 +20,7 @@ public class RessetPasswordActivity extends AppCompatActivity implements View.On
 
     ImageView imageback;
     Button bReset;
-    EditText etEmail;
+    EditText uEmail;
     FirebaseAuth firebaseAuth;
 
     @Override
@@ -29,7 +29,7 @@ public class RessetPasswordActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_resset_password);
         imageback = (ImageView) findViewById(R.id.ivBack);
         bReset = (Button) findViewById(R.id.breset);
-        etEmail = (EditText) findViewById(R.id.etEmail);
+        uEmail = (EditText) findViewById(R.id.uemail);
         imageback.setOnClickListener(this);
         bReset.setOnClickListener(this);
 
@@ -58,7 +58,7 @@ public class RessetPasswordActivity extends AppCompatActivity implements View.On
     }
 
     public void resetPassword(){
-        String email = etEmail.getText().toString().trim();
+        String email = uEmail.getText().toString().trim();
         if(TextUtils.isEmpty(email)){
             Toast.makeText(RessetPasswordActivity.this, "Please Enter Email", Toast.LENGTH_LONG).show();
             return;

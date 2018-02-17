@@ -1,43 +1,35 @@
 {
   "project_info": {
-    "project_number": "405031455387",
-    "firebase_url": "https://doctrackuser.firebaseio.com",
-    "project_id": "doctrackuser",
-    "storage_bucket": "doctrackuser.appspot.com"
+    "project_number": "779408216496",
+    "firebase_url": "https://doctrackapp-523f5.firebaseio.com",
+    "project_id": "doctrackapp-523f5",
+    "storage_bucket": "doctrackapp-523f5.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:405031455387:android:02f7e0afac0afe82",
+        "mobilesdk_app_id": "1:779408216496:android:02f7e0afac0afe82",
         "android_client_info": {
           "package_name": "com.pln.www"
         }
       },
       "oauth_client": [
         {
-          "client_id": "405031455387-opvbmjn8qljr3vk9lcb6grqof77npskp.apps.googleusercontent.com",
+          "client_id": "779408216496-teqflfm5to84grs1o4u3l38e362ete5n.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.pln.www",
-            "certificate_hash": "4f97db447a45d0a541d551a2c4b15a9aaf796c7a"
+            "certificate_hash": "cfb0c89c82710019f4f43bd9a85f7efdd9529e4d"
           }
         },
         {
-          "client_id": "405031455387-i3n78a3qior69b4nui49jmhfcgd5ettn.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.pln.www",
-            "certificate_hash": "f0c0b68471a600c3b0216bb715318d04baf681aa"
-          }
-        },
-        {
-          "client_id": "405031455387-a69tpj05cl1smsr3ni3k5ve6tfo14vms.apps.googleusercontent.com",
+          "client_id": "779408216496-vie8pr8id0g1jksb8c5mgfjbuu9i577o.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDSnIuTR2eMd98Pfk3Hb9JwqB2DLSctZmQ"
+          "current_key": "AIzaSyA8S9dLBxU4PZEP7YgrX4V-uQT9-OaLsDs"
         }
       ],
       "services": {
@@ -48,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "405031455387-a69tpj05cl1smsr3ni3k5ve6tfo14vms.apps.googleusercontent.com",
+              "client_id": "779408216496-vie8pr8id0g1jksb8c5mgfjbuu9i577o.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
