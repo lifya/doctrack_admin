@@ -41,7 +41,7 @@ public class DetailDocumentActivity extends AppCompatActivity {
     TextView textView;
     String longText = "Detail " +
            "Amandemen" +
-            "fcghjnkmjijiubhkmlljiugyvhnkjkmlkkloj" +
+            " fcghjnkmjijiubhkmlljiugyvhnkjkmlkkloj" +
             "bgvhjn.lkklol8ghjnkjloiyftgbjnlkjiif" +
             "gfytuhloilkjcfyuuol, bctrdtuyj/o;lp897f5y4w6" +
             "cftcvhjbn.iui767fvhmmoiklkgtrx";
