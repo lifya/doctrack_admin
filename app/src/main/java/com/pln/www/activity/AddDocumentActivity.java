@@ -33,13 +33,11 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.pln.www.Helper.Constant;
-//import com.pln.www.Manifest;
 import com.pln.www.R;
 import com.pln.www.model.KonsultanModel;
 import com.pln.www.model.KontrakModel;
 import com.pln.www.model.PekerjaanModel;
-import com.pln.www.alert.FormDocumentDialog;
-import com.pln.www.model.UploadFileModel;
+
 
 import java.util.Calendar;
 
@@ -56,7 +54,7 @@ public class AddDocumentActivity extends AppCompatActivity{
     private DatabaseReference dbKonsultan, dbKontrak, dbPekerjaan, databaseReference;
     private StorageReference storageReference;
     private ProgressBar progressBar;
-    final static int PICK_PDF_CODE = 2342;
+
 
 
     @Override
@@ -70,7 +68,6 @@ public class AddDocumentActivity extends AppCompatActivity{
         dbPekerjaan = FirebaseDatabase.getInstance().getReference("Pekerjaan");
         tvSave = (TextView) findViewById(R.id.tvSave);
         ivBack = (ImageView) findViewById(R.id.ivBack);
-        ivGetFile = (ImageView) findViewById(R.id.ivGetFile);
         radioGroup = (RadioGroup) findViewById(R.id.rgTipe);
         etJudul = (EditText) findViewById(R.id.etJudul);
         etTegangan = (EditText) findViewById(R.id.etTegangan);
@@ -118,13 +115,6 @@ public class AddDocumentActivity extends AppCompatActivity{
             }
         });
 
-        ivGetFile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getPDF();
-            }
-        });
-
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,9 +127,10 @@ public class AddDocumentActivity extends AppCompatActivity{
             public void onClick(View v) {
                     saveData();
                     Intent intent = new Intent(AddDocumentActivity.this, DetailDocumentActivity.class);
-                    intent.putExtra("idPekerjaan");
-                    intent.putExtra("idKonsultan");
-                    intent.putExtra("idKontrak");
+
+//                    intent.putExtra("idPekerjaan", );
+//                    intent.putExtra("idKonsultan", );
+//                    intent.putExtra("idKontrak", );
                     startActivity(intent);
 
                 }
@@ -176,10 +167,9 @@ public class AddDocumentActivity extends AppCompatActivity{
         String kontrak = etKontrak.getText().toString().trim();
         String tglMulai = Ed1.getText().toString().trim();
         String tglAkhir = Ed2.getText().toString().trim();
-        String fileName = etUploadFile.getText().toString().trim();
 
 
-        checkData(judul, tegangan, kms, provinsi, konsultan, kontrak, tglMulai, tglAkhir, fileName);
+        checkData(judul, tegangan, kms, provinsi, konsultan, kontrak, tglMulai, tglAkhir);
 
         onWait();
 
@@ -199,73 +189,14 @@ public class AddDocumentActivity extends AppCompatActivity{
         //progressDialog.dismiss();
         finish();
         //startActivity(getIntent());
-        Toast.makeText(this, "Successed", Toast.LENGTH_LONG).show();
-        return;
-    }
+//        Toast.makeText(this, "Successes", Toast.LENGTH_LONG).show();
+//        return;
 
-    private void getPDF() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(AddDocumentActivity.this,
-                android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                    Uri.parse("package:" + getPackageName()));
-            startActivity(intent);
-            return;
-        }
-
-        //creating an intent for file chooser
-        Intent intent = new Intent();
-        intent.setType("application/pdf");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Document"), PICK_PDF_CODE);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        //when the user choses the file
-        if (requestCode == PICK_PDF_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            //if a file is selected
-            if (data.getData() != null) {
-                //uploading the file
-                uploadFile(data.getData());
-            }else{
-                Toast.makeText(this, "No file chosen", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    private void uploadFile(Uri data) {
-        final String fileName = etUploadFile.getText().toString().trim();
-        progressBar.setVisibility(View.VISIBLE);
-        StorageReference sRef = storageReference.child(Constant.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + ".pdf");
-        sRef.putFile(data)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @SuppressWarnings("VisibleForTests")
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        progressBar.setVisibility(View.GONE);
-                        //textViewStatus.setText("File Uploaded Successfully");
-                        String id_file = databaseReference.push().getKey();
-
-                        UploadFileModel upload = new UploadFileModel(id_file, fileName, taskSnapshot.getDownloadUrl().toString());
-                        databaseReference.child(id_file).setValue(upload);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                })
-                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                    @SuppressWarnings("VisibleForTests")
-                    @Override
-                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                        double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                        progressDialog.setMessage(progress + "%");
-                    }
-                });
-
+        Intent intent = new Intent(AddDocumentActivity.this, DetailDocumentActivity.class);
+            intent.putExtra("idPekerjaan", idPekerjaan);
+            intent.putExtra("idKonsultan", idKonsultan);
+            intent.putExtra("idKontrak", idKontrak);
+        startActivity(intent);
     }
 
     public void onWait(){
@@ -275,7 +206,7 @@ public class AddDocumentActivity extends AppCompatActivity{
         progressDialog.show();
     }
 
-    private void checkData(String judul, String tegangan, String kms, String provinsi, String konsultan, String kontrak, String tglMulai, String tglAkhir, String fileName){
+    private void checkData(String judul, String tegangan, String kms, String provinsi, String konsultan, String kontrak, String tglMulai, String tglAkhir){
         if(TextUtils.isEmpty(judul)){
             Toast.makeText(this, "Please Enter The Title", Toast.LENGTH_LONG).show();
             return;
@@ -310,10 +241,6 @@ public class AddDocumentActivity extends AppCompatActivity{
         }
         if(TextUtils.isEmpty(tglAkhir)){
             Toast.makeText(this, "Please Enter The Date", Toast.LENGTH_LONG).show();
-            return;
-        }
-        if(TextUtils.isEmpty(fileName)){
-            Toast.makeText(this, "Please Enter The File Name", Toast.LENGTH_LONG).show();
             return;
         }
     }

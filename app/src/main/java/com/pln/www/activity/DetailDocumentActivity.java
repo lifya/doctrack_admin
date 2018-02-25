@@ -41,7 +41,7 @@ public class DetailDocumentActivity extends AppCompatActivity {
     TextView textView;
     String longText = "Detail " +
            "Amandemen" +
-            " fcghjnkmjijiubhkmlljiugyvhnkjkmlkkloj" +
+            "fcghjnkmjijiubhkmlljiugyvhnkjkmlkkloj" +
             "bgvhjn.lkklol8ghjnkjloiyftgbjnlkjiif" +
             "gfytuhloilkjcfyuuol, bctrdtuyj/o;lp897f5y4w6" +
             "cftcvhjbn.iui767fvhmmoiklkgtrx";
@@ -90,15 +90,27 @@ public class DetailDocumentActivity extends AppCompatActivity {
             }
         });
 
-        expandableTextView = (ExpandableTextView)findViewById(R.id.expandable_text_view);
-        expandableTextView.setText(longText);
+//        expandableTextView = (ExpandableTextView)findViewById(R.id.expandable_text_view);
+//        expandableTextView.setText(longText);
 
-        expandableTextView.setOnExpandStateChangeListener(new ExpandableTextView.OnExpandStateChangeListener() {
-            @Override
-            public void onExpandStateChanged(TextView textView, boolean isExpanded) {
-                Toast.makeText(DetailDocumentActivity.this, "Expandable : "+isExpanded, Toast.LENGTH_SHORT).show();
-            }
-        });
+//        expandableTextView.setOnExpandStateChangeListener(new ExpandableTextView.OnExpandStateChangeListener() {
+//            @Override
+//            public void onExpandStateChanged(TextView textView, boolean isExpanded) {
+//                Toast.makeText(DetailDocumentActivity.this, "Expandable : "+isExpanded, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        AddDocumentActivity doc = new AddDocumentActivity();
+        sentoDocumentList();
+    }
+
+    private void sentoDocumentList() {
+        Intent startIntent = new Intent(DetailDocumentActivity.this, DocumentTrackingActivity.class);
+        startActivity(startIntent);
+        finish();
     }
 
     @Override

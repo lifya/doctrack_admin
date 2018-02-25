@@ -6,9 +6,15 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.text.TextUtils;
@@ -24,10 +30,24 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.pln.www.Helper.Constant;
 import com.pln.www.R;
 import com.pln.www.activity.AddDocumentActivity;
+import com.pln.www.model.UploadFileModel;
 
 import java.util.Calendar;
+
+import static android.app.Activity.RESULT_OK;
+
 
 
 /**
@@ -35,7 +55,7 @@ import java.util.Calendar;
  */
 public class FormDocumentDialog extends AppCompatDialogFragment implements View.OnClickListener{
 
-    private ImageView imageView;
+    private ImageView imageView, ivGetFile;
     private Button bCancel, bAddDoc;
     public EditText Ed, etFile, etKeterangan;
     public Spinner spinnerProses, spinnerStatus;
@@ -44,6 +64,10 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
     private int day, month, year;
     private ProgressDialog progressDialog;
     private Intent intent;
+    private StorageReference storageReference;
+    private DatabaseReference databaseReference;
+    final static int PICK_PDF_CODE = 2342;
+    private Uri dataUri;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,7 +79,11 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         bAddDoc = (Button) v.findViewById(R.id.btnAdd);
         spinnerProses = (Spinner) v.findViewById(R.id.spProses1);
         spinnerStatus = (Spinner) v.findViewById(R.id.spStatus);
+        ivGetFile = (ImageView) v.findViewById(R.id.ivGetFile);
+        etFile = (EditText) v.findViewById(R.id.etUploadFile);
         etKeterangan = (EditText) v.findViewById(R.id.etKeterangan);
+        databaseReference = FirebaseDatabase.getInstance().getReference(Constant.DATABASE_PATH_UPLOADS);
+        storageReference = FirebaseStorage.getInstance().getReference();
         Ed = (EditText) v.findViewById(R.id.etTglProses);
         mCurrentDate = Calendar.getInstance();
         day = mCurrentDate.get(Calendar.DAY_OF_MONTH);
@@ -79,22 +107,14 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
             }
         });
 
-//        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                switch(which) {
-//                    case DialogInterface.BUTTON_POSITIVE :
-//                        TextView tv = (TextView) getActivity().findViewById(R.id.message);
-//                        tv.setText("Hay Achi");
-//                        break;
-//
-//                    case DialogInterface.BUTTON_NEGATIVE:
-//                        break;
-//                }
-//            }
-//        };
+        ivGetFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPDF();
+            }
+        });
+
         bCancel.setOnClickListener(this);
-        bAddDoc.setOnClickListener(this);
         return v;
     }
 
@@ -295,5 +315,63 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         }
         startActivity(intent);
         getDialog().dismiss();
+    }
+
+    private void getPDF() {
+
+        //creating an intent for file chooser
+        Intent intent = new Intent();
+        intent.setType("application/pdf");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Document"), PICK_PDF_CODE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //when the user choses the file
+        if (requestCode == PICK_PDF_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            //if a file is selected
+            if (data.getData() != null) {
+                //uploadFile(data.getData());
+
+                Toast.makeText(this.getContext(), "one file chosen", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(this.getContext(), "No file chosen", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void uploadFile(Uri data) {
+        //final String fileName = etUploadFile.getText().toString().trim();
+
+        StorageReference sRef = storageReference.child(Constant.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + ".pdf");
+        sRef.putFile(data)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @SuppressWarnings("VisibleForTests")
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                        progressBar.setVisibility(View.GONE);
+                        //textViewStatus.setText("File Uploaded Successfully");
+                        String id_file = databaseReference.push().getKey();
+
+                        UploadFileModel upload = new UploadFileModel(id_file, dataUri.getLastPathSegment().toString(), taskSnapshot.getDownloadUrl().toString());
+                        databaseReference.child(id_file).setValue(upload);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Toast.makeText(getContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @SuppressWarnings("VisibleForTests")
+                    @Override
+                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    }
+                });
+
     }
 }

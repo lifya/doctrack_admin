@@ -380,54 +380,6 @@
                 android:layout_marginTop="10dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_weight="1"
-                    >
-
-                    <EditText
-                        android:id="@+id/etUploadFile"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="#a8aca8"
-                        android:gravity="center"
-                        android:hint="upload file"
-                        android:inputType="text"
-                        android:padding="10dp"
-                        android:textColor="#fff"
-                        android:textColorHint="#fff"
-                        android:textSize="14dp" />
-                </LinearLayout>
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="#050505"
-                    >
-
-                    <ImageView
-                        android:id="@+id/ivGetFile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_attach_file_white_24dp" />
-                </FrameLayout>
-
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_marginTop="10dp">
-
-                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -447,19 +399,6 @@
                         android:gravity="left" />
 
                 </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp">
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="5dp"
-                    android:background="#dae4da" />
 
             </LinearLayout>
 

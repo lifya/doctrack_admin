@@ -53,31 +53,6 @@ public class AmdalFragment extends Fragment {
     private DatabaseReference dbPekerjaan;
     private List<ItemModel> dataSet;
 
-
-//    @Override
-//    public boolean onQueryTextSubmit(String query) {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean onQueryTextChange(String newText) {
-//        final List<ItemModel> filteredModelList = filter(dataSet, newText);
-//
-//        mAdapter.setFilter(filteredModelList);
-//        return true;
-//    }
-
-//    private List<ItemModel> filter(List<ItemModel> models, String query) {
-//        query = query.toLowerCase(); final List<ItemModel> filteredModelList = new ArrayList<>();
-//        for (ItemModel model : models){
-//            final String text = model.getmJudul().toLowerCase();
-//            if (text.contains(query)){
-//                filteredModelList.add(model);
-//            }
-//        }
-//        return filteredModelList;
-//    }
-
     private enum LayoutManagerType {
         GRID_LAYOUT_MANAGER,
         LINEAR_LAYOUT_MANAGER
