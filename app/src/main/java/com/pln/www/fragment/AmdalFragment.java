@@ -71,7 +71,7 @@ public class AmdalFragment extends Fragment {
                 PekerjaanModel.class,
                 R.layout.list_view,
                 PekerjaanModelViewHolder.class,
-                dbPekerjaan.child("Pekerjaan")
+                dbPekerjaan.child("Pekerjaan").orderByChild("jenisPekerjaan").equalTo("AMDAL")
         ) {
             @Override
             protected void populateViewHolder(final PekerjaanModelViewHolder viewHolder, final PekerjaanModel model, int position) {
@@ -102,9 +102,14 @@ public class AmdalFragment extends Fragment {
                     @Override
                     public void onItemClick(View view, int position) {
                         Intent intent = new Intent(getActivity(), DetailDocumentActivity.class);
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("id_pekerjaan", id_Pekerjaan);
+//                        bundle.putString("id_konsultan", id_Konsultan);
+//                        bundle.putString("id_kontrak", id_Kontrak);
                         intent.putExtra("id_pekerjaan", id_Pekerjaan);
                         intent.putExtra("id_konsultan", id_Konsultan);
                         intent.putExtra("id_kontrak", id_Kontrak);
+//                        intent.putExtra("Key2", bundle);
                         startActivity(intent);
                     }
 

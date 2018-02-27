@@ -250,7 +250,8 @@
                 android:background="#1b9ddf"
                 android:text="Add"
                 android:textSize="12dp"
-                android:textColor="#fff" />
+                android:textColor="#fff"
+                android:onClick="btnAddClick"/>
 
         </LinearLayout>
 

@@ -101,7 +101,7 @@ public class UklUplFragment extends Fragment implements View.OnClickListener {
                 PekerjaanModel.class,
                 R.layout.list_view,
                 PekerjaanModelViewHolder.class,
-                dbPekerjaan.child("Pekerjaan")
+                dbPekerjaan.child("Pekerjaan").orderByChild("jenisPekerjaan").equalTo("UKL-UPL")
         ) {
             @Override
             protected void populateViewHolder(final PekerjaanModelViewHolder viewHolder, final PekerjaanModel model, int position) {

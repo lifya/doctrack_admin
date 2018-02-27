@@ -43,6 +43,7 @@ import com.pln.www.Helper.Constant;
 import com.pln.www.R;
 import com.pln.www.activity.AddDocumentActivity;
 import com.pln.www.model.UploadFileModel;
+import android.support.v7.widget.AppCompatButton;
 
 import java.util.Calendar;
 
@@ -76,7 +77,7 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         setCancelable(false);
 
         bCancel = (Button) v.findViewById(R.id.btnCancel);
-        bAddDoc = (Button) v.findViewById(R.id.btnAdd);
+        //bAddDoc = (Button) v.findViewById(R.id.btnAdd);
         spinnerProses = (Spinner) v.findViewById(R.id.spProses1);
         spinnerStatus = (Spinner) v.findViewById(R.id.spStatus);
         ivGetFile = (ImageView) v.findViewById(R.id.ivGetFile);
@@ -129,8 +130,9 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
             getDialog().dismiss();
         }
         if(v == bAddDoc){
-            addDetailData();
-            Toast.makeText(getActivity(), "" + getSpinnerProses, Toast.LENGTH_LONG).show();
+            //addDetailData();
+            //uploadFile(dataUri);
+            //Toast.makeText(getActivity(), "" + getSpinnerProses, Toast.LENGTH_LONG).show();
             return;
         }
     }
@@ -331,9 +333,9 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         super.onActivityResult(requestCode, resultCode, data);
         //when the user choses the file
         if (requestCode == PICK_PDF_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            //if a file is selected
-            if (data.getData() != null) {
-                //uploadFile(data.getData());
+            dataUri = data.getData();
+            if (dataUri != null) {
+
 
                 Toast.makeText(this.getContext(), "one file chosen", Toast.LENGTH_SHORT).show();
             }else{
@@ -342,11 +344,11 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         }
     }
 
-    private void uploadFile(Uri data) {
+    public void btnAddClick(View v) {
         //final String fileName = etUploadFile.getText().toString().trim();
 
         StorageReference sRef = storageReference.child(Constant.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + ".pdf");
-        sRef.putFile(data)
+        sRef.putFile(dataUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @SuppressWarnings("VisibleForTests")
                     @Override

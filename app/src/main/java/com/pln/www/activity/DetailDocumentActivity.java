@@ -116,14 +116,15 @@ public class DetailDocumentActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        String get_idPekerjaan, get_idKonsultan, get_idKontrak;
+        String get_idPekerjaan, get_idKonsultan, get_idKontrak, get_saya;
+
 
         if(bundle != null){
             get_idPekerjaan = (String) bundle.get("id_pekerjaan");
             get_idKonsultan = (String) bundle.get("id_konsultan");
             get_idKontrak = (String) bundle.get("id_kontrak");
 
-            dbPekerjaan.child(get_idPekerjaan).addValueEventListener(new ValueEventListener() {
+            dbPekerjaan.child(get_idPekerjaan).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     PekerjaanModel pekerjaanModel = dataSnapshot.getValue(PekerjaanModel.class);

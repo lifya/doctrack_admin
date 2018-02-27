@@ -26,6 +26,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -39,6 +42,7 @@ import com.pln.www.model.KontrakModel;
 import com.pln.www.model.PekerjaanModel;
 
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AddDocumentActivity extends AppCompatActivity{
@@ -50,12 +54,11 @@ public class AddDocumentActivity extends AppCompatActivity{
     private TextView tvSave;
     private Calendar mCurrentDate;
     private int day, month, year;
+    String idKonsultan, idKontrak, idPekerjaan;
     private ProgressDialog progressDialog;
     private DatabaseReference dbKonsultan, dbKontrak, dbPekerjaan, databaseReference;
     private StorageReference storageReference;
     private ProgressBar progressBar;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,12 +129,6 @@ public class AddDocumentActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                     saveData();
-                    Intent intent = new Intent(AddDocumentActivity.this, DetailDocumentActivity.class);
-
-//                    intent.putExtra("idPekerjaan", );
-//                    intent.putExtra("idKonsultan", );
-//                    intent.putExtra("idKontrak", );
-                    startActivity(intent);
 
                 }
         });
@@ -173,30 +170,62 @@ public class AddDocumentActivity extends AppCompatActivity{
 
         onWait();
 
-        String idKonsultan = dbKonsultan.push().getKey();
-        KonsultanModel konsultanModel = new KonsultanModel(idKonsultan, konsultan);
+        idKonsultan = dbKonsultan.push().getKey();
+        final KonsultanModel konsultanModel = new KonsultanModel(idKonsultan, konsultan);
         dbKonsultan.child(idKonsultan).setValue(konsultanModel);
 
-        String idKontrak = dbKontrak.push().getKey();
-        KontrakModel kontrakModel = new KontrakModel(idKontrak, kontrak, tglMulai, tglAkhir);
+        idKontrak = dbKontrak.push().getKey();
+        final KontrakModel kontrakModel = new KontrakModel(idKontrak, kontrak, tglMulai, tglAkhir);
         dbKontrak.child(idKontrak).setValue(kontrakModel);
 
-        String idPekerjaan = dbPekerjaan.push().getKey();
-        PekerjaanModel pekerjaanModel = new PekerjaanModel(idPekerjaan, idKonsultan, idKontrak, judul, tegangan, kms, provinsi, jenisDoc);
+        idPekerjaan = dbPekerjaan.push().getKey();
+        final PekerjaanModel pekerjaanModel = new PekerjaanModel(idPekerjaan, idKonsultan, idKontrak, judul, tegangan, kms, provinsi, jenisDoc);
         //dbPekerjaan.child(idPekerjaan).child(idKonsultan).child(idKontrak).setValue(pekerjaanModel);
         dbPekerjaan.child(idPekerjaan).setValue(pekerjaanModel);
 
         //progressDialog.dismiss();
-        finish();
+
         //startActivity(getIntent());
 //        Toast.makeText(this, "Successes", Toast.LENGTH_LONG).show();
 //        return;
 
-        Intent intent = new Intent(AddDocumentActivity.this, DetailDocumentActivity.class);
-            intent.putExtra("idPekerjaan", idPekerjaan);
-            intent.putExtra("idKonsultan", idKonsultan);
-            intent.putExtra("idKontrak", idKontrak);
-        startActivity(intent);
+        dbPekerjaan.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Intent intent = new Intent(AddDocumentActivity.this, DetailDocumentActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("id_pekerjaan",idPekerjaan);
+//                bundle.putString("id_konsultan",idKonsultan);
+//                bundle.putString("id_kontrak",idKontrak);
+                intent.putExtra("id_pekerjaan", idPekerjaan);
+                intent.putExtra("id_konsultan", idKonsultan);
+                intent.putExtra("id_kontrak", idKontrak);
+//                intent.putExtra("Key1",bundle);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        finish();
     }
 
     public void onWait(){
