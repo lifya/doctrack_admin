@@ -166,7 +166,42 @@ public class AddDocumentActivity extends AppCompatActivity{
         String tglAkhir = Ed2.getText().toString().trim();
 
 
-        checkData(judul, tegangan, kms, provinsi, konsultan, kontrak, tglMulai, tglAkhir);
+        if(TextUtils.isEmpty(judul)){
+            Toast.makeText(this, "Please Enter The Title", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(TextUtils.isEmpty(tegangan)){
+            Toast.makeText(this, "Please Enter The Tegangan", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(TextUtils.isEmpty(kms)){
+            Toast.makeText(this, "Please Enter The KMS", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(TextUtils.isEmpty(provinsi)){
+            Toast.makeText(this, "Please Enter The Provinsi", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(TextUtils.isEmpty(konsultan)){
+            Toast.makeText(this, "Please Enter The Consultant", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(TextUtils.isEmpty(kontrak)){
+            Toast.makeText(this, "Please Enter The Contract", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(TextUtils.isEmpty(tglMulai)){
+            Toast.makeText(this, "Please Enter The Date", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(TextUtils.isEmpty(tglAkhir)){
+            Toast.makeText(this, "Please Enter The Date", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         onWait();
 

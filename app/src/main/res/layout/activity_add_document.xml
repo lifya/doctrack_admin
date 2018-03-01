@@ -384,6 +384,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_weight="1">
+
                     <EditText
                         android:id="@+id/cont"
                         android:layout_width="match_parent"
@@ -393,8 +394,8 @@
                         android:textColorHint="#626562"
                         android:padding="10dp"
                         android:hint="detail amandemen"
-                        android:textColor="#a7aba7"
-                        android:inputType="text"
+                        android:textColor="#050505"
+                        android:inputType="textMultiLine"
                         android:textSize="14dp"
                         android:gravity="left" />
 
