@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="com.android.support:support-fragment-25.4.0">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-fragment-25.4.0.aar/3bcdf7203db3f6c1c2ee976f207fbc1f/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/support-fragment-25.4.0.aar/3bcdf7203db3f6c1c2ee976f207fbc1f/res" />
+      <root url="jar://$USER_HOME$/.AndroidStudio3.0/system/gradle/gradle-4.1-all/caches/transforms-1/files-1.1/support-fragment-25.4.0.aar/92c7ce0ae341b184eccbc53d1a6a944d/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.AndroidStudio3.0/system/gradle/gradle-4.1-all/caches/transforms-1/files-1.1/support-fragment-25.4.0.aar/92c7ce0ae341b184eccbc53d1a6a944d/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/support-fragment/25.4.0/cc1db0e29908067f78f1c55e7b80ad5e0fafab96/support-fragment-25.4.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.AndroidStudio3.0/system/gradle/gradle-4.1-all/caches/modules-2/files-2.1/com.android.support/support-fragment/25.4.0/cc1db0e29908067f78f1c55e7b80ad5e0fafab96/support-fragment-25.4.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

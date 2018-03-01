@@ -38,7 +38,6 @@ public class FormUserDialog extends AppCompatDialogFragment implements View.OnCl
     private ProgressDialog progressDialog;
     private DatabaseReference dbUsers;
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.dialog_form_user, null);
@@ -60,10 +59,10 @@ public class FormUserDialog extends AppCompatDialogFragment implements View.OnCl
         return v;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//    }
 
     @Override
     public void onClick(View v) {

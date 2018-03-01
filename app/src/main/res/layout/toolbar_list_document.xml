@@ -15,15 +15,20 @@
         android:background="@drawable/ic_arrow_back"
         android:id="@+id/back"/>
 
-    <TextView
+    <EditText
+        android:id="@+id/searchEdit"
+        android:background="#1da0e1"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+        android:textColor="#ffffff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Daftar Pekerjaan"
+        android:hint="Daftar Pekerjaan"
         android:textSize="18dp"
         android:layout_marginLeft="20dp"
         android:textStyle="bold"
         android:layout_gravity="left"
-        android:textColor="#ffffff"/>
+        android:textColorHint="#ffffff"/>
 
     <ImageView
         android:id="@+id/addDoc"
@@ -35,6 +40,7 @@
         android:src="@drawable/ic_note_add_white_24dp" />
 
     <ImageView
+        android:id="@+id/searchdoc"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:scaleType="fitEnd"

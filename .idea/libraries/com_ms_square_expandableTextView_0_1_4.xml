@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="com.ms-square:expandableTextView-0.1.4">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expandableTextView-0.1.4.aar/07cf98ab8c30753c5227fd5b323ac451/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expandableTextView-0.1.4.aar/07cf98ab8c30753c5227fd5b323ac451/res" />
+      <root url="jar://$USER_HOME$/.AndroidStudio3.0/system/gradle/gradle-4.1-all/caches/transforms-1/files-1.1/expandableTextView-0.1.4.aar/8bd64ada5fb1b5ec70bee15ad7bdcfb8/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.AndroidStudio3.0/system/gradle/gradle-4.1-all/caches/transforms-1/files-1.1/expandableTextView-0.1.4.aar/8bd64ada5fb1b5ec70bee15ad7bdcfb8/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.ms-square/expandableTextView/0.1.4/ef3493271430b98fc4c8f206adbde6354b185b0/expandableTextView-0.1.4-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.AndroidStudio3.0/system/gradle/gradle-4.1-all/caches/modules-2/files-2.1/com.ms-square/expandableTextView/0.1.4/ef3493271430b98fc4c8f206adbde6354b185b0/expandableTextView-0.1.4-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
