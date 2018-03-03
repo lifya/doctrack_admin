@@ -59,11 +59,6 @@ public class FormUserDialog extends AppCompatDialogFragment implements View.OnCl
         return v;
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//    }
-
     @Override
     public void onClick(View v) {
         if(v == bAddUser){

@@ -33,10 +33,6 @@ public class DocumentTrackingActivity extends AppCompatActivity implements View.
     private ViewPager mViewPager;
     private ImageView image1;
     private ImageView addDoc;
-    ImageView searchdoc;
-    private DatabaseReference mItemDatabase;
-    private RecyclerView mResultList;
-    private EditText searchField;
 
 
 
@@ -51,18 +47,6 @@ public class DocumentTrackingActivity extends AppCompatActivity implements View.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        mItemDatabase = FirebaseDatabase.getInstance().getReference("Pekerjaan");
-        searchField = (EditText) findViewById(R.id.searchEdit);
-        searchdoc = (ImageView) findViewById(R.id.searchdoc);
-        searchdoc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String editSearch = searchField.getText().toString();
-                firebaseUserSearch(editSearch);
-            }
-        });
-
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -71,8 +55,6 @@ public class DocumentTrackingActivity extends AppCompatActivity implements View.
         addDoc = (ImageView) findViewById(R.id.addDoc);
         addDoc.setOnClickListener(this);
 
-        searchdoc = (ImageView) findViewById(R.id.searchdoc);
-        searchdoc.setOnClickListener(this);
 
         image1 = (ImageView) findViewById(R.id.back);
         image1.setOnClickListener(new View.OnClickListener() {
@@ -84,29 +66,6 @@ public class DocumentTrackingActivity extends AppCompatActivity implements View.
 
     }
 
-    private void firebaseUserSearch(String editSearch) {
-        Toast.makeText(DocumentTrackingActivity.this, "Started Search", Toast.LENGTH_LONG).show();
-
-        Query firebaseSearchQuery = mItemDatabase.orderByChild("judul").startAt(editSearch).endAt(editSearch + "\ufBff");
-
-        FirebaseRecyclerAdapter<ItemModel, PekerjaanModelViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ItemModel, PekerjaanModelViewHolder>(
-                ItemModel.class,
-                R.layout.list_view,
-                PekerjaanModelViewHolder.class,
-                mItemDatabase
-        ) {
-
-
-            @Override
-            protected void populateViewHolder(PekerjaanModelViewHolder viewHolder, ItemModel model, int position) {
-
-                //viewHolder.(model.getmJudul());
-
-            }
-        };
-
-        mResultList.setAdapter(firebaseRecyclerAdapter);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

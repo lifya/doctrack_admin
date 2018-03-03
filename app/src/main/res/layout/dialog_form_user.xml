@@ -49,7 +49,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/ic_menu_camera"
                 android:hint="Email"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:padding="10dp"
                 android:singleLine="true"
                 android:textColor="#060606"
