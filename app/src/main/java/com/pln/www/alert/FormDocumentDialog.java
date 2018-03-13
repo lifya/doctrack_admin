@@ -30,8 +30,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -42,6 +45,9 @@ import com.google.firebase.storage.UploadTask;
 import com.pln.www.Helper.Constant;
 import com.pln.www.R;
 import com.pln.www.activity.AddDocumentActivity;
+import com.pln.www.model.DetailProses;
+import com.pln.www.model.DetailProsesModel;
+import com.pln.www.model.PekerjaanModel;
 import com.pln.www.model.UploadFileModel;
 import android.support.v7.widget.AppCompatButton;
 
@@ -69,6 +75,7 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
     private DatabaseReference databaseReference;
     final static int PICK_PDF_CODE = 2342;
     private Uri dataUri;
+    private String idPekerjaan;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -76,8 +83,12 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
                 .inflate(R.layout.dialog_form_document, null);
         setCancelable(false);
 
+        Bundle bundle = getArguments();
+        if (bundle != null)
+            idPekerjaan = bundle.getString("idPekerjaan");
+
         bCancel = (Button) v.findViewById(R.id.btnCancel);
-        //bAddDoc = (Button) v.findViewById(R.id.btnAdd);
+        bAddDoc = (Button) v.findViewById(R.id.btnAdd);
         spinnerProses = (Spinner) v.findViewById(R.id.spProses1);
         spinnerStatus = (Spinner) v.findViewById(R.id.spStatus);
         ivGetFile = (ImageView) v.findViewById(R.id.ivGetFile);
@@ -114,7 +125,7 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
                 getPDF();
             }
         });
-
+        bAddDoc.setOnClickListener(this);
         bCancel.setOnClickListener(this);
         return v;
     }
@@ -130,17 +141,16 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
             getDialog().dismiss();
         }
         if(v == bAddDoc){
-            //addDetailData();
+            addDetailData();
             //uploadFile(dataUri);
             //Toast.makeText(getActivity(), "" + getSpinnerProses, Toast.LENGTH_LONG).show();
-            return;
         }
     }
 
     private void addDetailData(){
 
-        String etTanggal = Ed.getText().toString();
-        String etKet = etKeterangan.getText().toString();
+        final String etTanggal = Ed.getText().toString();
+        final String etKet = etKeterangan.getText().toString();
         spinnerProses.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -176,147 +186,17 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
             Toast.makeText(getActivity(), "Please Enter The Date", Toast.LENGTH_LONG).show();
             return;
         }
+        if(TextUtils.isEmpty(etKet)){
+            Toast.makeText(getActivity(), "Please Enter The Date", Toast.LENGTH_LONG).show();
+            return;
+        }
 
-        if(getSpinnerProses.equals("Permohonan RTRW")){
-            if(getSpinnerStatus.equals("Belum")){
-                intent = new Intent(getActivity(), AddDocumentActivity.class);
-                intent.putExtra("namaProses_1", getSpinnerProses);
-                intent.putExtra("namaStatus_1", getSpinnerStatus);
-                intent.putExtra("tanggal_1", etTanggal);
-                intent.putExtra("keterangan_1", etKet);
-            }
-            if(getSpinnerStatus.equals("Proses")){
-                intent = new Intent(getActivity(), AddDocumentActivity.class);
-                intent.putExtra("namaProses_1", getSpinnerProses);
-                intent.putExtra("namaStatus_1", getSpinnerStatus);
-                intent.putExtra("tanggal_1", etTanggal);
-                intent.putExtra("keterangan_1", etKet);
-            }
-            if(getSpinnerStatus.equals("Sudah")){
-                intent = new Intent(getActivity(), AddDocumentActivity.class);
-                intent.putExtra("namaProses_1", getSpinnerProses);
-                intent.putExtra("namaStatus_1", getSpinnerStatus);
-                intent.putExtra("tanggal_1", etTanggal);
-                intent.putExtra("keterangan_1", etKet);
-            }
-        }
-        if(getSpinnerProses.equals("Pembahasan RTRW")){
-            if(getSpinnerStatus.equals("Belum")){
-                intent = new Intent(getActivity(), AddDocumentActivity.class);
-                intent.putExtra("namaProses_2", getSpinnerProses);
-                intent.putExtra("namaStatus_2", getSpinnerStatus);
-                intent.putExtra("tanggal_2", etTanggal);
-                intent.putExtra("keterangan_2", etKet);
-            }
-            if(getSpinnerStatus.equals("Proses")){
-                intent = new Intent(getActivity(), AddDocumentActivity.class);
-                intent.putExtra("namaProses_2", getSpinnerProses);
-                intent.putExtra("namaStatus_2", getSpinnerStatus);
-                intent.putExtra("tanggal_2", etTanggal);
-                intent.putExtra("keterangan_2", etKet);
-            }
-            if(getSpinnerStatus.equals("Sudah")){
-                intent = new Intent(getActivity(), AddDocumentActivity.class);
-                intent.putExtra("namaProses_2", getSpinnerProses);
-                intent.putExtra("namaStatus_2", getSpinnerStatus);
-                intent.putExtra("tanggal_2", etTanggal);
-                intent.putExtra("keterangan_2", etKet);
-            }
-        }
-        if(getSpinnerProses.equals("RTRW")){
-            if(getSpinnerStatus.equals("Belum")){
-                intent = new Intent(getActivity(), AddDocumentActivity.class);
-                intent.putExtra("namaProses_3", getSpinnerProses);
-                intent.putExtra("namaStatus_3", getSpinnerStatus);
-                intent.putExtra("tanggal_3", etTanggal);
-                intent.putExtra("keterangan_3", etKet);
-            }
-            if(getSpinnerStatus.equals("Proses")){
-                intent = new Intent(getActivity(), AddDocumentActivity.class);
-                intent.putExtra("namaProses_3", getSpinnerProses);
-                intent.putExtra("namaStatus_3", getSpinnerStatus);
-                intent.putExtra("tanggal_3", etTanggal);
-                intent.putExtra("keterangan_3", etKet);
-            }
-            if(getSpinnerStatus.equals("Sudah")){
-                intent = new Intent(getActivity(), AddDocumentActivity.class);
-                intent.putExtra("namaProses_3", getSpinnerProses);
-                intent.putExtra("namaStatus_3", getSpinnerStatus);
-                intent.putExtra("tanggal_3", etTanggal);
-                intent.putExtra("keterangan_3", etKet);
-            }
-        }
-        if(getSpinnerProses.equals("Draft UKL-UPL")){
-            if(getSpinnerStatus.equals("Belum")){
-                intent = new Intent(getActivity(), AddDocumentActivity.class);
-                intent.putExtra("namaProses_4", getSpinnerProses);
-                intent.putExtra("namaStatus_4", getSpinnerStatus);
-                intent.putExtra("tanggal_4", etTanggal);
-                intent.putExtra("keterangan_4", etKet);
-            }
-            if(getSpinnerStatus.equals("Proses")){
-                intent = new Intent(getActivity(), AddDocumentActivity.class);
-                intent.putExtra("namaProses_4", getSpinnerProses);
-                intent.putExtra("namaStatus_4", getSpinnerStatus);
-                intent.putExtra("tanggal_4", etTanggal);
-                intent.putExtra("keterangan_4", etKet);
-            }
-            if(getSpinnerStatus.equals("Sudah")){
-                intent = new Intent(getActivity(), AddDocumentActivity.class);
-                intent.putExtra("namaProses_4", getSpinnerProses);
-                intent.putExtra("namaStatus_4", getSpinnerStatus);
-                intent.putExtra("tanggal_4", etTanggal);
-                intent.putExtra("keterangan_4", etKet);
-            }
-        }
-        if(getSpinnerProses.equals("Pembahasan")){
-            if(getSpinnerStatus.equals("Belum")){
-                intent = new Intent(getActivity(), AddDocumentActivity.class);
-                intent.putExtra("namaProses_5", getSpinnerProses);
-                intent.putExtra("namaStatus_5", getSpinnerStatus);
-                intent.putExtra("tanggal_5", etTanggal);
-                intent.putExtra("keterangan_5", etKet);
-            }
-            if(getSpinnerStatus.equals("Proses")){
-                intent = new Intent(getActivity(), AddDocumentActivity.class);
-                intent.putExtra("namaProses_5", getSpinnerProses);
-                intent.putExtra("namaStatus_5", getSpinnerStatus);
-                intent.putExtra("tanggal_5", etTanggal);
-                intent.putExtra("keterangan_5", etKet);
-            }
-            if(getSpinnerStatus.equals("Sudah")){
-                intent = new Intent(getActivity(), AddDocumentActivity.class);
-                intent.putExtra("namaProses_5", getSpinnerProses);
-                intent.putExtra("namaStatus_5", getSpinnerStatus);
-                intent.putExtra("tanggal_5", etTanggal);
-                intent.putExtra("keterangan_5", etKet);
-            }
-        }
-        if(getSpinnerProses.equals("Perbaikan Dok")){
-            if(getSpinnerStatus.equals("Belum")){
-                intent = new Intent(getActivity(), AddDocumentActivity.class);
-                intent.putExtra("namaProses_6", getSpinnerProses);
-                intent.putExtra("namaStatus_6", getSpinnerStatus);
-                intent.putExtra("tanggal_6", etTanggal);
-                intent.putExtra("keterangan_6", etKet);
-            }
-            if(getSpinnerStatus.equals("Proses")){
-                intent = new Intent(getActivity(), AddDocumentActivity.class);
-                intent.putExtra("namaProses_6", getSpinnerProses);
-                intent.putExtra("namaStatus_6", getSpinnerStatus);
-                intent.putExtra("tanggal_6", etTanggal);
-                intent.putExtra("keterangan_6", etKet);
-            }
-            if(getSpinnerStatus.equals("Sudah")){
-                intent = new Intent(getActivity(), AddDocumentActivity.class);
-                intent.putExtra("namaProses_6", getSpinnerProses);
-                intent.putExtra("namaStatus_6", getSpinnerStatus);
-                intent.putExtra("tanggal_6", etTanggal);
-                intent.putExtra("keterangan_6", etKet);
-            }
-        }
-        startActivity(intent);
-        getDialog().dismiss();
+        final DatabaseReference dbDetailProses;
+        dbDetailProses = FirebaseDatabase.getInstance().getReference("Detail_Proses");
+
+        DetailProsesModel detailProsesModel = new DetailProsesModel(idPekerjaan, getSpinnerProses, getSpinnerStatus, etTanggal, etKet);
+        dbDetailProses.child(idPekerjaan).child(getSpinnerProses).setValue(detailProsesModel);
+        Toast.makeText(getActivity(), "Successed !", Toast.LENGTH_LONG).show();
     }
 
     private void getPDF() {

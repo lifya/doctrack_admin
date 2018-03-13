@@ -2,6 +2,7 @@ package com.pln.www.alert;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -97,48 +98,24 @@ public class FormUserDialog extends AppCompatDialogFragment implements View.OnCl
         progressDialog.show();
 
         if(password.equals(repassword)){
-            DatabaseReference databaseReference;
-            databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-
-            databaseReference.addValueEventListener(new ValueEventListener() {
+            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                    String currentEmail = userModel.getEmail();
-                    if(currentEmail.equals(email)){
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        String user_id = mAuth.getCurrentUser().getUid();
+                        String status = "1";
+                        dbUsers = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
+                        UserModel userModel = new UserModel(user_id,name,email,status);
+                        dbUsers.setValue(userModel);
                         progressDialog.dismiss();
-                        Toast.makeText(getActivity(), "Check your email ! Email has already registered", Toast.LENGTH_LONG).show();
-                        return;
+                        Toast.makeText(getActivity(), "New User Added", Toast.LENGTH_LONG).show();
+                        getDialog().dismiss();
                     }
                     else{
                         progressDialog.dismiss();
-                        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
-                                    String user_id = mAuth.getCurrentUser().getUid();
-                                    String status = "1";
-                                    dbUsers = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
-                                    UserModel userModel = new UserModel(user_id,name,email,status);
-                                    dbUsers.setValue(userModel);
-                                    progressDialog.dismiss();
-                                    getDialog().dismiss();
-                                    Toast.makeText(getActivity(), "New User Added", Toast.LENGTH_LONG).show();
-                                    return;
-                                }
-                                else{
-                                    progressDialog.dismiss();
-                                    Toast.makeText(getActivity(), "Wrong Email or Password", Toast.LENGTH_LONG).show();
-                                    return;
-                                }
-                            }
-                        });
+                        Toast.makeText(getActivity(), "Wrong Email or Password", Toast.LENGTH_LONG).show();
+                        return;
                     }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
                 }
             });
         }

@@ -5,24 +5,15 @@ package com.pln.www.model;
  */
 
 public class DetailProsesModel {
-    String idDetailProses, idProses, idPekerjaan, tanggal, file, status, keterangan;
+    String idProses, idPekerjaan, tanggal, file, status, keterangan;
 
-    public DetailProsesModel(String idDetailProses, String idProses, String idPekerjaan, String tanggal, String file, String status, String keterangan) {
-        this.idDetailProses = idDetailProses;
+    public DetailProsesModel(String idPekerjaan, String idProses, String status, String tanggal, String keterangan) {
         this.idProses = idProses;
         this.idPekerjaan = idPekerjaan;
         this.tanggal = tanggal;
-        this.file = file;
+        //this.file = file;
         this.status = status;
         this.keterangan = keterangan;
-    }
-
-    public String getIdDetailProses() {
-        return idDetailProses;
-    }
-
-    public void setIdDetailProses(String idDetailProses) {
-        this.idDetailProses = idDetailProses;
     }
 
     public String getIdProses() {

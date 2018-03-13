@@ -164,9 +164,7 @@ public class AmdalFragment extends Fragment {
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
-
         dbPekerjaan = FirebaseDatabase.getInstance().getReference();
-
 
         return rootView;
     }

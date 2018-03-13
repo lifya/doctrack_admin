@@ -51,7 +51,7 @@ public class UserFragment extends Fragment implements View.OnClickListener{
     private Button bAddUser;
     //private ImageView ivHapus;
     private ListView listviewUsers;
-    private DatabaseReference dbUsers, dbKontrak;
+    private DatabaseReference dbUsers;
     private ArrayList<UserModel> usermodelList = new ArrayList<>();
     private FirebaseRecyclerAdapter firebaseRecyclerAdapter;
     private FirebaseAuth firebaseAuth;
@@ -89,23 +89,6 @@ public class UserFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onStart(){
         super.onStart();
-
-//        dbUsers.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-//                    if(snapshot.child("status").getValue() == 1){
-//                        //userList = snapshot.getValue(UserModel.class);
-//
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<UserModel, UserViewHolder>
                         (
                                 UserModel.class,
@@ -116,7 +99,6 @@ public class UserFragment extends Fragment implements View.OnClickListener{
                 {
                     @Override
                     protected void populateViewHolder(final UserViewHolder viewHolder, final UserModel model, int position) {
-
                         viewHolder.setEmail(model.getEmail());
                         viewHolder.setNama(model.getNama());
                         viewHolder.setOnClickListener(new UserViewHolder.ClickListener() {
@@ -124,7 +106,6 @@ public class UserFragment extends Fragment implements View.OnClickListener{
                             public void onItemClick(View view, final int position) {
 
                             }
-
                             @Override
                             public void onItemLongClick(View view,final int position) {
                                 final AlertDialog.Builder alertDelete = new AlertDialog.Builder(getActivity());
@@ -139,7 +120,6 @@ public class UserFragment extends Fragment implements View.OnClickListener{
                                                 //FirebaseAuth.getInstance().deleteUserAsync(model.getUser_id());
                                                 onStart();
                                             }
-
                                         })
                                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
                                             @Override
@@ -153,8 +133,6 @@ public class UserFragment extends Fragment implements View.OnClickListener{
                             }
                         });
                     }
-
-
                 };
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
     }
@@ -174,7 +152,6 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         mCurrentLayoutManagerType = UserFragment.LayoutManagerType.LINEAR_LAYOUT_MANAGER;
 
         if (savedInstanceState != null) {
-
             mCurrentLayoutManagerType = (UserFragment.LayoutManagerType) savedInstanceState
                     .getSerializable(KEY_LAYOUT_MANAGER);
         }
