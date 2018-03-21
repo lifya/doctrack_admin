@@ -151,6 +151,8 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
 
         final String etTanggal = Ed.getText().toString();
         final String etKet = etKeterangan.getText().toString();
+
+        getSpinnerProses = spinnerProses.getItemAtPosition(0).toString();
         spinnerProses.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -162,6 +164,8 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
                 return;
             }
         });
+
+        getSpinnerStatus = spinnerStatus.getItemAtPosition(0).toString();
         spinnerStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -215,7 +219,6 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         if (requestCode == PICK_PDF_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             dataUri = data.getData();
             if (dataUri != null) {
-
 
                 Toast.makeText(this.getContext(), "one file chosen", Toast.LENGTH_SHORT).show();
             }else{

@@ -14,7 +14,6 @@ import com.pln.www.R;
 public class UserViewHolder extends RecyclerView.ViewHolder{
     private UserViewHolder.ClickListener mClickListener;
     public TextView tvEmail, tvNama;
-    public ImageView ivHapus;
     public View mView;
 
     public UserViewHolder(View itemView){
@@ -22,13 +21,6 @@ public class UserViewHolder extends RecyclerView.ViewHolder{
         mView = itemView;
         tvEmail = (TextView) mView.findViewById(R.id.tvEmail);
         tvNama = (TextView) mView.findViewById(R.id.tvNama);
-
-        ivHapus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mClickListener.onItemClick(v, getAdapterPosition());
-            }
-        });
 
         itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -40,7 +32,6 @@ public class UserViewHolder extends RecyclerView.ViewHolder{
     }
 
     public interface ClickListener{
-        public void onItemClick(View view, int position);
         public void onItemLongClick(View view, int position);
     }
 

@@ -74,66 +74,58 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         LINEAR_LAYOUT_MANAGER
     }
 
-    protected UserFragment.LayoutManagerType mCurrentLayoutManagerType;
-
+    protected LayoutManagerType mCurrentLayoutManagerType;
     protected RecyclerView mRecyclerView;
-    protected RecycleAdapter mAdapter;
     protected RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initializeList();
     }
 
     @Override
     public void onStart(){
         super.onStart();
-        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<UserModel, UserViewHolder>
-                        (
-                                UserModel.class,
-                                R.layout.list_user,
-                                UserViewHolder.class,
-                                dbUsers
-                        )
-                {
-                    @Override
-                    protected void populateViewHolder(final UserViewHolder viewHolder, final UserModel model, int position) {
-                        viewHolder.setEmail(model.getEmail());
-                        viewHolder.setNama(model.getNama());
-                        viewHolder.setOnClickListener(new UserViewHolder.ClickListener() {
-                            @Override
-                            public void onItemClick(View view, final int position) {
 
-                            }
-                            @Override
-                            public void onItemLongClick(View view,final int position) {
-                                final AlertDialog.Builder alertDelete = new AlertDialog.Builder(getActivity());
-                                alertDelete.setMessage("Are you sure want to deactivate this user ?").setCancelable(false)
-                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                int selectedItem = position;
-                                                firebaseRecyclerAdapter.getRef(selectedItem).removeValue();
-                                                firebaseRecyclerAdapter.notifyItemRemoved(selectedItem);
-                                                mRecyclerView.invalidate();
-                                                //FirebaseAuth.getInstance().deleteUserAsync(model.getUser_id());
-                                                onStart();
-                                            }
-                                        })
-                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                dialog.cancel();
-                                            }
-                                        });
-                                AlertDialog alert = alertDelete.create();
-                                alert.setTitle("Warning");
-                                alert.show();
-                            }
-                        });
+        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<UserModel, UserViewHolder>(
+                UserModel.class,
+                R.layout.list_user,
+                UserViewHolder.class,
+                dbUsers
+        ) {
+            @Override
+            protected void populateViewHolder(UserViewHolder viewHolder, UserModel model, int position) {
+                viewHolder.setEmail(model.getEmail());
+                viewHolder.setNama(model.getNama());
+                viewHolder.setOnClickListener(new UserViewHolder.ClickListener() {
+                    @Override
+                    public void onItemLongClick(View view,final int position) {
+                        final AlertDialog.Builder alertDelete = new AlertDialog.Builder(getActivity());
+                        alertDelete.setMessage("Are you sure want to deactivate this user ?").setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        int selectedItem = position;
+                                        firebaseRecyclerAdapter.getRef(selectedItem).removeValue();
+                                        firebaseRecyclerAdapter.notifyItemRemoved(selectedItem);
+                                        mRecyclerView.invalidate();
+                                        //FirebaseAuth.getInstance().deleteUserAsync(model.getUser_id());
+                                        onStart();
+                                    }
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+                        AlertDialog alert = alertDelete.create();
+                        alert.setTitle("Warning");
+                        alert.show();
                     }
-                };
+                });
+            }
+        };
         mRecyclerView.setAdapter(firebaseRecyclerAdapter);
     }
 
@@ -149,29 +141,21 @@ public class UserFragment extends Fragment implements View.OnClickListener{
 
         mLayoutManager = new LinearLayoutManager(getActivity());
 
-        mCurrentLayoutManagerType = UserFragment.LayoutManagerType.LINEAR_LAYOUT_MANAGER;
+        mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
 
         if (savedInstanceState != null) {
-            mCurrentLayoutManagerType = (UserFragment.LayoutManagerType) savedInstanceState
+            mCurrentLayoutManagerType = (LayoutManagerType) savedInstanceState
                     .getSerializable(KEY_LAYOUT_MANAGER);
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
-
-        mAdapter = new RecycleAdapter(usermodelList, getActivity());
-
-        mRecyclerView.setAdapter(mAdapter);
-
         dbUsers = FirebaseDatabase.getInstance().getReference("Users");
-        listviewUsers = (ListView) rootView.findViewById(R.layout.list_user);
-
-        //ivHapus = (ImageView) rootView.findViewById(R.id.ivHapus);
         bAddUser = (Button) rootView.findViewById(R.id.bAddUser);
         bAddUser.setOnClickListener(this);
         return rootView;
 
     }
 
-    public void setRecyclerViewLayoutManager(UserFragment.LayoutManagerType layoutManagerType) {
+    public void setRecyclerViewLayoutManager(LayoutManagerType layoutManagerType) {
         int scrollPosition = 0;
 
 
@@ -184,15 +168,15 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         switch (layoutManagerType) {
             case GRID_LAYOUT_MANAGER:
                 mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT);
-                mCurrentLayoutManagerType = UserFragment.LayoutManagerType.GRID_LAYOUT_MANAGER;
+                mCurrentLayoutManagerType = LayoutManagerType.GRID_LAYOUT_MANAGER;
                 break;
             case LINEAR_LAYOUT_MANAGER:
                 mLayoutManager = new LinearLayoutManager(getActivity());
-                mCurrentLayoutManagerType = UserFragment.LayoutManagerType.LINEAR_LAYOUT_MANAGER;
+                mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
                 break;
             default:
                 mLayoutManager = new LinearLayoutManager(getActivity());
-                mCurrentLayoutManagerType = UserFragment.LayoutManagerType.LINEAR_LAYOUT_MANAGER;
+                mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
         }
 
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -205,117 +189,10 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         dialogAdd.show(manager, dialogAdd.getTag());
     }
 
-//    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
-//        private ArrayList<UserModel> userList;
-//
-//
-//        public MyAdapter(ArrayList<UserModel> userList) {
-//            this.userList = userList;
-//        }
-//
-//        @Override
-//        public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_user,parent,false);
-//            MyAdapter.MyViewHolder holder = new MyAdapter.MyViewHolder(view);
-//            return holder;
-//        }
-//
-//        @Override
-//        public void onBindViewHolder(MyAdapter.MyViewHolder holder, int position) {
-//
-//        }
-//
-//        @Override
-//        public int getItemCount() {
-//            return 0;
-//        }
-//
-//        @Override
-//        public void onBindViewHolder(MyViewHolder holder, int position) {
-//            holder.tvEmail.setText(userList.get(position).getEmail());
-//            holder.tvName.setText(userList.get(position).getNama());
-//            holder.setItemClickListener(new ItemClickListener() {
-//                @Override
-//                public void onClick(View view, int position, boolean isLongClick) {
-//                    if(isLongClick){
-//                        final AlertDialog.Builder alertDelete = new AlertDialog.Builder(getActivity());
-//                                alertDelete.setMessage("Are you sure want to deactivate this user ?").setCancelable(false)
-//                                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialog, int which) {
-//                                                //ubah status menjadi 0
-//                                            }
-//
-//                                        })
-//                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                                            @Override
-//                                            public void onClick(DialogInterface dialog, int which) {
-//                                                dialog.cancel();
-//                                            }
-//                                        });
-//                                AlertDialog alert = alertDelete.create();
-//                                alert.setTitle("Warning");
-//                                alert.show();
-//                            }
-//                    }
-//                }
-//
-//            });
-//        }
-//
-//        @Override
-//        public int getItemCount() {
-//            return userList.size();
-//        }
-//
-//        public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener{
-//
-//            public TextView tvName, tvEmail;
-//            private ItemClickListener itemClickListener;
-//
-//            public MyViewHolder(View itemView) {
-//                super(itemView);
-//                tvName = (TextView) itemView.findViewById(R.id.tvNama);
-//                tvEmail = (TextView) itemView.findViewById(R.id.tvEmail);
-//                itemView.setOnLongClickListener(this);
-//            }
-//            public void setItemClickListener(ItemClickListener itemClickListener) {
-//                this.itemClickListener = itemClickListener;
-//            }
-//
-//            @Override
-//            public boolean onLongClick(View v) {
-//                itemClickListener.onClick(v, getAdapterPosition(), true);
-//                return true;
-//            }
-//        }
-//    }
-
-    private void initializeList(){
-        usermodelList.clear();
-        final DatabaseReference databaseReference;
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                usermodelList.clear();
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    if(snapshot.child("status").getValue().toString().equals("1")){
-                        UserModel userModel = new UserModel();
-                        userModel.setEmail(snapshot.child("email").getValue().toString());
-                        userModel.setNama(snapshot.child("nama").getValue().toString());
-                        usermodelList.add(userModel);
-                    }
-                }
-//                mRecyclerView.setAdapter(new MyAdapter(usermodelList));
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putSerializable(KEY_LAYOUT_MANAGER, mCurrentLayoutManagerType);
+        super.onSaveInstanceState(savedInstanceState);
     }
 
 }
