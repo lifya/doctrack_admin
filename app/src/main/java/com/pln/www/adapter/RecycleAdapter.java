@@ -63,7 +63,6 @@ public class RecycleAdapter extends RecyclerView.Adapter<RecycleAdapter.MyHoder>
         return 0;
     }
 
-
     public class MyHoder extends RecyclerView.ViewHolder {
         TextView tvEmail, tvName;
         ImageView ivDelete;

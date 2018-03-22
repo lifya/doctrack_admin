@@ -17,16 +17,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.pln.www.R;
 import com.pln.www.activity.DetailDocumentActivity;
+import com.pln.www.adapter.RecycleAdapter;
 import com.pln.www.model.ItemModel;
 import com.pln.www.model.KonsultanModel;
 import com.pln.www.model.KontrakModel;
@@ -35,13 +39,14 @@ import com.pln.www.model.ProsesModel;
 import com.pln.www.model.DetailProsesModel;
 import com.pln.www.viewholder.PekerjaanModelViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by ACHI on 27/08/2017.
  */
 
-public class AmdalFragment extends Fragment {
+public class AmdalFragment extends Fragment{
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
@@ -49,9 +54,10 @@ public class AmdalFragment extends Fragment {
     protected LayoutManagerType mCurrentLayoutManagerType;
     protected RecyclerView mRecyclerView;
     protected RecyclerView.LayoutManager mLayoutManager;
-    private FirebaseRecyclerAdapter firebaseRecyclerAdapter;
     private DatabaseReference dbPekerjaan;
-    private List<ItemModel> dataSet;
+    private SearchView searchView;
+    private ArrayList<PekerjaanModel> listPekerjaan;
+    private RecycleAdapterPekerjaan adapterPekerjaan;
 
     private enum LayoutManagerType {
         GRID_LAYOUT_MANAGER,
@@ -63,86 +69,116 @@ public class AmdalFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//
+//        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<PekerjaanModel, PekerjaanModelViewHolder>(
+//                PekerjaanModel.class,
+//                R.layout.list_view,
+//                PekerjaanModelViewHolder.class,
+//                dbPekerjaan.child("Pekerjaan").orderByChild("jenisPekerjaan").equalTo("AMDAL")
+//        ) {
+//            @Override
+//            protected void populateViewHolder(final PekerjaanModelViewHolder viewHolder, final PekerjaanModel model, int position) {
+//
+//
+//            }
+//        };
+//        mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+//    }
 
-        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<PekerjaanModel, PekerjaanModelViewHolder>(
-                PekerjaanModel.class,
-                R.layout.list_view,
-                PekerjaanModelViewHolder.class,
-                dbPekerjaan.child("Pekerjaan").orderByChild("jenisPekerjaan").equalTo("AMDAL")
-        ) {
-            @Override
-            protected void populateViewHolder(final PekerjaanModelViewHolder viewHolder, final PekerjaanModel model, int position) {
-                final String id_Pekerjaan = this.getRef(position).getKey();
-                final String id_Konsultan = model.getIdKonsultan();
-                final String id_Kontrak = model.getIdKontrak();
-                viewHolder.setNamaPekerjaan(model.getNamaPekerjaan());
-                viewHolder.setTegangan(model.getTegangan());
-                viewHolder.setKms(model.getKms());
-                viewHolder.setProvinsi(model.getProvinsi());
+    public class RecycleAdapterPekerjaan extends RecyclerView.Adapter<PekerjaanModelViewHolder>{
+        ArrayList<PekerjaanModel> dataPekerjaan = new ArrayList<>();
 
-                dbPekerjaan.child("Kontrak").child(id_Kontrak).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        KontrakModel kontrakModel = dataSnapshot.getValue(KontrakModel.class);
-                        String noKontrak = kontrakModel.getNoKontrak();
-                        viewHolder.setNoKontrak(noKontrak);
-                    }
+        public RecycleAdapterPekerjaan(ArrayList<PekerjaanModel> list) {
+            dataPekerjaan = list;
+        }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Toast.makeText(getActivity(), "Failed to Get Contract ID", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                });
+        @Override
+        public PekerjaanModelViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_view, parent, false);
 
-                viewHolder.setOnClickListener(new PekerjaanModelViewHolder.ClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        Intent intent = new Intent(getActivity(), DetailDocumentActivity.class);
+            return new PekerjaanModelViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(final PekerjaanModelViewHolder holder, int position) {
+            final String id_Pekerjaan = dataPekerjaan.get(position).getIdPekerjaan();
+            final String id_Konsultan = dataPekerjaan.get(position).getIdKonsultan();
+            final String id_Kontrak = dataPekerjaan.get(position).getIdKontrak();
+            holder.setNamaPekerjaan(dataPekerjaan.get(position).getNamaPekerjaan());
+            holder.setTegangan(dataPekerjaan.get(position).getTegangan());
+            holder.setKms(dataPekerjaan.get(position).getKms());
+            holder.setProvinsi(dataPekerjaan.get(position).getProvinsi());
+
+            dbPekerjaan.child("Kontrak").child(id_Kontrak).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    KontrakModel kontrakModel = dataSnapshot.getValue(KontrakModel.class);
+                    String noKontrak = kontrakModel.getNoKontrak();
+                    holder.setNoKontrak(noKontrak);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(getActivity(), "Failed to Get Contract ID", Toast.LENGTH_LONG).show();
+                    return;
+                }
+            });
+
+            holder.setOnClickListener(new PekerjaanModelViewHolder.ClickListener() {
+                  @Override
+                  public void onItemClick(View view, int position) {
+                      Intent intent = new Intent(getActivity(), DetailDocumentActivity.class);
 //                        Bundle bundle = new Bundle();
 //                        bundle.putString("id_pekerjaan", id_Pekerjaan);
 //                        bundle.putString("id_konsultan", id_Konsultan);
 //                        bundle.putString("id_kontrak", id_Kontrak);
-                        intent.putExtra("id_pekerjaan", id_Pekerjaan);
-                        intent.putExtra("id_konsultan", id_Konsultan);
-                        intent.putExtra("id_kontrak", id_Kontrak);
+                      intent.putExtra("id_pekerjaan", id_Pekerjaan);
+                      intent.putExtra("id_konsultan", id_Konsultan);
+                      intent.putExtra("id_kontrak", id_Kontrak);
 //                        intent.putExtra("Key2", bundle);
-                        startActivity(intent);
-                    }
+                      startActivity(intent);
+                  }
 
-                    @Override
-                    public void onItemLongClick(View view, final int position) {
-                        final AlertDialog.Builder alertDelete = new AlertDialog.Builder(getActivity());
-                        alertDelete.setMessage("Are you sure want to delete this document ?").setCancelable(false)
-                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        int selectedItem = position;
-                                        firebaseRecyclerAdapter.getRef(selectedItem).removeValue();
-                                        firebaseRecyclerAdapter.notifyItemRemoved(selectedItem);
-                                        mRecyclerView.invalidate();
-                                        onStart();
-                                    }
+                  @Override
+                  public void onItemLongClick(View view, int position) {
+                      final AlertDialog.Builder alertDelete = new AlertDialog.Builder(getActivity());
+//                    alertDelete.setMessage("Are you sure want to delete this document ?").setCancelable(false)
+//                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    int selectedItem = position;
+//                                    firebaseRecyclerAdapter.getRef(selectedItem).removeValue();
+//                                    firebaseRecyclerAdapter.notifyItemRemoved(selectedItem);
+//                                    mRecyclerView.invalidate();
+//                                    onStart();
+//                                }
+//
+//                            })
+//                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    dialog.cancel();
+//                                }
+//                            });
+//                    AlertDialog alert = alertDelete.create();
+//                    alert.setTitle("Warning");
+//                    alert.show();
+                  }
+              });
+        }
+        @Override
+        public int getItemCount() {
+            return dataPekerjaan.size();
+        }
 
-                                })
-                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.cancel();
-                                    }
-                                });
-                        AlertDialog alert = alertDelete.create();
-                        alert.setTitle("Warning");
-                        alert.show();
-                    }
-                });
-
-            }
-        };
-        mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+        public void setFilter(ArrayList<PekerjaanModel> list){
+            dataPekerjaan = new ArrayList<>();
+            dataPekerjaan.addAll(list);
+            notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -165,9 +201,59 @@ public class AmdalFragment extends Fragment {
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
 
         dbPekerjaan = FirebaseDatabase.getInstance().getReference();
+        searchView = (SearchView) rootView.findViewById(R.id.searchView);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                newText = newText.toLowerCase();
+
+                ArrayList<PekerjaanModel> list = new ArrayList<>();
+                for(PekerjaanModel pekerjaan : listPekerjaan){
+                    String nama_pekerjaan = pekerjaan.getNamaPekerjaan().toLowerCase();
+                    if(nama_pekerjaan.contains(newText)){
+                        list.add(pekerjaan);
+                    }
+                }
+
+                adapterPekerjaan.setFilter(list);
+                return true;
+            }
+        });
+
+        initialize();
 
         return rootView;
     }
+    public void initialize(){
+        listPekerjaan = new ArrayList<>();
+        dbPekerjaan.child("Pekerjaan").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                listPekerjaan = new ArrayList<>();
+                for(DataSnapshot pekerjaanSnapshot : dataSnapshot.getChildren()){
+                    if(pekerjaanSnapshot.child("jenisPekerjaan").getValue().toString().equals("AMDAL")){
+                        PekerjaanModel pekerjaanModel = pekerjaanSnapshot.getValue(PekerjaanModel.class);
+                        listPekerjaan.add(pekerjaanModel);
+                    }
+                }
+
+                adapterPekerjaan = new RecycleAdapterPekerjaan(listPekerjaan);
+                mRecyclerView.setAdapter(adapterPekerjaan);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -224,6 +310,8 @@ public class AmdalFragment extends Fragment {
         savedInstanceState.putSerializable(KEY_LAYOUT_MANAGER, mCurrentLayoutManagerType);
         super.onSaveInstanceState(savedInstanceState);
     }
+
+
 
 }
 

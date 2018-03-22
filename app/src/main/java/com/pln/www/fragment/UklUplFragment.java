@@ -35,12 +35,13 @@ import com.pln.www.model.KonsultanModel;
 import com.pln.www.model.PekerjaanModel;
 import com.pln.www.viewholder.PekerjaanModelViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UklUplFragment extends Fragment implements View.OnClickListener {
+public class UklUplFragment extends Fragment {
 
 
     private static final String TAG = "RecyclerViewFragment";
@@ -52,36 +53,10 @@ public class UklUplFragment extends Fragment implements View.OnClickListener {
     protected RecyclerView.LayoutManager mLayoutManager;
     private FirebaseRecyclerAdapter firebaseRecyclerAdapter;
     private DatabaseReference dbPekerjaan;
-    private List<ItemModel> dataSet;
+    private SearchView searchView;
+    private ArrayList<PekerjaanModel> listPekerjaan;
+    private RecycleAdapterPekerjaan adapterPekerjaan;
 
-    @Override
-    public void onClick(View v) {
-
-    }
-
-//    @Override
-//    public boolean onQueryTextSubmit(String query) {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean onQueryTextChange(String newText) {
-//        final List<ItemModel> filteredModelList = filter(dataSet, newText);
-//
-//        mAdapter.setFilter(filteredModelList);
-//        return true;
-//    }
-
-//    private List<ItemModel> filter(List<ItemModel> models, String query) {
-//        query = query.toLowerCase(); final List<ItemModel> filteredModelList = new ArrayList<>();
-//        for (ItemModel model : models){
-//            final String text = model.getmJudul().toLowerCase();
-//            if (text.contains(query)){
-//                filteredModelList.add(model);
-//            }
-//        }
-//        return filteredModelList;
-//    }
 
     private enum LayoutManagerType {
         GRID_LAYOUT_MANAGER,
@@ -93,87 +68,179 @@ public class UklUplFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//
+//        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<PekerjaanModel, PekerjaanModelViewHolder>(
+//                PekerjaanModel.class,
+//                R.layout.list_view,
+//                PekerjaanModelViewHolder.class,
+//                dbPekerjaan.child("Pekerjaan").orderByChild("jenisPekerjaan").equalTo("UKL-UPL")
+//        ) {
+//            @Override
+//            protected void populateViewHolder(final PekerjaanModelViewHolder viewHolder, final PekerjaanModel model, int position) {
+//                final String id_Pekerjaan = this.getRef(position).getKey();
+//                final String id_Konsultan = model.getIdKonsultan();
+//                final String id_Kontrak = model.getIdKontrak();
+//                viewHolder.setNamaPekerjaan(model.getNamaPekerjaan());
+//                viewHolder.setTegangan(model.getTegangan());
+//                viewHolder.setKms(model.getKms());
+//                viewHolder.setProvinsi(model.getProvinsi());
+//
+//                dbPekerjaan.child("Kontrak").child(id_Kontrak).addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                        KontrakModel kontrakModel = dataSnapshot.getValue(KontrakModel.class);
+//                        String noKontrak = kontrakModel.getTglMulai();
+//                        viewHolder.setNoKontrak(noKontrak);
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(DatabaseError databaseError) {
+//                        Toast.makeText(getActivity(), "Failed to Get Contract ID", Toast.LENGTH_LONG).show();
+//                        return;
+//                    }
+//                });
+//
+//                viewHolder.setOnClickListener(new PekerjaanModelViewHolder.ClickListener() {
+//                    @Override
+//                    public void onItemClick(View view, int position) {
+//                        Intent intent = new Intent(getActivity(), DetailDocumentActivity.class);
+//                        intent.putExtra("id_pekerjaan", id_Pekerjaan);
+//                        intent.putExtra("id_konsultan", id_Konsultan);
+//                        intent.putExtra("id_kontrak", id_Kontrak);
+//                        startActivity(intent);
+//                    }
+//
+//                    @Override
+//                    public void onItemLongClick(View view, final int position) {
+//                        final AlertDialog.Builder alertDelete = new AlertDialog.Builder(getActivity());
+//                        alertDelete.setMessage("Are you sure want to delete this document ?").setCancelable(false)
+//                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        int selectedItem = position;
+//                                        firebaseRecyclerAdapter.getRef(selectedItem).removeValue();
+//                                        firebaseRecyclerAdapter.notifyItemRemoved(selectedItem);
+//                                        mRecyclerView.invalidate();
+//                                        onStart();
+//                                    }
+//
+//                                })
+//                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                        dialog.cancel();
+//                                    }
+//                                });
+//                        AlertDialog alert = alertDelete.create();
+//                        alert.setTitle("Warning");
+//                        alert.show();
+//                    }
+//                });
+//
+//            }
+//        };
+//        mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+//    }
+public class RecycleAdapterPekerjaan extends RecyclerView.Adapter<PekerjaanModelViewHolder>{
+    ArrayList<PekerjaanModel> dataPekerjaan = new ArrayList<>();
 
-        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<PekerjaanModel, PekerjaanModelViewHolder>(
-                PekerjaanModel.class,
-                R.layout.list_view,
-                PekerjaanModelViewHolder.class,
-                dbPekerjaan.child("Pekerjaan").orderByChild("jenisPekerjaan").equalTo("UKL-UPL")
-        ) {
-            @Override
-            protected void populateViewHolder(final PekerjaanModelViewHolder viewHolder, final PekerjaanModel model, int position) {
-                final String id_Pekerjaan = this.getRef(position).getKey();
-                final String id_Konsultan = model.getIdKonsultan();
-                final String id_Kontrak = model.getIdKontrak();
-                viewHolder.setNamaPekerjaan(model.getNamaPekerjaan());
-                viewHolder.setTegangan(model.getTegangan());
-                viewHolder.setKms(model.getKms());
-                viewHolder.setProvinsi(model.getProvinsi());
-
-                dbPekerjaan.child("Kontrak").child(id_Kontrak).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        KontrakModel kontrakModel = dataSnapshot.getValue(KontrakModel.class);
-                        String noKontrak = kontrakModel.getTglMulai();
-                        viewHolder.setNoKontrak(noKontrak);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Toast.makeText(getActivity(), "Failed to Get Contract ID", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                });
-
-                viewHolder.setOnClickListener(new PekerjaanModelViewHolder.ClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        Intent intent = new Intent(getActivity(), DetailDocumentActivity.class);
-                        intent.putExtra("id_pekerjaan", id_Pekerjaan);
-                        intent.putExtra("id_konsultan", id_Konsultan);
-                        intent.putExtra("id_kontrak", id_Kontrak);
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onItemLongClick(View view, final int position) {
-                        final AlertDialog.Builder alertDelete = new AlertDialog.Builder(getActivity());
-                        alertDelete.setMessage("Are you sure want to delete this document ?").setCancelable(false)
-                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        int selectedItem = position;
-                                        firebaseRecyclerAdapter.getRef(selectedItem).removeValue();
-                                        firebaseRecyclerAdapter.notifyItemRemoved(selectedItem);
-                                        mRecyclerView.invalidate();
-                                        onStart();
-                                    }
-
-                                })
-                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.cancel();
-                                    }
-                                });
-                        AlertDialog alert = alertDelete.create();
-                        alert.setTitle("Warning");
-                        alert.show();
-                    }
-                });
-
-            }
-        };
-        mRecyclerView.setAdapter(firebaseRecyclerAdapter);
+    public RecycleAdapterPekerjaan(ArrayList<PekerjaanModel> list) {
+        dataPekerjaan = list;
     }
+
+    @Override
+    public PekerjaanModelViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_view, parent, false);
+
+        return new PekerjaanModelViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(final PekerjaanModelViewHolder holder, int position) {
+        final String id_Pekerjaan = dataPekerjaan.get(position).getIdPekerjaan();
+        final String id_Konsultan = dataPekerjaan.get(position).getIdKonsultan();
+        final String id_Kontrak = dataPekerjaan.get(position).getIdKontrak();
+        holder.setNamaPekerjaan(dataPekerjaan.get(position).getNamaPekerjaan());
+        holder.setTegangan(dataPekerjaan.get(position).getTegangan());
+        holder.setKms(dataPekerjaan.get(position).getKms());
+        holder.setProvinsi(dataPekerjaan.get(position).getProvinsi());
+
+        dbPekerjaan.child("Kontrak").child(id_Kontrak).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                KontrakModel kontrakModel = dataSnapshot.getValue(KontrakModel.class);
+                String noKontrak = kontrakModel.getNoKontrak();
+                holder.setNoKontrak(noKontrak);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getActivity(), "Failed to Get Contract ID", Toast.LENGTH_LONG).show();
+                return;
+            }
+        });
+
+        holder.setOnClickListener(new PekerjaanModelViewHolder.ClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(getActivity(), DetailDocumentActivity.class);
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("id_pekerjaan", id_Pekerjaan);
+//                        bundle.putString("id_konsultan", id_Konsultan);
+//                        bundle.putString("id_kontrak", id_Kontrak);
+                intent.putExtra("id_pekerjaan", id_Pekerjaan);
+                intent.putExtra("id_konsultan", id_Konsultan);
+                intent.putExtra("id_kontrak", id_Kontrak);
+//                        intent.putExtra("Key2", bundle);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                final AlertDialog.Builder alertDelete = new AlertDialog.Builder(getActivity());
+//                    alertDelete.setMessage("Are you sure want to delete this document ?").setCancelable(false)
+//                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    int selectedItem = position;
+//                                    firebaseRecyclerAdapter.getRef(selectedItem).removeValue();
+//                                    firebaseRecyclerAdapter.notifyItemRemoved(selectedItem);
+//                                    mRecyclerView.invalidate();
+//                                    onStart();
+//                                }
+//
+//                            })
+//                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    dialog.cancel();
+//                                }
+//                            });
+//                    AlertDialog alert = alertDelete.create();
+//                    alert.setTitle("Warning");
+//                    alert.show();
+            }
+        });
+    }
+    @Override
+    public int getItemCount() {
+        return dataPekerjaan.size();
+    }
+
+    public void setFilter(ArrayList<PekerjaanModel> list){
+        dataPekerjaan = new ArrayList<>();
+        dataPekerjaan.addAll(list);
+        notifyDataSetChanged();
+    }
+}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_amdal, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_ukl_upl, container, false);
         rootView.setTag(TAG);
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
@@ -188,15 +255,61 @@ public class UklUplFragment extends Fragment implements View.OnClickListener {
                     .getSerializable(KEY_LAYOUT_MANAGER);
         }
         setRecyclerViewLayoutManager(mCurrentLayoutManagerType);
-        //mRecyclerView.setAdapter(firebaseRecyclerAdapter1);
-        //mAdapter = new MyAdapter(dataSet);
-
-        //mRecyclerView.setAdapter(mAdapter);
 
         dbPekerjaan = FirebaseDatabase.getInstance().getReference();
 
+        searchView = (SearchView) rootView.findViewById(R.id.searchView);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                newText = newText.toLowerCase();
+
+                ArrayList<PekerjaanModel> list = new ArrayList<>();
+                for(PekerjaanModel pekerjaan : listPekerjaan){
+                    String nama_pekerjaan = pekerjaan.getNamaPekerjaan().toLowerCase();
+                    if(nama_pekerjaan.contains(newText)){
+                        list.add(pekerjaan);
+                    }
+                }
+
+                adapterPekerjaan.setFilter(list);
+                return true;
+            }
+        });
+
+        initialize();
 
         return rootView;
+    }
+
+    private void initialize() {
+        listPekerjaan = new ArrayList<>();
+        dbPekerjaan.child("Pekerjaan").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                listPekerjaan = new ArrayList<>();
+                for(DataSnapshot pekerjaanSnapshot : dataSnapshot.getChildren()){
+                    if(pekerjaanSnapshot.child("jenisPekerjaan").getValue().toString().equals("UKL-UPL")){
+                        PekerjaanModel pekerjaanModel = pekerjaanSnapshot.getValue(PekerjaanModel.class);
+                        listPekerjaan.add(pekerjaanModel);
+                    }
+                }
+
+                adapterPekerjaan = new RecycleAdapterPekerjaan(listPekerjaan);
+                mRecyclerView.setAdapter(adapterPekerjaan);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
