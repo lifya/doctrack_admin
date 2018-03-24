@@ -177,8 +177,8 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
 
         dbUploadFile = FirebaseDatabase.getInstance().getReference("Uploads");
         String id = dbUploadFile.push().getKey();
-        String File = dataUri.getLastPathSegment().toString();
-        UploadFileModel fileModel = new UploadFileModel(id, File, dataUri.toString());
+        String namaFile = dataUri.getLastPathSegment().toString();
+        UploadFileModel fileModel = new UploadFileModel(id, namaFile, dataUri.toString());
         dbUploadFile.child(id).setValue(fileModel);
 
         dbDetailProses = FirebaseDatabase.getInstance().getReference("DetailProses");
@@ -210,10 +210,10 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         if (requestCode == PICK_PDF_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             dataUri = data.getData();
             if (dataUri != null) {
-                //Toast.makeText(this.getContext(), "one file chosen", Toast.LENGTH_SHORT).show();
-                UploadFileModel uploadFileModel = new UploadFileModel();
-                String namaFile = uploadFileModel.getName();
-                etUploadFile.setText(namaFile);
+                Toast.makeText(this.getContext(), "one file chosen", Toast.LENGTH_SHORT).show();
+//                UploadFileModel uploadFileModel = new UploadFileModel();
+//                String namaFile = uploadFileModel.getName();
+//                etUploadFile.setText(namaFile);
             }else{
                 Toast.makeText(this.getContext(), "No file chosen", Toast.LENGTH_SHORT).show();
             }

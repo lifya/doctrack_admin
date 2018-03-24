@@ -77,7 +77,7 @@ public class DetailDocumentActivity extends AppCompatActivity {
         dbKonsultan = FirebaseDatabase.getInstance().getReference("Konsultan");
         dbKontrak = FirebaseDatabase.getInstance().getReference("Kontrak");
         dbPekerjaan = FirebaseDatabase.getInstance().getReference("Pekerjaan");
-        dbDetailProses = FirebaseDatabase.getInstance().getReference("Detail_Proses");
+        dbDetailProses = FirebaseDatabase.getInstance().getReference("DetailProses");
 
         tvJudul = (TextView) findViewById(R.id.tvJudul);
         tvKonsultan = (TextView) findViewById(R.id.tvKonsultan);
