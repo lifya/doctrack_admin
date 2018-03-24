@@ -1,27 +1,34 @@
 package com.pln.www.model;
 
+import com.google.firebase.database.Exclude;
+
 /**
  * Created by ACHI on 17/02/2018.
  */
 
 public class DetailProsesModel {
-    String idProses, idPekerjaan, tanggal, file, status, keterangan;
+    String idPekerjaan, namaProses, tanggal, status, keterangan;
+    @Exclude
+    String file;
 
-    public DetailProsesModel(String idPekerjaan, String idProses, String status, String tanggal, String keterangan) {
-        this.idProses = idProses;
+    public DetailProsesModel() {
+    }
+
+    public DetailProsesModel(String idPekerjaan, String namaProses, String status, String tanggal, String keterangan) {
         this.idPekerjaan = idPekerjaan;
+        this.namaProses = namaProses;
         this.tanggal = tanggal;
         //this.file = file;
         this.status = status;
         this.keterangan = keterangan;
     }
 
-    public String getIdProses() {
-        return idProses;
+    public String getNamaProses() {
+        return namaProses;
     }
 
-    public void setIdProses(String idProses) {
-        this.idProses = idProses;
+    public void setNamaProses(String namaProses) {
+        this.namaProses = namaProses;
     }
 
     public String getIdPekerjaan() {

@@ -2,20 +2,13 @@ package com.pln.www.alert;
 
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -27,14 +20,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -44,12 +33,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.pln.www.Helper.Constant;
 import com.pln.www.R;
-import com.pln.www.activity.AddDocumentActivity;
-import com.pln.www.model.DetailProses;
+import com.pln.www.activity.DetailDocumentActivity;
 import com.pln.www.model.DetailProsesModel;
-import com.pln.www.model.PekerjaanModel;
 import com.pln.www.model.UploadFileModel;
-import android.support.v7.widget.AppCompatButton;
 
 import java.util.Calendar;
 
@@ -73,9 +59,11 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
     private Intent intent;
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
+    private DatabaseReference dbDetailProses, dbUploadFile;
     final static int PICK_PDF_CODE = 2342;
     private Uri dataUri;
-    private String idPekerjaan;
+    private String idPekerjaan, idKonsultan, idKontrak;
+    private EditText etUploadFile;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -84,19 +72,23 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         setCancelable(false);
 
         Bundle bundle = getArguments();
-        if (bundle != null)
+        if (bundle != null){
             idPekerjaan = bundle.getString("idPekerjaan");
+            idKonsultan = bundle.getString("idKonsultan");
+            idKontrak = bundle.getString("idKontrak");
+        }
 
         bCancel = (Button) v.findViewById(R.id.btnCancel);
         bAddDoc = (Button) v.findViewById(R.id.btnAdd);
+        progressDialog = new ProgressDialog(getActivity());
         spinnerProses = (Spinner) v.findViewById(R.id.spProses1);
         spinnerStatus = (Spinner) v.findViewById(R.id.spStatus);
         ivGetFile = (ImageView) v.findViewById(R.id.ivGetFile);
         etFile = (EditText) v.findViewById(R.id.etUploadFile);
         etKeterangan = (EditText) v.findViewById(R.id.etKeterangan);
-        databaseReference = FirebaseDatabase.getInstance().getReference(Constant.DATABASE_PATH_UPLOADS);
-        storageReference = FirebaseStorage.getInstance().getReference();
         Ed = (EditText) v.findViewById(R.id.etTglProses);
+        etUploadFile = (EditText) v.findViewById(R.id.etUploadFile);
+        storageReference = FirebaseStorage.getInstance().getReference();
         mCurrentDate = Calendar.getInstance();
         day = mCurrentDate.get(Calendar.DAY_OF_MONTH);
         month = mCurrentDate.get(Calendar.MONTH);
@@ -105,6 +97,7 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         month=month+1;
         Ed.setText(day+"/"+month+"/"+year);
 
+        spinnerListener();
         Ed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,29 +123,21 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         return v;
     }
 
-    public void onWait(){
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Please Wait");
-        progressDialog.show();
-    }
     @Override
     public void onClick(View v) {
         if(v == bCancel){
             getDialog().dismiss();
         }
         if(v == bAddDoc){
+            btnAddClick(v);
             addDetailData();
-            //uploadFile(dataUri);
-            //Toast.makeText(getActivity(), "" + getSpinnerProses, Toast.LENGTH_LONG).show();
         }
     }
 
-    private void addDetailData(){
-
-        final String etTanggal = Ed.getText().toString();
-        final String etKet = etKeterangan.getText().toString();
-
+    private void spinnerListener(){
         getSpinnerProses = spinnerProses.getItemAtPosition(0).toString();
+        getSpinnerStatus = spinnerStatus.getItemAtPosition(0).toString();
+
         spinnerProses.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -165,7 +150,6 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
             }
         });
 
-        getSpinnerStatus = spinnerStatus.getItemAtPosition(0).toString();
         spinnerStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -177,34 +161,41 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
                 return;
             }
         });
+    }
+    private void addDetailData(){
+        String etTanggal = Ed.getText().toString();
+        String etKet = etKeterangan.getText().toString();
 
-        if(TextUtils.isEmpty(getSpinnerProses)){
-            Toast.makeText(getActivity(), "Please Enter The Process", Toast.LENGTH_LONG).show();
-            return;
-        }
-        if(TextUtils.isEmpty(getSpinnerStatus)){
-            Toast.makeText(getActivity(), "Please Enter The Status", Toast.LENGTH_LONG).show();
-            return;
-        }
-        if(TextUtils.isEmpty(etTanggal)){
-            Toast.makeText(getActivity(), "Please Enter The Date", Toast.LENGTH_LONG).show();
-            return;
-        }
         if(TextUtils.isEmpty(etKet)){
-            Toast.makeText(getActivity(), "Please Enter The Date", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Isi keterangan", Toast.LENGTH_LONG).show();
             return;
         }
 
-        final DatabaseReference dbDetailProses;
-        dbDetailProses = FirebaseDatabase.getInstance().getReference("Detail_Proses");
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.show();
 
+        dbUploadFile = FirebaseDatabase.getInstance().getReference("Uploads");
+        String id = dbUploadFile.push().getKey();
+        String File = dataUri.getLastPathSegment().toString();
+        UploadFileModel fileModel = new UploadFileModel(id, File, dataUri.toString());
+        dbUploadFile.child(id).setValue(fileModel);
+
+        dbDetailProses = FirebaseDatabase.getInstance().getReference("DetailProses");
         DetailProsesModel detailProsesModel = new DetailProsesModel(idPekerjaan, getSpinnerProses, getSpinnerStatus, etTanggal, etKet);
         dbDetailProses.child(idPekerjaan).child(getSpinnerProses).setValue(detailProsesModel);
-        Toast.makeText(getActivity(), "Successed !", Toast.LENGTH_LONG).show();
+        progressDialog.dismiss();
+
+        Intent intent = new Intent(getActivity(), DetailDocumentActivity.class);
+        intent.putExtra("id_pekerjaan", idPekerjaan);
+        intent.putExtra("id_konsultan", idKonsultan);
+        intent.putExtra("id_kontrak", idKontrak);
+        startActivity(intent);
+
+        getDialog().dismiss();
     }
 
     private void getPDF() {
-
         //creating an intent for file chooser
         Intent intent = new Intent();
         intent.setType("application/pdf");
@@ -219,8 +210,10 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         if (requestCode == PICK_PDF_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             dataUri = data.getData();
             if (dataUri != null) {
-
-                Toast.makeText(this.getContext(), "one file chosen", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this.getContext(), "one file chosen", Toast.LENGTH_SHORT).show();
+                UploadFileModel uploadFileModel = new UploadFileModel();
+                String namaFile = uploadFileModel.getName();
+                etUploadFile.setText(namaFile);
             }else{
                 Toast.makeText(this.getContext(), "No file chosen", Toast.LENGTH_SHORT).show();
             }
@@ -228,20 +221,13 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
     }
 
     public void btnAddClick(View v) {
-        //final String fileName = etUploadFile.getText().toString().trim();
-
         StorageReference sRef = storageReference.child(Constant.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + ".pdf");
         sRef.putFile(dataUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @SuppressWarnings("VisibleForTests")
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                        progressBar.setVisibility(View.GONE);
-                        //textViewStatus.setText("File Uploaded Successfully");
-                        String id_file = databaseReference.push().getKey();
 
-                        UploadFileModel upload = new UploadFileModel(id_file, dataUri.getLastPathSegment().toString(), taskSnapshot.getDownloadUrl().toString());
-                        databaseReference.child(id_file).setValue(upload);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

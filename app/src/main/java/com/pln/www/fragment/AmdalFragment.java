@@ -1,6 +1,5 @@
 package com.pln.www.fragment;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,30 +16,21 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
+
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.pln.www.R;
 import com.pln.www.activity.DetailDocumentActivity;
-import com.pln.www.adapter.RecycleAdapter;
-import com.pln.www.model.ItemModel;
-import com.pln.www.model.KonsultanModel;
 import com.pln.www.model.KontrakModel;
 import com.pln.www.model.PekerjaanModel;
-import com.pln.www.model.ProsesModel;
-import com.pln.www.model.DetailProsesModel;
 import com.pln.www.viewholder.PekerjaanModelViewHolder;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by ACHI on 27/08/2017.
@@ -50,7 +40,6 @@ public class AmdalFragment extends Fragment{
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
-    private static final int DATASET_COUNT = 60; // menampilkan data sebanyak value
     protected LayoutManagerType mCurrentLayoutManagerType;
     protected RecyclerView mRecyclerView;
     protected RecyclerView.LayoutManager mLayoutManager;
@@ -69,24 +58,6 @@ public class AmdalFragment extends Fragment{
         super.onCreate(savedInstanceState);
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//
-//        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<PekerjaanModel, PekerjaanModelViewHolder>(
-//                PekerjaanModel.class,
-//                R.layout.list_view,
-//                PekerjaanModelViewHolder.class,
-//                dbPekerjaan.child("Pekerjaan").orderByChild("jenisPekerjaan").equalTo("AMDAL")
-//        ) {
-//            @Override
-//            protected void populateViewHolder(final PekerjaanModelViewHolder viewHolder, final PekerjaanModel model, int position) {
-//
-//
-//            }
-//        };
-//        mRecyclerView.setAdapter(firebaseRecyclerAdapter);
-//    }
 
     public class RecycleAdapterPekerjaan extends RecyclerView.Adapter<PekerjaanModelViewHolder>{
         ArrayList<PekerjaanModel> dataPekerjaan = new ArrayList<>();
@@ -131,41 +102,33 @@ public class AmdalFragment extends Fragment{
                   @Override
                   public void onItemClick(View view, int position) {
                       Intent intent = new Intent(getActivity(), DetailDocumentActivity.class);
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString("id_pekerjaan", id_Pekerjaan);
-//                        bundle.putString("id_konsultan", id_Konsultan);
-//                        bundle.putString("id_kontrak", id_Kontrak);
                       intent.putExtra("id_pekerjaan", id_Pekerjaan);
                       intent.putExtra("id_konsultan", id_Konsultan);
                       intent.putExtra("id_kontrak", id_Kontrak);
-//                        intent.putExtra("Key2", bundle);
                       startActivity(intent);
                   }
 
                   @Override
-                  public void onItemLongClick(View view, int position) {
+                  public void onItemLongClick(View view, final int positionItem) {
                       final AlertDialog.Builder alertDelete = new AlertDialog.Builder(getActivity());
-//                    alertDelete.setMessage("Are you sure want to delete this document ?").setCancelable(false)
-//                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    int selectedItem = position;
-//                                    firebaseRecyclerAdapter.getRef(selectedItem).removeValue();
-//                                    firebaseRecyclerAdapter.notifyItemRemoved(selectedItem);
-//                                    mRecyclerView.invalidate();
-//                                    onStart();
-//                                }
-//
-//                            })
-//                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    dialog.cancel();
-//                                }
-//                            });
-//                    AlertDialog alert = alertDelete.create();
-//                    alert.setTitle("Warning");
-//                    alert.show();
+                    alertDelete.setMessage("Are you sure want to delete this document ?").setCancelable(false)
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    String id = dataPekerjaan.get(positionItem).getIdPekerjaan();
+                                    dbPekerjaan.child("Pekerjaan").child(id).removeValue();
+                                }
+
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alert = alertDelete.create();
+                    alert.setTitle("Warning");
+                    alert.show();
                   }
               });
         }
@@ -227,9 +190,53 @@ public class AmdalFragment extends Fragment{
         });
 
         initialize();
+        initializeCRUD();
 
         return rootView;
     }
+
+    private void initializeCRUD() {
+        dbPekerjaan = FirebaseDatabase.getInstance().getReference();
+
+        dbPekerjaan.child("Pekerjaan").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                String key = dataSnapshot.getKey();
+
+                for(PekerjaanModel pekerjaan : listPekerjaan){
+                    String id = pekerjaan.getIdPekerjaan();
+                    if(id.equals(key)){
+                        listPekerjaan.remove(pekerjaan);
+                        break;
+                    }
+                }
+
+                adapterPekerjaan = new RecycleAdapterPekerjaan(listPekerjaan);
+                mRecyclerView.setAdapter(adapterPekerjaan);
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     public void initialize(){
         listPekerjaan = new ArrayList<>();
         dbPekerjaan.child("Pekerjaan").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -310,8 +317,5 @@ public class AmdalFragment extends Fragment{
         savedInstanceState.putSerializable(KEY_LAYOUT_MANAGER, mCurrentLayoutManagerType);
         super.onSaveInstanceState(savedInstanceState);
     }
-
-
-
 }
 

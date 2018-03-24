@@ -18,10 +18,13 @@
     <array name="namaproses">
         <item>Permohonan RT RW</item>
         <item>Pembahasan RT RW</item>
-        <item>RT RW</item>
+        <item>Izin RT RW keluar</item>
         <item>Draft UKL-UPL</item>
         <item>Pembahasan</item>
-        <item>Perbaikan Dok</item>
+        <item>Perbaikan Dokumen</item>
+        <item>Dokumen Final</item>
+        <item>Rekomendasi UKL-UPL</item>
+        <item>Izin Lingkungan</item>
     </array>
     <string name="title_activity_document_tracking">DocumentTrackingActivity</string>
     <string name="tab_text_1">Tab 1</string>

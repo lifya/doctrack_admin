@@ -14,7 +14,7 @@ public class DetailProsesModelViewHolder extends RecyclerView.ViewHolder {
     private View mView;
     private TextView tvNamaProses, tvStatusProses, tvTanggalProses, tvKeteranganProses, tvFileProses;
 
-    DetailProsesModelViewHolder(View itemView){
+    public DetailProsesModelViewHolder(View itemView){
         super(itemView);
         mView = itemView;
         tvNamaProses = (TextView) mView.findViewById(R.id.tvNamaProses);
@@ -31,11 +31,7 @@ public class DetailProsesModelViewHolder extends RecyclerView.ViewHolder {
         tvStatusProses.setText(statusProses);
     }
 
-    public void setTanggalProses (String tanggalProses){
-        tvStatusProses.setText(tanggalProses);
-    }
+    public void setTanggalProses (String tanggalProses){ tvTanggalProses.setText(tanggalProses); }
 
-    public void setKeteranganProses (String keteranganProses){
-        tvStatusProses.setText(keteranganProses);
-    }
+    public void setKeteranganProses (String keteranganProses){ tvKeteranganProses.setText(keteranganProses); }
 }
