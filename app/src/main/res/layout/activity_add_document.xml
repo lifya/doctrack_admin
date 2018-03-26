@@ -88,7 +88,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_search_white_24dp"
+                        android:src="@drawable/ic_nama_jalur"
                         android:padding="8dp"/>
 
                 </FrameLayout>
@@ -127,7 +127,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_date_range_white_24dp"
+                            android:src="@drawable/ic_tegangan"
                             android:padding="8dp"/>
                     </FrameLayout>
 
@@ -161,7 +161,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_date_range_white_24dp"
+                            android:src="@drawable/ic_kms"
                             android:padding="8dp"/>
                     </FrameLayout>
                     <EditText
@@ -198,7 +198,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_search_white_24dp"
+                        android:src="@drawable/ic_konsultan"
                         android:padding="8dp"
                         android:paddingRight="-5dp"/>
                 </FrameLayout>
@@ -232,7 +232,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_search_white_24dp"
+                        android:src="@drawable/ic_no_kontrak"
                         android:padding="8dp"
                         android:paddingRight="-5dp"/>
                 </FrameLayout>
@@ -266,7 +266,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_search_white_24dp"
+                        android:src="@drawable/ic_provinsi"
                         android:padding="8dp"
                         android:paddingRight="-5dp"/>
                 </FrameLayout>
