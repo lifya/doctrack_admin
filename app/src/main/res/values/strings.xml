@@ -15,15 +15,29 @@
         <item>Sudah</item>
     </array>
 
-    <array name="namaproses">
-        <item>Permohonan RT RW</item>
-        <item>Pembahasan RT RW</item>
-        <item>Izin RT RW keluar</item>
+    <array name="namaprosesUklUpl">
+        <item>Permohonan RTRW</item>
+        <item>Pembahasan RTRW</item>
+        <item>Izin RTRW keluar</item>
         <item>Draft UKL-UPL</item>
         <item>Pembahasan</item>
         <item>Perbaikan Dokumen</item>
         <item>Dokumen Final</item>
         <item>Rekomendasi UKL-UPL</item>
+        <item>Izin Lingkungan</item>
+    </array>
+
+    <array name="namaprosesAmdal">
+        <item>Permohonan RTRW</item>
+        <item>Pembahasan RTRW</item>
+        <item>Izin RTRW keluar</item>
+        <item>Konsultasi Publik</item>
+        <item>Draft Kerangka Acuan AMDAL</item>
+        <item>Pembahasan Dokumen Kerangka Acuan</item>
+        <item>Perbaikan dan Persetujuan Kerangka Acuan</item>
+        <item>Draft AMDAL dan RKL-RPL</item>
+        <item>Pembahasan AMDAL dan RKL-RPL</item>
+        <item>Surat Keterangan Kelayakan Lingkungan</item>
         <item>Izin Lingkungan</item>
     </array>
     <string name="title_activity_document_tracking">DocumentTrackingActivity</string>

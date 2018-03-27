@@ -12,7 +12,7 @@ import com.pln.www.R;
 
 public class DetailProsesModelViewHolder extends RecyclerView.ViewHolder {
     private View mView;
-    private TextView tvNamaProses, tvStatusProses, tvTanggalProses, tvKeteranganProses;
+    private TextView tvNamaProses, tvStatusProses, tvTanggalProses, tvKeteranganProses, tvFIleProses;
 
     public DetailProsesModelViewHolder(View itemView){
         super(itemView);
@@ -21,6 +21,7 @@ public class DetailProsesModelViewHolder extends RecyclerView.ViewHolder {
         tvStatusProses = (TextView) mView.findViewById(R.id.tvStatusProses);
         tvTanggalProses = (TextView) mView.findViewById(R.id.tvTanggalProses);
         tvKeteranganProses = (TextView) mView.findViewById(R.id.tvKeteranganProses);
+        tvFIleProses = (TextView) mView.findViewById(R.id.tvFileProses);
 
     }
 
@@ -36,4 +37,5 @@ public class DetailProsesModelViewHolder extends RecyclerView.ViewHolder {
 
     public void setKeteranganProses (String keteranganProses){ tvKeteranganProses.setText(keteranganProses); }
 
+    public void setTvFIleProses(String fileProses) { tvFIleProses.setText(fileProses); }
 }

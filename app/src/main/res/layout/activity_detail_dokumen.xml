@@ -115,12 +115,27 @@
                                 android:textSize="12dp"
                                 android:textStyle="bold"/>
 
-                            <TextView
-                                android:layout_width="match_parent"
+                            <LinearLayout
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/tvTegangan"
-                                android:text="Tegangan"
-                                android:textSize="10dp"/>
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/tvTegangan"
+                                    android:text="Tegangan"
+                                    android:textSize="10dp"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="kV"
+                                    android:textSize="10dp"
+                                    android:layout_marginLeft="5dp"/>
+
+                            </LinearLayout>
+
+
 
                         </LinearLayout>
 

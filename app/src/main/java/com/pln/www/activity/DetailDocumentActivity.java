@@ -32,6 +32,7 @@ import com.pln.www.model.DetailProsesModel;
 import com.pln.www.model.KonsultanModel;
 import com.pln.www.model.KontrakModel;
 import com.pln.www.model.PekerjaanModel;
+import com.pln.www.model.UploadFileModel;
 import com.pln.www.viewholder.DetailProsesModelViewHolder;
 
 import java.util.ArrayList;
@@ -42,10 +43,9 @@ import java.util.ArrayList;
 
 public class DetailDocumentActivity extends AppCompatActivity {
     private ImageView ivBack, ivProses;
-    private Button bAddDoc;
-    private TextView tvSave, tvJudul, tvKonsultan, tvTanggalMulai, tvTanggalAKhir, tvTegangan, tvKms, tvProvinsi, tvKontrak;
+    private TextView tvJudul, tvKonsultan, tvTanggalMulai, tvTanggalAKhir, tvTegangan, tvKms, tvProvinsi, tvKontrak;
     private ProgressDialog progressDialog;
-    private DatabaseReference dbKonsultan, dbKontrak, dbPekerjaan, dbDetailProses;
+    private DatabaseReference dbKonsultan, dbKontrak, dbPekerjaan, dbDetailProses, dbUploadFile;
     private Intent intent;
     private Bundle bundle;
     private String get_idPekerjaan, get_idKonsultan, get_idKontrak;
@@ -78,6 +78,7 @@ public class DetailDocumentActivity extends AppCompatActivity {
         dbKontrak = FirebaseDatabase.getInstance().getReference("Kontrak");
         dbPekerjaan = FirebaseDatabase.getInstance().getReference("Pekerjaan");
         dbDetailProses = FirebaseDatabase.getInstance().getReference("DetailProses");
+        dbUploadFile = FirebaseDatabase.getInstance().getReference("Uploads");
 
         tvJudul = (TextView) findViewById(R.id.tvJudul);
         tvKonsultan = (TextView) findViewById(R.id.tvKonsultan);
@@ -135,6 +136,7 @@ public class DetailDocumentActivity extends AppCompatActivity {
                     String tegangan = pekerjaanModel.getTegangan();
                     String kms = pekerjaanModel.getKms();
                     String provinsi = pekerjaanModel.getProvinsi();
+                    String jenisPekerjaan = pekerjaanModel.getJenisPekerjaan();
                     tvJudul.setText(namaPekerjaan);
                     tvTegangan.setText(tegangan);
                     tvKms.setText(kms);
@@ -199,12 +201,29 @@ public class DetailDocumentActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(DetailProsesModelViewHolder holder, int position) {
+        public void onBindViewHolder(final DetailProsesModelViewHolder holder, int position) {
             final String id_Pekerjaan = dataProses.get(position).getIdPekerjaan();
+            final String id_file = dataProses.get(position).getIdFile();
+            holder.setTvFIleProses(dataProses.get(position).getNamaFile());
             holder.setNamaProses(dataProses.get(position).getNamaProses());
             holder.setStatusProses(dataProses.get(position).getStatus());
             holder.setTanggalProses(dataProses.get(position).getTanggal());
             holder.setKeteranganProses(dataProses.get(position).getKeterangan());
+
+//            dbUploadFile.child(id_file).addListenerForSingleValueEvent(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    UploadFileModel uploadFileModel = dataSnapshot.getValue(UploadFileModel.class);
+//                    String namaFile = uploadFileModel.getName();
+//                    holder.setTvFIleProses(namaFile);
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//                    Toast.makeText(DetailDocumentActivity.this, "Failed to Get File ID", Toast.LENGTH_LONG).show();
+//                    return;
+//                }
+//            });
 
         }
 
@@ -247,32 +266,7 @@ public class DetailDocumentActivity extends AppCompatActivity {
         dbDetailProses.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//                Toast.makeText(DetailDocumentActivity.this, "Added", Toast.LENGTH_LONG).show();
-//                DetailProsesModel detailProsesModel = null;
-//                String id = dataSnapshot.getKey();
-//                boolean flag;
-//
-//                for(DataSnapshot namaProses : dataSnapshot.getChildren()) {
-//                    flag = false;
-//
-//                    for(DetailProsesModel detailProses : listProses){
-//                        if(detailProses.getNamaProses().equals(namaProses.getKey())){
-//                           flag = true;
-//                        }
-//                    }
-//
-//                    if(flag == false){
-//                        detailProsesModel = namaProses.getValue(DetailProsesModel.class);
-//                        break;
-//                    }
-//                }
-//
-//                if(detailProsesModel != null){
-//                    listProses.add(0, detailProsesModel);
-//                }
-//
-//                adapterProses = new RecycleAdapterProses(listProses);
-//                mRecyclerView.setAdapter(adapterProses);
+
             }
 
             @Override
@@ -300,15 +294,21 @@ public class DetailDocumentActivity extends AppCompatActivity {
     private void goToAddDoc(){
         if(bundle != null) {
             get_idPekerjaan = (String) bundle.get("id_pekerjaan");
+
         }
-        FragmentManager manager = getSupportFragmentManager();
-        FormDocumentDialog dialogAdd = new FormDocumentDialog();
-        Bundle bundle = new Bundle();
-        bundle.putString("idPekerjaan", get_idPekerjaan);
-        bundle.putString("idKonsultan", get_idKonsultan);
-        bundle.putString("idKontrak", get_idKontrak);
-        dialogAdd.setArguments(bundle);
-        dialogAdd.show(manager, dialogAdd.getTag());
+
+            FragmentManager manager = getSupportFragmentManager();
+            FormDocumentDialog dialogAdd = new FormDocumentDialog();
+            Bundle bundle = new Bundle();
+            bundle.putString("idPekerjaan", get_idPekerjaan);
+            bundle.putString("idKonsultan", get_idKonsultan);
+            bundle.putString("idKontrak", get_idKontrak);
+            dialogAdd.setArguments(bundle);
+            dialogAdd.show(manager, dialogAdd.getTag());
+
+
+
+
     }
 
 }

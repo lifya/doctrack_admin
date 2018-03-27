@@ -8,11 +8,12 @@ import android.widget.ArrayAdapter;
 
 public class UserModel {
 
-    private String user_id, nama, email, status;
+    private String user_id, nama, email;
+    int status;
 
     public UserModel(){}
 
-    public UserModel(String user_id, String nama, String email, String status) {
+    public UserModel(String user_id, String nama, String email, int status) {
         this.user_id = user_id;
         this.nama = nama;
         this.email= email;
@@ -43,11 +44,11 @@ public class UserModel {
         this.email = email;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 }

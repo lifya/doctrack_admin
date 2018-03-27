@@ -71,6 +71,7 @@ public class FormUserDialog extends AppCompatDialogFragment implements View.OnCl
     }
 
     private void AddNewUser(){
+        dbUsers = FirebaseDatabase.getInstance().getReference().child("Users");
         final String email = etEmail.getText().toString().trim();
         final String name = etName.getText().toString().trim();
         final String password = etPassword.getText().toString().trim();
@@ -98,12 +99,53 @@ public class FormUserDialog extends AppCompatDialogFragment implements View.OnCl
         progressDialog.show();
 
         if(password.equals(repassword)){
+            dbUsers.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for(DataSnapshot child : dataSnapshot.getChildren()){
+                        final String idUser = child.getKey();
+                        System.out.println(idUser);
+                        System.out.println(email);
+                        dbUsers.child(idUser).child("status").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                int status = Integer.parseInt(dataSnapshot.getValue().toString());
+                                if(status == 0) {
+                                    dbUsers.child(idUser).child("nama").setValue(name);
+                                    dbUsers.child(idUser).child("status").setValue(1);
+                                    progressDialog.dismiss();
+                                    getDialog().dismiss();
+                                    Toast.makeText(getActivity(), "Successed", Toast.LENGTH_LONG).show();
+                                    return;
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                progressDialog.dismiss();
+                                getDialog().dismiss();
+                                Toast.makeText(getActivity(), "Error !", Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    progressDialog.dismiss();
+                    getDialog().dismiss();
+                    Toast.makeText(getActivity(), "Error !", Toast.LENGTH_LONG).show();
+                    return;
+                }
+            });
+
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         String user_id = mAuth.getCurrentUser().getUid();
-                        String status = "1";
+                        int status = 1;
                         dbUsers = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
                         UserModel userModel = new UserModel(user_id,name,email,status);
                         dbUsers.setValue(userModel);
@@ -113,16 +155,16 @@ public class FormUserDialog extends AppCompatDialogFragment implements View.OnCl
                     }
                     else{
                         progressDialog.dismiss();
-                        Toast.makeText(getActivity(), "Wrong Email or Password", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Wrong Email or User Name or Password", Toast.LENGTH_LONG).show();
                         return;
                     }
                 }
             });
         }
         else{
+            progressDialog.dismiss();
             Toast.makeText(getActivity(), "Wrong Password", Toast.LENGTH_LONG).show();
             return;
         }
-
     }
 }

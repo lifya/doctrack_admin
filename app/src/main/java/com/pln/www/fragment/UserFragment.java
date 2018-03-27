@@ -91,10 +91,11 @@ public class UserFragment extends Fragment implements View.OnClickListener{
                 UserModel.class,
                 R.layout.list_user,
                 UserViewHolder.class,
-                dbUsers
+                dbUsers.orderByChild("status").equalTo(1)
         ) {
             @Override
             protected void populateViewHolder(UserViewHolder viewHolder, UserModel model, int position) {
+                final String idUser = this.getRef(position).getKey();
                 viewHolder.setEmail(model.getEmail());
                 viewHolder.setNama(model.getNama());
                 viewHolder.setOnClickListener(new UserViewHolder.ClickListener() {
@@ -105,11 +106,7 @@ public class UserFragment extends Fragment implements View.OnClickListener{
                                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        int selectedItem = position;
-                                        firebaseRecyclerAdapter.getRef(selectedItem).removeValue();
-                                        firebaseRecyclerAdapter.notifyItemRemoved(selectedItem);
-                                        mRecyclerView.invalidate();
-                                        //FirebaseAuth.getInstance().deleteUserAsync(model.getUser_id());
+                                        dbUsers.child(idUser).child("status").setValue(0);
                                         onStart();
                                     }
                                 })

@@ -62,7 +62,7 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
     private DatabaseReference dbDetailProses, dbUploadFile;
     final static int PICK_PDF_CODE = 2342;
     private Uri dataUri;
-    private String idPekerjaan, idKonsultan, idKontrak;
+    private String idPekerjaan, idKonsultan, idKontrak, idFile, namaFile;
     private EditText etUploadFile;
 
     @Override
@@ -176,13 +176,13 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         progressDialog.show();
 
         dbUploadFile = FirebaseDatabase.getInstance().getReference("Uploads");
-        String id = dbUploadFile.push().getKey();
-        String namaFile = dataUri.getLastPathSegment().toString();
-        UploadFileModel fileModel = new UploadFileModel(id, namaFile, dataUri.toString());
-        dbUploadFile.child(id).setValue(fileModel);
+        idFile = dbUploadFile.push().getKey();
+        namaFile = dataUri.getLastPathSegment().toString();
+        final UploadFileModel fileModel = new UploadFileModel(idFile, namaFile, dataUri.toString());
+        dbUploadFile.child(idFile).setValue(fileModel);
 
         dbDetailProses = FirebaseDatabase.getInstance().getReference("DetailProses");
-        DetailProsesModel detailProsesModel = new DetailProsesModel(idPekerjaan, getSpinnerProses, getSpinnerStatus, etTanggal, etKet);
+        final DetailProsesModel detailProsesModel = new DetailProsesModel(idPekerjaan, getSpinnerProses, getSpinnerStatus, etTanggal, etKet, idFile, namaFile);
         dbDetailProses.child(idPekerjaan).child(getSpinnerProses).setValue(detailProsesModel);
         progressDialog.dismiss();
 
@@ -214,6 +214,7 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
 //                UploadFileModel uploadFileModel = new UploadFileModel();
 //                String namaFile = uploadFileModel.getName();
 //                etUploadFile.setText(namaFile);
+
             }else{
                 Toast.makeText(this.getContext(), "No file chosen", Toast.LENGTH_SHORT).show();
             }

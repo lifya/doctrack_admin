@@ -19,7 +19,7 @@
         android:layout_gravity="left"
         android:layout_marginLeft="20dp"
         android:gravity="bottom"
-        android:text="Update Pekerjaan"
+        android:text="Detail Pekerjaan"
         android:textColor="#ffffff"
         android:textSize="18dp"
         android:textStyle="bold"/>

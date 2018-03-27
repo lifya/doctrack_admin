@@ -42,19 +42,6 @@
                         android:orientation="horizontal">
 
                         <RadioButton
-                            android:id="@+id/rbUKL"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:layout_marginRight="50dp"
-                            android:checked="true"
-                            android:padding="10dp"
-                            android:singleLine="true"
-                            android:text="UKL-UPL"
-                            android:textColor="#080808"
-                            android:textSize="14dp" />
-
-                        <RadioButton
                             android:id="@+id/rbAmdal"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -62,7 +49,20 @@
                             android:layout_marginRight="5dp"
                             android:padding="10dp"
                             android:singleLine="true"
+                            android:checked="true"
                             android:text="AMDAL"
+                            android:textColor="#080808"
+                            android:textSize="14dp" />
+
+                        <RadioButton
+                            android:id="@+id/rbUKL"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:layout_marginRight="50dp"
+                            android:padding="10dp"
+                            android:singleLine="true"
+                            android:text="UKL-UPL"
                             android:textColor="#080808"
                             android:textSize="14dp" />
 
@@ -143,7 +143,7 @@
                         android:textColorHint="#626562"
                         android:textSize="14dp"
                         android:singleLine="true"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:textColor="#080808"
                         android:layout_marginRight="5dp"/>
                 </LinearLayout>
@@ -174,7 +174,7 @@
                         android:hint="kms"
                         android:textColorHint="#626562"
                         android:textSize="14dp"
-                        android:inputType="text"
+                        android:inputType="number|numberDecimal"
                         android:textColor="#050505"
                         android:singleLine="true"/>
                 </LinearLayout>

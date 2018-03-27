@@ -35,7 +35,7 @@
                 android:id="@+id/spProses1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/namaproses"
+                android:entries="@array/namaprosesAmdal"
                 android:padding="8dp"
                 android:backgroundTint="#1b9fe1"
                 android:singleLine="true"

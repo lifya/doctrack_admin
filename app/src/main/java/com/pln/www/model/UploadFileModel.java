@@ -20,13 +20,6 @@ public class UploadFileModel {
         this.url = url;
     }
 
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
 
     public String getUrl() {
         return url;
