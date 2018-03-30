@@ -64,6 +64,8 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
     private Uri dataUri;
     private String idPekerjaan, idKonsultan, idKontrak, idFile, namaFile;
     private EditText etUploadFile;
+    private String downloadurl;
+    private String permohonan[] = {"Permohonan RT/RW","Izin Keluar"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -130,7 +132,6 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         }
         if(v == bAddDoc){
             btnAddClick(v);
-            addDetailData();
         }
     }
 
@@ -182,16 +183,16 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         dbUploadFile.child(idFile).setValue(fileModel);
 
         dbDetailProses = FirebaseDatabase.getInstance().getReference("DetailProses");
-        final DetailProsesModel detailProsesModel = new DetailProsesModel(idPekerjaan, getSpinnerProses, getSpinnerStatus, etTanggal, etKet, idFile, namaFile);
+        final DetailProsesModel detailProsesModel = new DetailProsesModel(idPekerjaan, getSpinnerProses, getSpinnerStatus, etTanggal, etKet, idFile, namaFile, downloadurl);
         dbDetailProses.child(idPekerjaan).child(getSpinnerProses).setValue(detailProsesModel);
         progressDialog.dismiss();
 
+        //Toast.makeText(getActivity(), "Data Berhasil di Unduh", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getActivity(), DetailDocumentActivity.class);
         intent.putExtra("id_pekerjaan", idPekerjaan);
         intent.putExtra("id_konsultan", idKonsultan);
         intent.putExtra("id_kontrak", idKontrak);
         startActivity(intent);
-
         getDialog().dismiss();
     }
 
@@ -210,6 +211,7 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         if (requestCode == PICK_PDF_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             dataUri = data.getData();
             if (dataUri != null) {
+                etUploadFile.setText(dataUri.getLastPathSegment().toString());
                 Toast.makeText(this.getContext(), "one file chosen", Toast.LENGTH_SHORT).show();
 //                UploadFileModel uploadFileModel = new UploadFileModel();
 //                String namaFile = uploadFileModel.getName();
@@ -223,12 +225,14 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
 
     public void btnAddClick(View v) {
         StorageReference sRef = storageReference.child(Constant.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + ".pdf");
+
         sRef.putFile(dataUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @SuppressWarnings("VisibleForTests")
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
+                        downloadurl = taskSnapshot.getDownloadUrl().toString();
+                        addDetailData();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

@@ -7,12 +7,12 @@ import com.google.firebase.database.Exclude;
  */
 
 public class DetailProsesModel {
-    String idPekerjaan, namaProses, tanggal, status, keterangan, idFile, namaFile;
+    String idPekerjaan, namaProses, tanggal, status, keterangan, idFile, namaFile, uriFile;
 
     public DetailProsesModel() {
     }
 
-    public DetailProsesModel(String idPekerjaan, String namaProses, String status, String tanggal, String keterangan, String idFile, String namaFile) {
+    public DetailProsesModel(String idPekerjaan, String namaProses, String status, String tanggal, String keterangan, String idFile, String namaFile, String uriFile) {
         this.idPekerjaan = idPekerjaan;
         this.namaProses = namaProses;
         this.tanggal = tanggal;
@@ -20,6 +20,7 @@ public class DetailProsesModel {
         this.keterangan = keterangan;
         this.idFile = idFile;
         this.namaFile = namaFile;
+        this.uriFile = uriFile;
     }
 
     public String getNamaProses() {
@@ -67,4 +68,12 @@ public class DetailProsesModel {
     public String getNamaFile() { return namaFile; }
 
     public void setNamaFile(String namaFile) { this.namaFile = namaFile; }
+
+    public String getUriFile() {
+        return uriFile;
+    }
+
+    public void setUriFile(String uriFile) {
+        this.uriFile = uriFile;
+    }
 }

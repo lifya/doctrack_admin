@@ -38,4 +38,8 @@ public class DetailProsesModelViewHolder extends RecyclerView.ViewHolder {
     public void setKeteranganProses (String keteranganProses){ tvKeteranganProses.setText(keteranganProses); }
 
     public void setTvFIleProses(String fileProses) { tvFIleProses.setText(fileProses); }
+
+    public TextView getTvFIleProses(String namaFile) {
+        return tvFIleProses;
+    }
 }

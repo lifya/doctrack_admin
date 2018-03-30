@@ -183,7 +183,7 @@ public class FormDocumentDialog2 extends AppCompatDialogFragment implements View
         dbUploadFile.child(idFile).setValue(fileModel);
 
         dbDetailProses = FirebaseDatabase.getInstance().getReference("DetailProses");
-        final DetailProsesModel detailProsesModel = new DetailProsesModel(idPekerjaan, getSpinnerProses, getSpinnerStatus, etTanggal, etKet, idFile, namaFile);
+        final DetailProsesModel detailProsesModel = new DetailProsesModel(idPekerjaan, getSpinnerProses, getSpinnerStatus, etTanggal, etKet, idFile, namaFile, dataUri.toString());
         dbDetailProses.child(idPekerjaan).child(getSpinnerProses).setValue(detailProsesModel);
         progressDialog.dismiss();
 

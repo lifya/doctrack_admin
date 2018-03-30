@@ -1,8 +1,12 @@
 package com.pln.www.activity;
 
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -51,6 +55,7 @@ public class DetailDocumentActivity extends AppCompatActivity {
     private String get_idPekerjaan, get_idKonsultan, get_idKontrak;
     private ArrayList<DetailProsesModel> listProses;
     private DetailDocumentActivity.RecycleAdapterProses adapterProses;
+    private DownloadManager downloadManager;
 
     protected RecyclerView mRecyclerView;
     protected RecyclerView.LayoutManager mLayoutManager;
@@ -201,7 +206,7 @@ public class DetailDocumentActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(final DetailProsesModelViewHolder holder, int position) {
+        public void onBindViewHolder(final DetailProsesModelViewHolder holder, final int position) {
             final String id_Pekerjaan = dataProses.get(position).getIdPekerjaan();
             final String id_file = dataProses.get(position).getIdFile();
             holder.setTvFIleProses(dataProses.get(position).getNamaFile());
@@ -209,6 +214,20 @@ public class DetailDocumentActivity extends AppCompatActivity {
             holder.setStatusProses(dataProses.get(position).getStatus());
             holder.setTanggalProses(dataProses.get(position).getTanggal());
             holder.setKeteranganProses(dataProses.get(position).getKeterangan());
+
+            holder.getTvFIleProses(dataProses.get(position).getNamaFile()).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    downloadManager = (DownloadManager)getSystemService(Context.DOWNLOAD_SERVICE);
+                    Uri uri = Uri.parse(dataProses.get(position).getUriFile());
+
+                    DownloadManager.Request request = new DownloadManager.Request(uri);
+                    request.setDescription("Download Completed").setTitle(dataProses.get(position).getNamaFile());
+                    request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, dataProses.get(position).getNamaFile());
+                    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                    Long reference = downloadManager.enqueue(request);
+                }
+            });
 
 //            dbUploadFile.child(id_file).addListenerForSingleValueEvent(new ValueEventListener() {
 //                @Override
