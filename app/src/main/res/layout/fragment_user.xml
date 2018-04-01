@@ -10,21 +10,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-    <android.support.v7.widget.SearchView
-        android:id="@+id/searchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_menu_camera"
-        android:layout_margin="10dp">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-    </android.support.v7.widget.SearchView>
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:id="@+id/rvUser">
-    </android.support.v7.widget.RecyclerView>
+            android:id="@+id/rvUser">
+        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
     <Button

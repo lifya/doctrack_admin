@@ -31,17 +31,17 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activity.AddDocumentActivity"
+            android:name=".activity.AddWorkActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activity.DocumentTrackingActivity"
+            android:name=".activity.WorkListActivity"
             android:label="@string/title_activity_document_tracking"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activity.DetailDocumentActivity"
+            android:name=".activity.DetailWorkDocumentActivity"
             android:label="@string/title_activity_document_tracking"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>

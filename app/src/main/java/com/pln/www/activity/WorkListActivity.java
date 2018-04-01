@@ -9,25 +9,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.View;
 
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.pln.www.R;
 import com.pln.www.fragment.AmdalFragment;
 import com.pln.www.fragment.UklUplFragment;
-import com.pln.www.model.ItemModel;
-import com.pln.www.viewholder.PekerjaanModelViewHolder;
 
-public class DocumentTrackingActivity extends AppCompatActivity implements View.OnClickListener{
+public class WorkListActivity extends AppCompatActivity implements View.OnClickListener{
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -39,7 +30,7 @@ public class DocumentTrackingActivity extends AppCompatActivity implements View.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_document_tracking);
+        setContentView(R.layout.activity_work_list);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -78,25 +69,25 @@ public class DocumentTrackingActivity extends AppCompatActivity implements View.
     public void onClick(View v) {
 
         if (v == addDoc){
-            AddDocumentActivity addDocActivity = new AddDocumentActivity();
+            AddWorkActivity addDocActivity = new AddWorkActivity();
             sentoAdd();
         }
     }
 
     @Override
     public void onBackPressed() {
-        DocumentTrackingActivity doc = new DocumentTrackingActivity();
+        WorkListActivity doc = new WorkListActivity();
         sentoHome();
     }
 
     public void sentoAdd() {
-        Intent startIntent = new Intent(DocumentTrackingActivity.this, AddDocumentActivity.class);
+        Intent startIntent = new Intent(WorkListActivity.this, AddWorkActivity.class);
         startActivity(startIntent);
         finish();
     }
 
     public void sentoHome() {
-        Intent startIntent = new Intent(DocumentTrackingActivity.this, MainActivity.class);
+        Intent startIntent = new Intent(WorkListActivity.this, MainActivity.class);
         startActivity(startIntent);
         finish();
     }

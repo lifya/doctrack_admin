@@ -6,15 +6,15 @@ import com.google.firebase.database.Exclude;
  * Created by ACHI on 17/02/2018.
  */
 
-public class DetailProsesModel {
-    String idPekerjaan, namaProses, tanggal, status, keterangan, idFile, namaFile, uriFile;
+public class DocumentModel {
+    String idPekerjaan, namaDokumen, tanggal, status, keterangan, idFile, namaFile, uriFile;
 
-    public DetailProsesModel() {
+    public DocumentModel() {
     }
 
-    public DetailProsesModel(String idPekerjaan, String namaProses, String status, String tanggal, String keterangan, String idFile, String namaFile, String uriFile) {
+    public DocumentModel(String idPekerjaan, String namaDokumen, String status, String tanggal, String keterangan, String idFile, String namaFile, String uriFile) {
         this.idPekerjaan = idPekerjaan;
-        this.namaProses = namaProses;
+        this.namaDokumen = namaDokumen;
         this.tanggal = tanggal;
         this.status = status;
         this.keterangan = keterangan;
@@ -23,12 +23,12 @@ public class DetailProsesModel {
         this.uriFile = uriFile;
     }
 
-    public String getNamaProses() {
-        return namaProses;
+    public String getNamaDokumen() {
+        return namaDokumen;
     }
 
-    public void setNamaProses(String namaProses) {
-        this.namaProses = namaProses;
+    public void setNamaDokumen(String namaDokumen) {
+        this.namaDokumen = namaDokumen;
     }
 
     public String getIdPekerjaan() {

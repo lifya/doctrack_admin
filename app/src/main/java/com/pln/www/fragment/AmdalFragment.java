@@ -25,10 +25,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.pln.www.R;
-import com.pln.www.activity.DetailDocumentActivity;
+import com.pln.www.activity.DetailWorkDocumentActivity;
 import com.pln.www.model.KontrakModel;
 import com.pln.www.model.PekerjaanModel;
-import com.pln.www.viewholder.PekerjaanModelViewHolder;
+import com.pln.www.viewholder.PekerjaanViewHolder;
 
 import java.util.ArrayList;
 
@@ -59,7 +59,7 @@ public class AmdalFragment extends Fragment{
     }
 
 
-    public class RecycleAdapterPekerjaan extends RecyclerView.Adapter<PekerjaanModelViewHolder>{
+    public class RecycleAdapterPekerjaan extends RecyclerView.Adapter<PekerjaanViewHolder>{
         ArrayList<PekerjaanModel> dataPekerjaan = new ArrayList<>();
 
         public RecycleAdapterPekerjaan(ArrayList<PekerjaanModel> list) {
@@ -67,18 +67,18 @@ public class AmdalFragment extends Fragment{
         }
 
         @Override
-        public PekerjaanModelViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_view, parent, false);
+        public PekerjaanViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_work, parent, false);
 
-            return new PekerjaanModelViewHolder(view);
+            return new PekerjaanViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(final PekerjaanModelViewHolder holder, int position) {
+        public void onBindViewHolder(final PekerjaanViewHolder holder, int position) {
             final String id_Pekerjaan = dataPekerjaan.get(position).getIdPekerjaan();
             final String id_Konsultan = dataPekerjaan.get(position).getIdKonsultan();
             final String id_Kontrak = dataPekerjaan.get(position).getIdKontrak();
-            holder.setNamaPekerjaan(dataPekerjaan.get(position).getNamaPekerjaan());
+            holder.setNamaPekerjaan(dataPekerjaan.get(position).getNamaJalur());
             holder.setTegangan(dataPekerjaan.get(position).getTegangan());
             holder.setKms(dataPekerjaan.get(position).getKms());
             holder.setProvinsi(dataPekerjaan.get(position).getProvinsi());
@@ -98,10 +98,10 @@ public class AmdalFragment extends Fragment{
                 }
             });
 
-            holder.setOnClickListener(new PekerjaanModelViewHolder.ClickListener() {
+            holder.setOnClickListener(new PekerjaanViewHolder.ClickListener() {
                   @Override
                   public void onItemClick(View view, int position) {
-                      Intent intent = new Intent(getActivity(), DetailDocumentActivity.class);
+                      Intent intent = new Intent(getActivity(), DetailWorkDocumentActivity.class);
                       intent.putExtra("id_pekerjaan", id_Pekerjaan);
                       intent.putExtra("id_konsultan", id_Konsultan);
                       intent.putExtra("id_kontrak", id_Kontrak);
@@ -178,7 +178,7 @@ public class AmdalFragment extends Fragment{
 
                 ArrayList<PekerjaanModel> list = new ArrayList<>();
                 for(PekerjaanModel pekerjaan : listPekerjaan){
-                    String nama_pekerjaan = pekerjaan.getNamaPekerjaan().toLowerCase();
+                    String nama_pekerjaan = pekerjaan.getNamaJalur().toLowerCase();
                     if(nama_pekerjaan.contains(newText)){
                         list.add(pekerjaan);
                     }

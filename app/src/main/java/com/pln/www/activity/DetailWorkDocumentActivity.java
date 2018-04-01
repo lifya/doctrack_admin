@@ -10,13 +10,11 @@ import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,17 +25,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.pln.www.R;
 import com.pln.www.alert.FormDocumentDialog;
-import com.pln.www.fragment.AmdalFragment;
-import com.pln.www.model.DetailProses;
-import com.pln.www.model.DetailProsesModel;
+import com.pln.www.model.DocumentModel;
 import com.pln.www.model.KonsultanModel;
 import com.pln.www.model.KontrakModel;
 import com.pln.www.model.PekerjaanModel;
-import com.pln.www.model.UploadFileModel;
-import com.pln.www.viewholder.DetailProsesModelViewHolder;
+import com.pln.www.viewholder.DocumentViewHolder;
 
 import java.util.ArrayList;
 
@@ -45,7 +39,7 @@ import java.util.ArrayList;
  * Created by User on 13/01/2018.
  */
 
-public class DetailDocumentActivity extends AppCompatActivity {
+public class DetailWorkDocumentActivity extends AppCompatActivity {
     private ImageView ivBack, ivProses;
     private TextView tvJudul, tvKonsultan, tvTanggalMulai, tvTanggalAKhir, tvTegangan, tvKms, tvProvinsi, tvKontrak;
     private ProgressDialog progressDialog;
@@ -53,8 +47,8 @@ public class DetailDocumentActivity extends AppCompatActivity {
     private Intent intent;
     private Bundle bundle;
     private String get_idPekerjaan, get_idKonsultan, get_idKontrak;
-    private ArrayList<DetailProsesModel> listProses;
-    private DetailDocumentActivity.RecycleAdapterProses adapterProses;
+    private ArrayList<DocumentModel> listProses;
+    private DetailWorkDocumentActivity.RecycleAdapterProses adapterProses;
     private DownloadManager downloadManager;
 
     protected RecyclerView mRecyclerView;
@@ -75,7 +69,7 @@ public class DetailDocumentActivity extends AppCompatActivity {
 
         mRecyclerView = (RecyclerView) findViewById(R.id.rvDetailProses);
 
-        mLayoutManager = new LinearLayoutManager(DetailDocumentActivity.this);
+        mLayoutManager = new LinearLayoutManager(DetailWorkDocumentActivity.this);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
 
@@ -118,12 +112,12 @@ public class DetailDocumentActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AddDocumentActivity doc = new AddDocumentActivity();
+        AddWorkActivity doc = new AddWorkActivity();
         sentoDocumentList();
     }
 
     private void sentoDocumentList() {
-        Intent startIntent = new Intent(DetailDocumentActivity.this, DocumentTrackingActivity.class);
+        Intent startIntent = new Intent(DetailWorkDocumentActivity.this, WorkListActivity.class);
         startActivity(startIntent);
         finish();
     }
@@ -137,7 +131,7 @@ public class DetailDocumentActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     PekerjaanModel pekerjaanModel = dataSnapshot.getValue(PekerjaanModel.class);
-                    String namaPekerjaan = pekerjaanModel.getNamaPekerjaan();
+                    String namaPekerjaan = pekerjaanModel.getNamaJalur();
                     String tegangan = pekerjaanModel.getTegangan();
                     String kms = pekerjaanModel.getKms();
                     String provinsi = pekerjaanModel.getProvinsi();
@@ -150,7 +144,7 @@ public class DetailDocumentActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-                    Toast.makeText(DetailDocumentActivity.this, "Failed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(DetailWorkDocumentActivity.this, "Failed", Toast.LENGTH_LONG).show();
                     return;
                 }
             });
@@ -164,7 +158,7 @@ public class DetailDocumentActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-                    Toast.makeText(DetailDocumentActivity.this, "Failed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(DetailWorkDocumentActivity.this, "Failed", Toast.LENGTH_LONG).show();
                     return;
                 }
             });
@@ -182,7 +176,7 @@ public class DetailDocumentActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
-                    Toast.makeText(DetailDocumentActivity.this, "Failed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(DetailWorkDocumentActivity.this, "Failed", Toast.LENGTH_LONG).show();
                     return;
                 }
             });
@@ -190,27 +184,27 @@ public class DetailDocumentActivity extends AppCompatActivity {
         }
     }
 
-    public class RecycleAdapterProses extends RecyclerView.Adapter<DetailProsesModelViewHolder> {
+    public class RecycleAdapterProses extends RecyclerView.Adapter<DocumentViewHolder> {
 
-        ArrayList<DetailProsesModel> dataProses = new ArrayList<>();
+        ArrayList<DocumentModel> dataProses = new ArrayList<>();
 
-        public RecycleAdapterProses(ArrayList<DetailProsesModel> list) {
+        public RecycleAdapterProses(ArrayList<DocumentModel> list) {
             dataProses = list;
         }
 
         @Override
-        public DetailProsesModelViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_proses, parent, false);
+        public DocumentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_document, parent, false);
 
-            return new DetailProsesModelViewHolder(view);
+            return new DocumentViewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(final DetailProsesModelViewHolder holder, final int position) {
+        public void onBindViewHolder(final DocumentViewHolder holder, final int position) {
             final String id_Pekerjaan = dataProses.get(position).getIdPekerjaan();
             final String id_file = dataProses.get(position).getIdFile();
             holder.setTvFIleProses(dataProses.get(position).getNamaFile());
-            holder.setNamaProses(dataProses.get(position).getNamaProses());
+            holder.setNamaProses(dataProses.get(position).getNamaDokumen());
             holder.setStatusProses(dataProses.get(position).getStatus());
             holder.setTanggalProses(dataProses.get(position).getTanggal());
             holder.setKeteranganProses(dataProses.get(position).getKeterangan());
@@ -229,20 +223,7 @@ public class DetailDocumentActivity extends AppCompatActivity {
                 }
             });
 
-//            dbUploadFile.child(id_file).addListenerForSingleValueEvent(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(DataSnapshot dataSnapshot) {
-//                    UploadFileModel uploadFileModel = dataSnapshot.getValue(UploadFileModel.class);
-//                    String namaFile = uploadFileModel.getName();
-//                    holder.setTvFIleProses(namaFile);
-//                }
-//
-//                @Override
-//                public void onCancelled(DatabaseError databaseError) {
-//                    Toast.makeText(DetailDocumentActivity.this, "Failed to Get File ID", Toast.LENGTH_LONG).show();
-//                    return;
-//                }
-//            });
+
 
         }
 
@@ -264,8 +245,8 @@ public class DetailDocumentActivity extends AppCompatActivity {
 
                     if(id.equals(get_idPekerjaan)){
                         for(DataSnapshot namaProses : detailProsesSnapshot.getChildren()) {
-                            DetailProsesModel detailProsesModel = namaProses.getValue(DetailProsesModel.class);
-                            listProses.add(detailProsesModel);
+                            DocumentModel documentModel = namaProses.getValue(DocumentModel.class);
+                            listProses.add(documentModel);
                         }
                     }
                 }

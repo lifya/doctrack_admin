@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.pln.www.activity.AddDocumentActivity">
+    tools:context="com.pln.www.activity.AddWorkActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,7 +12,7 @@
         android:orientation="vertical"
         android:id="@+id/linearLayout">
 
-        <include layout="@layout/toolbar_add_document"/>
+        <include layout="@layout/toolbar_add_work"/>
 
         <LinearLayout
             android:layout_width="match_parent"

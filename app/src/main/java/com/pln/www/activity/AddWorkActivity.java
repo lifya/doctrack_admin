@@ -3,51 +3,34 @@ package com.pln.www.activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-import com.pln.www.Helper.Constant;
 import com.pln.www.R;
 import com.pln.www.model.KonsultanModel;
 import com.pln.www.model.KontrakModel;
 import com.pln.www.model.PekerjaanModel;
 
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
-public class AddDocumentActivity extends AppCompatActivity{
+public class AddWorkActivity extends AppCompatActivity{
 
-    private ImageView ivGetFile, ivBack;
+    private ImageView ivBack;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
     private EditText Ed1, Ed2, etJudul, etTegangan, etKms, etProvinsi, etKonsultan, etKontrak, etUploadFile;
@@ -55,17 +38,12 @@ public class AddDocumentActivity extends AppCompatActivity{
     private Calendar mCurrentDate;
     private int day, month, year;
     String idKonsultan, idKontrak, idPekerjaan;
-    private ProgressDialog progressDialog;
-    private DatabaseReference dbKonsultan, dbKontrak, dbPekerjaan, databaseReference;
-    private StorageReference storageReference;
-    private ProgressBar progressBar;
+    private DatabaseReference dbKonsultan, dbKontrak, dbPekerjaan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_document);
-        databaseReference = FirebaseDatabase.getInstance().getReference(Constant.DATABASE_PATH_UPLOADS);
-        storageReference = FirebaseStorage.getInstance().getReference();
+        setContentView(R.layout.activity_add_work);
         dbKonsultan = FirebaseDatabase.getInstance().getReference("Konsultan");
         dbKontrak = FirebaseDatabase.getInstance().getReference("Kontrak");
         dbPekerjaan = FirebaseDatabase.getInstance().getReference("Pekerjaan");
@@ -93,7 +71,7 @@ public class AddDocumentActivity extends AppCompatActivity{
         Ed1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(AddDocumentActivity.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(AddWorkActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int montOfYear, int dayOfMonth) {
                         montOfYear = montOfYear+1;
@@ -107,7 +85,7 @@ public class AddDocumentActivity extends AppCompatActivity{
         Ed2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(AddDocumentActivity.this, new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(AddWorkActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int montOfYear, int dayOfMonth) {
                         montOfYear = montOfYear+1;
@@ -137,12 +115,12 @@ public class AddDocumentActivity extends AppCompatActivity{
 
     @Override
     public void onBackPressed() {
-        AddDocumentActivity doc = new AddDocumentActivity();
+        AddWorkActivity doc = new AddWorkActivity();
         sentoDocumentList();
     }
 
     private void sentoDocumentList() {
-        Intent startIntent = new Intent(AddDocumentActivity.this, DocumentTrackingActivity.class);
+        Intent startIntent = new Intent(AddWorkActivity.this, WorkListActivity.class);
         startActivity(startIntent);
         finish();
     }
@@ -227,7 +205,7 @@ public class AddDocumentActivity extends AppCompatActivity{
         dbPekerjaan.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Intent intent = new Intent(AddDocumentActivity.this, DetailDocumentActivity.class);
+                Intent intent = new Intent(AddWorkActivity.this, DetailWorkDocumentActivity.class);
 //                Bundle bundle = new Bundle();
 //                bundle.putString("id_pekerjaan",idPekerjaan);
 //                bundle.putString("id_konsultan",idKonsultan);

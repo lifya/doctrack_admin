@@ -10,11 +10,11 @@ import com.pln.www.R;
  * Created by User on 12/03/2018.
  */
 
-public class DetailProsesModelViewHolder extends RecyclerView.ViewHolder {
+public class DocumentViewHolder extends RecyclerView.ViewHolder {
     private View mView;
     private TextView tvNamaProses, tvStatusProses, tvTanggalProses, tvKeteranganProses, tvFIleProses;
 
-    public DetailProsesModelViewHolder(View itemView){
+    public DocumentViewHolder(View itemView){
         super(itemView);
         mView = itemView;
         tvNamaProses = (TextView) mView.findViewById(R.id.tvNamaProses);

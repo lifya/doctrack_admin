@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void  sentoStartDoc() {
-        Intent startIntent = new Intent(MainActivity.this, DocumentTrackingActivity.class);
+        Intent startIntent = new Intent(MainActivity.this, WorkListActivity.class);
         startActivity(startIntent);
         finish();
     }
@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onClick(View v) {
         if(v == imagev1){
-            DocumentTrackingActivity home = new DocumentTrackingActivity();
+            WorkListActivity home = new WorkListActivity();
             sentoStartDoc();
         }
         else if (v == imagev2) {

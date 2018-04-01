@@ -33,8 +33,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.pln.www.Helper.Constant;
 import com.pln.www.R;
-import com.pln.www.activity.DetailDocumentActivity;
-import com.pln.www.model.DetailProsesModel;
+import com.pln.www.activity.DetailWorkDocumentActivity;
+import com.pln.www.model.DocumentModel;
 import com.pln.www.model.UploadFileModel;
 
 import java.util.Calendar;
@@ -58,7 +58,6 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
     private ProgressDialog progressDialog;
     private Intent intent;
     private StorageReference storageReference;
-    private DatabaseReference databaseReference;
     private DatabaseReference dbDetailProses, dbUploadFile;
     final static int PICK_PDF_CODE = 2342;
     private Uri dataUri;
@@ -167,10 +166,16 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         String etTanggal = Ed.getText().toString();
         String etKet = etKeterangan.getText().toString();
 
+
         if(TextUtils.isEmpty(etKet)){
-            Toast.makeText(getActivity(), "Isi keterangan", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Masukkan keterangan", Toast.LENGTH_LONG).show();
             return;
         }
+
+//        if(TextUtils.isEmpty(etUploadFile)){
+//            Toast.makeText(getActivity(), "Masukkan File", Toast.LENGTH_LONG).show();
+//            return;
+//        }
 
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Please Wait");
@@ -183,12 +188,12 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         dbUploadFile.child(idFile).setValue(fileModel);
 
         dbDetailProses = FirebaseDatabase.getInstance().getReference("DetailProses");
-        final DetailProsesModel detailProsesModel = new DetailProsesModel(idPekerjaan, getSpinnerProses, getSpinnerStatus, etTanggal, etKet, idFile, namaFile, downloadurl);
-        dbDetailProses.child(idPekerjaan).child(getSpinnerProses).setValue(detailProsesModel);
+        final DocumentModel documentModel = new DocumentModel(idPekerjaan, getSpinnerProses, getSpinnerStatus, etTanggal, etKet, idFile, namaFile, downloadurl);
+        dbDetailProses.child(idPekerjaan).child(getSpinnerProses).setValue(documentModel);
         progressDialog.dismiss();
 
         //Toast.makeText(getActivity(), "Data Berhasil di Unduh", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(getActivity(), DetailDocumentActivity.class);
+        Intent intent = new Intent(getActivity(), DetailWorkDocumentActivity.class);
         intent.putExtra("id_pekerjaan", idPekerjaan);
         intent.putExtra("id_konsultan", idKonsultan);
         intent.putExtra("id_kontrak", idKontrak);
@@ -212,10 +217,6 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
             dataUri = data.getData();
             if (dataUri != null) {
                 etUploadFile.setText(dataUri.getLastPathSegment().toString());
-                Toast.makeText(this.getContext(), "one file chosen", Toast.LENGTH_SHORT).show();
-//                UploadFileModel uploadFileModel = new UploadFileModel();
-//                String namaFile = uploadFileModel.getName();
-//                etUploadFile.setText(namaFile);
 
             }else{
                 Toast.makeText(this.getContext(), "No file chosen", Toast.LENGTH_SHORT).show();
