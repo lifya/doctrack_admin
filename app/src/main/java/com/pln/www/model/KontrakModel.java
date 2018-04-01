@@ -7,13 +7,14 @@ import java.util.Date;
  */
 
 public class KontrakModel {
-    String idKontrak, noKontrak, tglMulai, tglAkhir;
+    String idKontrak, noKontrak, namaKonsultan, tglMulai, tglAkhir;
 
     public KontrakModel(){}
 
-    public KontrakModel(String idKontrak, String noKontrak, String tglMulai, String tglAkhir) {
+    public KontrakModel(String idKontrak, String noKontrak, String namaKonsultan, String tglMulai, String tglAkhir) {
         this.idKontrak = idKontrak;
         this.noKontrak = noKontrak;
+        this.namaKonsultan = namaKonsultan;
         this.tglMulai = tglMulai;
         this.tglAkhir = tglAkhir;
     }
@@ -33,6 +34,10 @@ public class KontrakModel {
     public void setNoKontrak(String noKontrak) {
         this.noKontrak = noKontrak;
     }
+
+    public String getNamaKonsultan() { return namaKonsultan; }
+
+    public void setNamaKonsultan(String namaKonsultan) { this.namaKonsultan = namaKonsultan; }
 
     public String getTglMulai() {
         return tglMulai;

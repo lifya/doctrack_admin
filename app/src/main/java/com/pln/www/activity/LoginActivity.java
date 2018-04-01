@@ -34,9 +34,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText etUsername, etPassword;
     private ProgressDialog progressDialog;
     private TextView fpass;
-    private String email, name;
     private DatabaseReference dbUsers;
-    //private Query query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +42,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         mAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
-
-        //databaseReference = FirebaseDatabase.getInstance().getReference();
 
         etUsername = (EditText) findViewById(R.id.etUsername);
         etPassword = (EditText) findViewById(R.id.etPassword);
@@ -156,7 +152,6 @@ public void sentoReset() {
             userLogin();
         }
         else if (v == fpass) {
-            RessetPasswordActivity home = new RessetPasswordActivity();
             sentoReset();
         }
     }

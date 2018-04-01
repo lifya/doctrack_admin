@@ -35,7 +35,6 @@ import com.pln.www.Helper.Constant;
 import com.pln.www.R;
 import com.pln.www.activity.DetailWorkDocumentActivity;
 import com.pln.www.model.DocumentModel;
-import com.pln.www.model.UploadFileModel;
 
 import java.util.Calendar;
 
@@ -181,13 +180,8 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
         progressDialog.setMessage("Please Wait");
         progressDialog.show();
 
-        dbUploadFile = FirebaseDatabase.getInstance().getReference("Uploads");
-        idFile = dbUploadFile.push().getKey();
-        namaFile = dataUri.getLastPathSegment().toString();
-        final UploadFileModel fileModel = new UploadFileModel(idFile, namaFile, dataUri.toString());
-        dbUploadFile.child(idFile).setValue(fileModel);
-
         dbDetailProses = FirebaseDatabase.getInstance().getReference("DetailProses");
+        namaFile = dataUri.getLastPathSegment().toString();
         final DocumentModel documentModel = new DocumentModel(idPekerjaan, getSpinnerProses, getSpinnerStatus, etTanggal, etKet, idFile, namaFile, downloadurl);
         dbDetailProses.child(idPekerjaan).child(getSpinnerProses).setValue(documentModel);
         progressDialog.dismiss();

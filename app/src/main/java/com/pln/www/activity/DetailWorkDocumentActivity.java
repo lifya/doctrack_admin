@@ -28,7 +28,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.pln.www.R;
 import com.pln.www.alert.FormDocumentDialog;
 import com.pln.www.model.DocumentModel;
-import com.pln.www.model.KonsultanModel;
 import com.pln.www.model.KontrakModel;
 import com.pln.www.model.PekerjaanModel;
 import com.pln.www.viewholder.DocumentViewHolder;
@@ -42,11 +41,10 @@ import java.util.ArrayList;
 public class DetailWorkDocumentActivity extends AppCompatActivity {
     private ImageView ivBack, ivProses;
     private TextView tvJudul, tvKonsultan, tvTanggalMulai, tvTanggalAKhir, tvTegangan, tvKms, tvProvinsi, tvKontrak;
-    private ProgressDialog progressDialog;
-    private DatabaseReference dbKonsultan, dbKontrak, dbPekerjaan, dbDetailProses, dbUploadFile;
+    private DatabaseReference dbKontrak, dbPekerjaan, dbDetailProses;
     private Intent intent;
     private Bundle bundle;
-    private String get_idPekerjaan, get_idKonsultan, get_idKontrak;
+    private String get_idPekerjaan, get_idKontrak;
     private ArrayList<DocumentModel> listProses;
     private DetailWorkDocumentActivity.RecycleAdapterProses adapterProses;
     private DownloadManager downloadManager;
@@ -63,7 +61,6 @@ public class DetailWorkDocumentActivity extends AppCompatActivity {
         bundle = intent.getExtras();
         if(bundle != null){
             get_idPekerjaan = (String) bundle.get("id_pekerjaan");
-            get_idKonsultan = (String) bundle.get("id_konsultan");
             get_idKontrak = (String) bundle.get("id_kontrak");
         }
 
@@ -73,11 +70,9 @@ public class DetailWorkDocumentActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        dbKonsultan = FirebaseDatabase.getInstance().getReference("Konsultan");
         dbKontrak = FirebaseDatabase.getInstance().getReference("Kontrak");
         dbPekerjaan = FirebaseDatabase.getInstance().getReference("Pekerjaan");
         dbDetailProses = FirebaseDatabase.getInstance().getReference("DetailProses");
-        dbUploadFile = FirebaseDatabase.getInstance().getReference("Uploads");
 
         tvJudul = (TextView) findViewById(R.id.tvJudul);
         tvKonsultan = (TextView) findViewById(R.id.tvKonsultan);
@@ -112,7 +107,6 @@ public class DetailWorkDocumentActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AddWorkActivity doc = new AddWorkActivity();
         sentoDocumentList();
     }
 
@@ -148,28 +142,17 @@ public class DetailWorkDocumentActivity extends AppCompatActivity {
                     return;
                 }
             });
-            dbKonsultan.child(get_idKonsultan).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    KonsultanModel konsultanModel = dataSnapshot.getValue(KonsultanModel.class);
-                    String namaKonsultan = konsultanModel.getNamaKonsultan();
-                    tvKonsultan.setText(namaKonsultan);
-                }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Toast.makeText(DetailWorkDocumentActivity.this, "Failed", Toast.LENGTH_LONG).show();
-                    return;
-                }
-            });
             dbKontrak.child(get_idKontrak).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     KontrakModel kontrakModel = dataSnapshot.getValue(KontrakModel.class);
                     String noKontrak = kontrakModel.getNoKontrak();
+                    String namaKonsultan = kontrakModel.getNamaKonsultan();
                     String tglMulai = kontrakModel.getTglMulai();
                     String tglAkhir = kontrakModel.getTglAkhir();
                     tvKontrak.setText(noKontrak);
+                    tvKonsultan.setText(namaKonsultan);
                     tvTanggalMulai.setText(tglMulai);
                     tvTanggalAKhir.setText(tglAkhir);
                 }
@@ -202,7 +185,6 @@ public class DetailWorkDocumentActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final DocumentViewHolder holder, final int position) {
             final String id_Pekerjaan = dataProses.get(position).getIdPekerjaan();
-            final String id_file = dataProses.get(position).getIdFile();
             holder.setTvFIleProses(dataProses.get(position).getNamaFile());
             holder.setNamaProses(dataProses.get(position).getNamaDokumen());
             holder.setStatusProses(dataProses.get(position).getStatus());
@@ -301,7 +283,6 @@ public class DetailWorkDocumentActivity extends AppCompatActivity {
             FormDocumentDialog dialogAdd = new FormDocumentDialog();
             Bundle bundle = new Bundle();
             bundle.putString("idPekerjaan", get_idPekerjaan);
-            bundle.putString("idKonsultan", get_idKonsultan);
             bundle.putString("idKontrak", get_idKontrak);
             dialogAdd.setArguments(bundle);
             dialogAdd.show(manager, dialogAdd.getTag());

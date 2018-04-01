@@ -5,13 +5,12 @@ package com.pln.www.model;
  */
 
 public class PekerjaanModel {
-    String idPekerjaan, idKontrak, idKonsultan, namaJalur, tegangan, kms, provinsi, jenisPekerjaan, file;
+    String idPekerjaan, idKontrak, namaJalur, tegangan, kms, provinsi, jenisPekerjaan, file;
 
     public PekerjaanModel(){}
 
-    public PekerjaanModel(String idPekerjaan, String idKonsultan, String idKontrak, String namaJalur, String tegangan, String kms, String provinsi, String jenisPekerjaan){
+    public PekerjaanModel(String idPekerjaan, String idKontrak, String namaJalur, String tegangan, String kms, String provinsi, String jenisPekerjaan){
         this.idPekerjaan = idPekerjaan;
-        this.idKonsultan = idKonsultan;
         this.idKontrak = idKontrak;
         this.namaJalur = namaJalur;
         this.tegangan = tegangan;
@@ -60,19 +59,7 @@ public class PekerjaanModel {
         this.file = file;
     }
 
-    public void setIdKontrak (String idKontrak){
-        this.idKontrak = idKontrak;
-    }
+    public void setIdKontrak (String idKontrak){ this.idKontrak = idKontrak; }
 
-    public String getIdKontrak (){
-        return idKontrak;
-    }
-
-    public void setIdKonsultan (String idKonsultan){
-        this.idKonsultan = idKonsultan;
-    }
-
-    public String getIdKonsultan (){
-        return idKonsultan;
-    }
+    public String getIdKontrak (){ return idKontrak; }
 }

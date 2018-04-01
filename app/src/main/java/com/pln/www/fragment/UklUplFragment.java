@@ -43,11 +43,9 @@ public class UklUplFragment extends Fragment {
     private static final String TAG = "RecyclerViewFragment";
     private static final String KEY_LAYOUT_MANAGER = "layoutManager";
     private static final int SPAN_COUNT = 2;
-    private static final int DATASET_COUNT = 60; // menampilkan data sebanyak value
     protected UklUplFragment.LayoutManagerType mCurrentLayoutManagerType;
     protected RecyclerView mRecyclerView;
     protected RecyclerView.LayoutManager mLayoutManager;
-    private FirebaseRecyclerAdapter firebaseRecyclerAdapter;
     private DatabaseReference dbPekerjaan;
     private SearchView searchView;
     private ArrayList<PekerjaanModel> listPekerjaan;
@@ -81,7 +79,6 @@ public class UklUplFragment extends Fragment {
         @Override
         public void onBindViewHolder(final PekerjaanViewHolder holder, int position) {
             final String id_Pekerjaan = dataPekerjaan.get(position).getIdPekerjaan();
-            final String id_Konsultan = dataPekerjaan.get(position).getIdKonsultan();
             final String id_Kontrak = dataPekerjaan.get(position).getIdKontrak();
             holder.setNamaPekerjaan(dataPekerjaan.get(position).getNamaJalur());
             holder.setTegangan(dataPekerjaan.get(position).getTegangan());
@@ -108,7 +105,6 @@ public class UklUplFragment extends Fragment {
                 public void onItemClick(View view, int position) {
                     Intent intent = new Intent(getActivity(), DetailWorkDocumentActivity.class);
                     intent.putExtra("id_pekerjaan", id_Pekerjaan);
-                    intent.putExtra("id_konsultan", id_Konsultan);
                     intent.putExtra("id_kontrak", id_Kontrak);
                     startActivity(intent);
                 }

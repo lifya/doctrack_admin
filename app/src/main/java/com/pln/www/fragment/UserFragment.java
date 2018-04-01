@@ -13,31 +13,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.ValueEventListener;
 import com.pln.www.R;
 //import com.pln.www.adapter.UserAdpter;
-import com.pln.www.adapter.RecycleAdapter;
-import com.pln.www.interfacee.ItemClickListener;
-import com.pln.www.model.KontrakModel;
 import com.pln.www.model.UserModel;
 import com.pln.www.viewholder.UserViewHolder;
 import com.pln.www.alert.FormUserDialog;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**

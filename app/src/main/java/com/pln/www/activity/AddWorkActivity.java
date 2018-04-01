@@ -21,7 +21,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.pln.www.R;
-import com.pln.www.model.KonsultanModel;
 import com.pln.www.model.KontrakModel;
 import com.pln.www.model.PekerjaanModel;
 
@@ -33,18 +32,17 @@ public class AddWorkActivity extends AppCompatActivity{
     private ImageView ivBack;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
-    private EditText Ed1, Ed2, etJudul, etTegangan, etKms, etProvinsi, etKonsultan, etKontrak, etUploadFile;
+    private EditText Ed1, Ed2, etJudul, etTegangan, etKms, etProvinsi, etKonsultan, etKontrak;
     private TextView tvSave;
     private Calendar mCurrentDate;
     private int day, month, year;
-    String idKonsultan, idKontrak, idPekerjaan;
-    private DatabaseReference dbKonsultan, dbKontrak, dbPekerjaan;
+    String idKontrak, idPekerjaan;
+    private DatabaseReference dbKontrak, dbPekerjaan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_work);
-        dbKonsultan = FirebaseDatabase.getInstance().getReference("Konsultan");
         dbKontrak = FirebaseDatabase.getInstance().getReference("Kontrak");
         dbPekerjaan = FirebaseDatabase.getInstance().getReference("Pekerjaan");
         tvSave = (TextView) findViewById(R.id.tvSave);
@@ -56,7 +54,6 @@ public class AddWorkActivity extends AppCompatActivity{
         etProvinsi = (EditText) findViewById(R.id.etProvinsi);
         etKonsultan = (EditText) findViewById(R.id.etKonsultan);
         etKontrak = (EditText) findViewById(R.id.etKontrak);
-        etUploadFile = (EditText) findViewById(R.id.etUploadFile);
         Ed1 = (EditText) findViewById(R.id.etTglMulai);
         Ed2 = (EditText) findViewById(R.id.etTglAkhir);
         mCurrentDate = Calendar.getInstance();
@@ -115,7 +112,6 @@ public class AddWorkActivity extends AppCompatActivity{
 
     @Override
     public void onBackPressed() {
-        AddWorkActivity doc = new AddWorkActivity();
         sentoDocumentList();
     }
 
@@ -183,37 +179,22 @@ public class AddWorkActivity extends AppCompatActivity{
 
         onWait();
 
-        idKonsultan = dbKonsultan.push().getKey();
-        final KonsultanModel konsultanModel = new KonsultanModel(idKonsultan, konsultan);
-        dbKonsultan.child(idKonsultan).setValue(konsultanModel);
-
         idKontrak = dbKontrak.push().getKey();
-        final KontrakModel kontrakModel = new KontrakModel(idKontrak, kontrak, tglMulai, tglAkhir);
+        final KontrakModel kontrakModel = new KontrakModel(idKontrak, kontrak, konsultan, tglMulai, tglAkhir);
         dbKontrak.child(idKontrak).setValue(kontrakModel);
 
         idPekerjaan = dbPekerjaan.push().getKey();
-        final PekerjaanModel pekerjaanModel = new PekerjaanModel(idPekerjaan, idKonsultan, idKontrak, judul, tegangan, kms, provinsi, jenisDoc);
+        final PekerjaanModel pekerjaanModel = new PekerjaanModel(idPekerjaan, idKontrak, judul, tegangan, kms, provinsi, jenisDoc);
         //dbPekerjaan.child(idPekerjaan).child(idKonsultan).child(idKontrak).setValue(pekerjaanModel);
         dbPekerjaan.child(idPekerjaan).setValue(pekerjaanModel);
 
-        //progressDialog.dismiss();
-
-        //startActivity(getIntent());
-//        Toast.makeText(this, "Successes", Toast.LENGTH_LONG).show();
-//        return;
 
         dbPekerjaan.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Intent intent = new Intent(AddWorkActivity.this, DetailWorkDocumentActivity.class);
-//                Bundle bundle = new Bundle();
-//                bundle.putString("id_pekerjaan",idPekerjaan);
-//                bundle.putString("id_konsultan",idKonsultan);
-//                bundle.putString("id_kontrak",idKontrak);
                 intent.putExtra("id_pekerjaan", idPekerjaan);
-                intent.putExtra("id_konsultan", idKonsultan);
                 intent.putExtra("id_kontrak", idKontrak);
-//                intent.putExtra("Key1",bundle);
                 startActivity(intent);
             }
 
@@ -246,45 +227,6 @@ public class AddWorkActivity extends AppCompatActivity{
         progressDialog.setMessage("Please Wait");
         progressDialog.setCancelable(false);
         progressDialog.show();
-    }
-
-    private void checkData(String judul, String tegangan, String kms, String provinsi, String konsultan, String kontrak, String tglMulai, String tglAkhir){
-        if(TextUtils.isEmpty(judul)){
-            Toast.makeText(this, "Please Enter The Title", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        if(TextUtils.isEmpty(tegangan)){
-            Toast.makeText(this, "Please Enter The Tegangan", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        if(TextUtils.isEmpty(kms)){
-            Toast.makeText(this, "Please Enter The KMS", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        if(TextUtils.isEmpty(provinsi)){
-            Toast.makeText(this, "Please Enter The Provinsi", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        if(TextUtils.isEmpty(konsultan)){
-            Toast.makeText(this, "Please Enter The Consultant", Toast.LENGTH_LONG).show();
-            return;
-        }
-        if(TextUtils.isEmpty(kontrak)){
-            Toast.makeText(this, "Please Enter The Contract", Toast.LENGTH_LONG).show();
-            return;
-        }
-        if(TextUtils.isEmpty(tglMulai)){
-            Toast.makeText(this, "Please Enter The Date", Toast.LENGTH_LONG).show();
-            return;
-        }
-        if(TextUtils.isEmpty(tglAkhir)){
-            Toast.makeText(this, "Please Enter The Date", Toast.LENGTH_LONG).show();
-            return;
-        }
     }
 
 

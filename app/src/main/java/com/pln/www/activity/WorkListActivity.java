@@ -34,7 +34,6 @@ public class WorkListActivity extends AppCompatActivity implements View.OnClickL
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
@@ -60,7 +59,6 @@ public class WorkListActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_document_tracking, menu);
         return true;
     }
@@ -69,14 +67,12 @@ public class WorkListActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
 
         if (v == addDoc){
-            AddWorkActivity addDocActivity = new AddWorkActivity();
             sentoAdd();
         }
     }
 
     @Override
     public void onBackPressed() {
-        WorkListActivity doc = new WorkListActivity();
         sentoHome();
     }
 
@@ -100,8 +96,6 @@ public class WorkListActivity extends AppCompatActivity implements View.OnClickL
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0 :
                     AmdalFragment amdalFragment = new AmdalFragment();
@@ -115,7 +109,6 @@ public class WorkListActivity extends AppCompatActivity implements View.OnClickL
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return 2;
         }
     }
