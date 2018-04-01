@@ -47,7 +47,7 @@ import static android.app.Activity.RESULT_OK;
  */
 public class FormDocumentDialog extends AppCompatDialogFragment implements View.OnClickListener{
 
-    private ImageView imageView, ivGetFile;
+    private ImageView ivGetFile;
     private Button bCancel, bAddDoc;
     public EditText Ed, etFile, etKeterangan;
     public Spinner spinnerProses, spinnerStatus;
@@ -55,12 +55,11 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
     private Calendar mCurrentDate;
     private int day, month, year;
     private ProgressDialog progressDialog;
-    private Intent intent;
     private StorageReference storageReference;
-    private DatabaseReference dbDetailProses, dbUploadFile;
+    private DatabaseReference dbDetailProses;
     final static int PICK_PDF_CODE = 2342;
     private Uri dataUri;
-    private String idPekerjaan, idKonsultan, idKontrak, idFile, namaFile;
+    private String idPekerjaan, idKonsultan, idKontrak, namaFile;
     private EditText etUploadFile;
     private String downloadurl;
     private String permohonan[] = {"Permohonan RT/RW","Izin Keluar"};
@@ -182,7 +181,7 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
 
         dbDetailProses = FirebaseDatabase.getInstance().getReference("DetailProses");
         namaFile = dataUri.getLastPathSegment().toString();
-        final DocumentModel documentModel = new DocumentModel(idPekerjaan, getSpinnerProses, getSpinnerStatus, etTanggal, etKet, idFile, namaFile, downloadurl);
+        final DocumentModel documentModel = new DocumentModel(idPekerjaan, getSpinnerProses, getSpinnerStatus, etTanggal, etKet, namaFile, downloadurl);
         dbDetailProses.child(idPekerjaan).child(getSpinnerProses).setValue(documentModel);
         progressDialog.dismiss();
 

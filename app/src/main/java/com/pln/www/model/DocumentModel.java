@@ -7,18 +7,17 @@ import com.google.firebase.database.Exclude;
  */
 
 public class DocumentModel {
-    String idPekerjaan, namaDokumen, tanggal, status, keterangan, idFile, namaFile, uriFile;
+    String idPekerjaan, namaDokumen, tanggal, status, keterangan, namaFile, uriFile;
 
     public DocumentModel() {
     }
 
-    public DocumentModel(String idPekerjaan, String namaDokumen, String status, String tanggal, String keterangan, String idFile, String namaFile, String uriFile) {
+    public DocumentModel(String idPekerjaan, String namaDokumen, String status, String tanggal, String keterangan, String namaFile, String uriFile) {
         this.idPekerjaan = idPekerjaan;
         this.namaDokumen = namaDokumen;
         this.tanggal = tanggal;
         this.status = status;
         this.keterangan = keterangan;
-        this.idFile = idFile;
         this.namaFile = namaFile;
         this.uriFile = uriFile;
     }
@@ -60,10 +59,6 @@ public class DocumentModel {
     public void setKeterangan(String keterangan) {
         this.keterangan = keterangan;
     }
-
-    public String getIdFile() { return idFile; }
-
-    public void setIdFile(String idFile) { this.idFile = idFile; }
 
     public String getNamaFile() { return namaFile; }
 

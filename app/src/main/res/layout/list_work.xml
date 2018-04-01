@@ -46,10 +46,10 @@
                             android:layout_marginRight="10dp">
 
                                 <TextView
-                                    android:id="@+id/tvJudul"
+                                    android:id="@+id/tvJalur"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Judul"
+                                    android:text="Jalur"
                                     android:textAppearance="?attr/textAppearanceListItem"
                                     android:textColor="#000000"
                                     android:textSize="14sp" />

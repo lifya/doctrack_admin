@@ -80,7 +80,7 @@ public class UklUplFragment extends Fragment {
         public void onBindViewHolder(final PekerjaanViewHolder holder, int position) {
             final String id_Pekerjaan = dataPekerjaan.get(position).getIdPekerjaan();
             final String id_Kontrak = dataPekerjaan.get(position).getIdKontrak();
-            holder.setNamaPekerjaan(dataPekerjaan.get(position).getNamaJalur());
+            holder.setNamaJalur(dataPekerjaan.get(position).getNamaJalur());
             holder.setTegangan(dataPekerjaan.get(position).getTegangan());
             holder.setKms(dataPekerjaan.get(position).getKms());
             holder.setProvinsi(dataPekerjaan.get(position).getProvinsi());

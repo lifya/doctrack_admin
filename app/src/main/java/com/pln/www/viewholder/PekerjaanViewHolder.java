@@ -13,14 +13,14 @@ import com.pln.www.R;
 
 public class PekerjaanViewHolder extends RecyclerView.ViewHolder {
     private PekerjaanViewHolder.ClickListener mClickListener;
-    public TextView tvNamaPekerjaan, tvTegangan, tvKms, tvNoKontrak, tvProvinsi, tvLastUpdate;
+    public TextView tvNamaJalur, tvTegangan, tvKms, tvNoKontrak, tvProvinsi, tvLastUpdate;
     public ImageView ivStatus;
     public View mView;
 
     public PekerjaanViewHolder(View itemView) {
         super(itemView);
         mView = itemView;
-        tvNamaPekerjaan = (TextView) mView.findViewById(R.id.tvJudul);
+        tvNamaJalur = (TextView) mView.findViewById(R.id.tvJalur);
         tvTegangan = (TextView) mView.findViewById(R.id.tvTegangan);
         tvKms = (TextView) mView.findViewById(R.id.tvKms);
         tvNoKontrak = (TextView) mView.findViewById(R.id.tvKontrak);
@@ -52,8 +52,8 @@ public class PekerjaanViewHolder extends RecyclerView.ViewHolder {
         mClickListener = clickListener;
     }
 
-    public void setNamaPekerjaan(String namaPekerjaan) {
-        tvNamaPekerjaan.setText(namaPekerjaan);
+    public void setNamaJalur(String namaPekerjaan) {
+        tvNamaJalur.setText(namaPekerjaan);
     }
 
     public void setTegangan(String tegangan) {

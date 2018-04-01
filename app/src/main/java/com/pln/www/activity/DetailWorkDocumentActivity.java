@@ -1,7 +1,6 @@
 package com.pln.www.activity;
 
 import android.app.DownloadManager;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -40,7 +39,7 @@ import java.util.ArrayList;
 
 public class DetailWorkDocumentActivity extends AppCompatActivity {
     private ImageView ivBack, ivProses;
-    private TextView tvJudul, tvKonsultan, tvTanggalMulai, tvTanggalAKhir, tvTegangan, tvKms, tvProvinsi, tvKontrak;
+    private TextView tvJalur, tvKonsultan, tvTanggalMulai, tvTanggalAKhir, tvTegangan, tvKms, tvProvinsi, tvKontrak;
     private DatabaseReference dbKontrak, dbPekerjaan, dbDetailProses;
     private Intent intent;
     private Bundle bundle;
@@ -56,7 +55,7 @@ public class DetailWorkDocumentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_dokumen);
+        setContentView(R.layout.activity_detail_work_document);
         intent = getIntent();
         bundle = intent.getExtras();
         if(bundle != null){
@@ -74,7 +73,7 @@ public class DetailWorkDocumentActivity extends AppCompatActivity {
         dbPekerjaan = FirebaseDatabase.getInstance().getReference("Pekerjaan");
         dbDetailProses = FirebaseDatabase.getInstance().getReference("DetailProses");
 
-        tvJudul = (TextView) findViewById(R.id.tvJudul);
+        tvJalur = (TextView) findViewById(R.id.tvJalur);
         tvKonsultan = (TextView) findViewById(R.id.tvKonsultan);
         tvTegangan = (TextView) findViewById(R.id.tvTegangan);
         tvKms = (TextView) findViewById(R.id.tvKms);
@@ -130,7 +129,7 @@ public class DetailWorkDocumentActivity extends AppCompatActivity {
                     String kms = pekerjaanModel.getKms();
                     String provinsi = pekerjaanModel.getProvinsi();
                     String jenisPekerjaan = pekerjaanModel.getJenisPekerjaan();
-                    tvJudul.setText(namaPekerjaan);
+                    tvJalur.setText(namaPekerjaan);
                     tvTegangan.setText(tegangan);
                     tvKms.setText(kms);
                     tvProvinsi.setText(provinsi);
