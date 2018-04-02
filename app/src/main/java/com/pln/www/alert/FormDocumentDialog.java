@@ -219,6 +219,12 @@ public class FormDocumentDialog extends AppCompatDialogFragment implements View.
 
     public void btnAddClick(View v) {
         StorageReference sRef = storageReference.child(Constant.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + ".pdf");
+        String etFile = etUploadFile.getText().toString();
+
+        if(TextUtils.isEmpty(etFile)) {
+            Toast.makeText(getActivity(), "Lampirkan Dokumen", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         sRef.putFile(dataUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
