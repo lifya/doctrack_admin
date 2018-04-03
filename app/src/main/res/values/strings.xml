@@ -15,28 +15,40 @@
         <item>Sudah</item>
     </array>
 
-    <array name="namaprosesUklUpl">
+    <!--<array name="namaprosesUklUpl">-->
+        <!--<item>Permohonan RTRW</item>-->
+        <!--<item>Pembahasan RTRW</item>-->
+        <!--<item>Izin RTRW Terbit</item>-->
+        <!--<item>Draft UKL-UPL</item>-->
+        <!--<item>Pembahasan</item>-->
+        <!--<item>Perbaikan Dokumen</item>-->
+        <!--<item>Dokumen Final</item>-->
+        <!--<item>Rekomendasi UKL-UPL</item>-->
+        <!--<item>Konsultasi Publik</item>-->
+        <!--<item>Draft Kerangka Acuan ANDAL</item>-->
+        <!--<item>Pembahasan Dokumen Kerangka Acuan</item>-->
+        <!--<item>Perbaikan dan Persetujuan Kerangka Acuan</item>-->
+        <!--<item>Draft ANDAL dan RKL-RPL</item>-->
+        <!--<item>Pembahasan ANDAL dan RKL-RPL</item>-->
+        <!--<item>Surat Keterangan Kelayakan Lingkungan</item>-->
+        <!--<item>Izin Lingkungan</item>-->
+    <!--</array>-->
+
+    <array name="namaprosesAmdal">
         <item>Permohonan RTRW</item>
         <item>Pembahasan RTRW</item>
-        <item>Izin RTRW keluar</item>
+        <item>Izin RTRW Terbit</item>
         <item>Draft UKL-UPL</item>
         <item>Pembahasan</item>
         <item>Perbaikan Dokumen</item>
         <item>Dokumen Final</item>
         <item>Rekomendasi UKL-UPL</item>
-        <item>Izin Lingkungan</item>
-    </array>
-
-    <array name="namaprosesAmdal">
-        <item>Permohonan RTRW</item>
-        <item>Pembahasan RTRW</item>
-        <item>Izin RTRW keluar</item>
         <item>Konsultasi Publik</item>
-        <item>Draft Kerangka Acuan AMDAL</item>
+        <item>Draft Kerangka Acuan ANDAL</item>
         <item>Pembahasan Dokumen Kerangka Acuan</item>
         <item>Perbaikan dan Persetujuan Kerangka Acuan</item>
-        <item>Draft AMDAL dan RKL-RPL</item>
-        <item>Pembahasan AMDAL dan RKL-RPL</item>
+        <item>Draft ANDAL dan RKL-RPL</item>
+        <item>Pembahasan ANDAL dan RKL-RPL</item>
         <item>Surat Keterangan Kelayakan Lingkungan</item>
         <item>Izin Lingkungan</item>
     </array>
